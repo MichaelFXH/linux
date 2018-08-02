@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>categories | </title>
+  <title>正则表达式 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://michaelfxh.github.io/categories/index.html">
+  <meta name="description" content="一、什么是正则表达式  处理大量文本字符串定义的一套算法规则，通过一些特殊符号可以快速的查找出要过滤的字符，以行为处理单位。 二、为什么学正则表达式  简单，高效，极大的提高了我们的工作效率，运维过程中会有很多对字符串或者文本的查找工作。linux 三剑客（grep,sed,awk）都支持正则表达式。 三、使用注意事项  正则表达式跟通配符容易搞混，通配符是对文件名或者目录的查找，二正则表达式是对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/gegexp/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="一、什么是正则表达式  处理大量文本字符串定义的一套算法规则，通过一些特殊符号可以快速的查找出要过滤的字符，以行为处理单位。 二、为什么学正则表达式  简单，高效，极大的提高了我们的工作效率，运维过程中会有很多对字符串或者文本的查找工作。linux 三剑客（grep,sed,awk）都支持正则表达式。 三、使用注意事项  正则表达式跟通配符容易搞混，通配符是对文件名或者目录的查找，二正则表达式是对">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-01T11:58:52.424Z">
+<meta property="og:updated_time" content="2018-08-02T03:45:52.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="一、什么是正则表达式  处理大量文本字符串定义的一套算法规则，通过一些特殊符号可以快速的查找出要过滤的字符，以行为处理单位。 二、为什么学正则表达式  简单，高效，极大的提高了我们的工作效率，运维过程中会有很多对字符串或者文本的查找工作。linux 三剑客（grep,sed,awk）都支持正则表达式。 三、使用注意事项  正则表达式跟通配符容易搞混，通配符是对文件名或者目录的查找，二正则表达式是对">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -162,7 +165,7 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                <article id="page-" class="article article-type-page "
+                <article id="post-gegexp" class="article article-type-post "
   itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -170,13 +173,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      categories
+      正则表达式
     </h1>
   
 
           
-            <a href="/linuxNotes/categories/index.html" class="archive-article-date">
-  	<time datetime="2018-08-01T11:58:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
+            <a href="/linuxNotes/2018/08/02/gegexp/" class="archive-article-date">
+  	<time datetime="2018-08-02T03:29:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
 </a>
               
       </header>
@@ -186,7 +189,43 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        
+                        <h1 id="一、什么是正则表达式"><a href="#一、什么是正则表达式" class="headerlink" title="一、什么是正则表达式"></a>一、什么是正则表达式</h1><p>  处理大量文本字符串定义的一套算法规则，通过一些特殊符号可以快速的查找出要过滤的字符，以行为处理单位。</p>
+<h1 id="二、为什么学正则表达式"><a href="#二、为什么学正则表达式" class="headerlink" title="二、为什么学正则表达式"></a>二、为什么学正则表达式</h1><p>  简单，高效，极大的提高了我们的工作效率，运维过程中会有很多对字符串或者文本的查找工作。linux 三剑客（grep,sed,awk）都支持正则表达式。</p>
+<h1 id="三、使用注意事项"><a href="#三、使用注意事项" class="headerlink" title="三、使用注意事项"></a>三、使用注意事项</h1><p>  正则表达式跟通配符容易搞混，通配符是对文件名或者目录的查找，二正则表达式是对文本或者字符串的查找。</p>
+<h1 id="四、正则表达式介绍"><a href="#四、正则表达式介绍" class="headerlink" title="四、正则表达式介绍"></a>四、正则表达式介绍</h1><h2 id="基本正则表达式元字符"><a href="#基本正则表达式元字符" class="headerlink" title="基本正则表达式元字符"></a>基本正则表达式元字符</h2><pre><code>. 匹配任意单个字符
+[] 匹配指定范围内的任意单个字符
+[^] 匹配指定范围外的任意单个字符
+[:alnum:] 字母和数字
+[:alpha:] 代表任何英文大小写字符，亦即 A-Z, a-z
+[:lower:] 小写字母 [:upper:] 大写字母
+[:blank:] 空白字符（空格和制表符）
+[:space:] 水平和垂直的空白字符（比[:blank:]包含的范围广）
+[:cntrl:] 不可打印的控制字符（退格、删除、警铃...）
+[:digit:] 十进制数字 [:xdigit:]十六进制数字
+[:graph:] 可打印的非空白字符
+[:print:] 可打印字符
+[:punct:] 标点符号
+</code></pre><h2 id="正则表达式介绍"><a href="#正则表达式介绍" class="headerlink" title="正则表达式介绍"></a>正则表达式介绍</h2><pre><code>* 匹配前面的字符任意次，包括0次
+贪婪模式：尽可能长的匹配
+.* 任意长度的任意字符
+\? 匹配其前面的字符0或1次
+\+ 匹配其前面的字符至少1次
+\{n\} 匹配前面的字符n次
+\{m,n\} 匹配前面的字符至少m次，至多n次
+\{,n\} 匹配前面的字符至多n次
+\{n,\} 匹配前面的字符至少n次
+^ 行首锚定，用于模式的最左侧
+$ 行尾锚定，用于模式的最右侧
+^PATTERN$ 用于模式匹配整行
+^$ 空行
+^[[:space:]]*$ 空白行
+\&lt; 或 \b 词首锚定，用于单词模式的左侧
+\&gt; 或 \b 词尾锚定；用于单词模式的右侧
+\&lt;PATTERN\&gt; 匹配整个单词
+</code></pre><h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><h2 id="向后引用"><a href="#向后引用" class="headerlink" title="向后引用"></a>向后引用</h2><h1 id="五、实例介绍"><a href="#五、实例介绍" class="headerlink" title="五、实例介绍"></a>五、实例介绍</h1><p>如下通过常用实例来学习BRE和ERE匹配，源文件url.txt内容如下：<br><a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a><br><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a><br><a href="http://wwwbaiducom" target="_blank" rel="noopener">http://wwwbaiducom</a><br>baidu.com<br>baidu<br>1.url匹配<br>匹配以http或者https开头，并且其后为：并且含有.的串<br>BRE匹配：<br>grep ‘^https{0,1}.<em>..</em>‘ url.txt<br>ERE匹配：<br>grep -E ‘^https?.<em>..</em>‘ url.txt<br>匹配结果如下：<br><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a><br><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+<p>2.Email匹配<br>示例文件内容为：<br><a href="mailto:hfutwyy@qq.com" target="_blank" rel="noopener">hfutwyy@qq.com</a><br>aaaa@<br>aaa@.com<br><a href="mailto:aaa@gmail.com" target="_blank" rel="noopener">aaa@gmail.com</a><br>@@baidu.com</p>
+<p>匹配以字母数字或者下划线开头的多个字符，其后有一个@之后有多个字母数字或者下划线，其中有一个.号<br>grep ‘^[[:alpha:][:digit:]_]<em>@[[:alpha:][:digit:]]</em>..*’ email.txt<br> 匹配结果：<br><a href="mailto:hfutwyy@qq.com" target="_blank" rel="noopener">hfutwyy@qq.com</a><br>aaa@.com<br><a href="mailto:aaa@gmail.com" target="_blank" rel="noopener">aaa@gmail.com</a></p>
+
                           
 
                             
@@ -279,7 +318,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/categories/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/02/gegexp/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,6 +330,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/linuxNotes/2018/08/02/shell/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">shell</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
     
       <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -310,6 +359,63 @@
 
 
         
+          
+            <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="gegexp" data-title="正则表达式" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/02/gegexp/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+              
+
+                
+                  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://michaelfxh.github.io/linuxNotes/2018/08/02/gegexp/", 
+    sourceId: "gegexp",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+                    
+
+                      
+
+                            
+
+                                
+                                  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "正则表达式",
+  owner: 'MichaelFXH',
+  repo: 'https://github.com/MichaelFXH/gitmentRep',
+  oauth: {
+    client_id: 'b195c02eeea32263666e',
+    client_secret: 'e1bf77181080b45638286bc2f067d3d495f652e9',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+                                    
+                                      
               </div>
             </div>
           </div>
@@ -332,7 +438,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
