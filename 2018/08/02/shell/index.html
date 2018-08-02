@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>shell | </title>
+  <title>shell脚本 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="article">
-<meta property="og:title" content="shell">
+<meta property="og:title" content="shell脚本">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/shell/index.html">
 <meta property="og:site_name">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-02T03:29:49.180Z">
+<meta property="og:updated_time" content="2018-08-02T10:38:12.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell">
+<meta name="twitter:title" content="shell脚本">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -170,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      shell
+      shell脚本
     </h1>
   
 
@@ -183,6 +183,30 @@
       
         <!-- 目录内容 -->
         
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+          </p>
+          <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+            <strong class="toc-title">文章目录</strong>
+            
+          </div>
+          <script type="text/javascript">
+            function showToc() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:block");
+              show_toc_btn.setAttribute("style", "display:none");
+            };
+            function showBtn() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:none");
+              show_toc_btn.setAttribute("style", "display:block");
+            };
+          </script>
+          
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
@@ -230,6 +254,17 @@
               
                   
                     
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/linuxNotes/categories/shell脚本//" class="article-tag-list-link color3">shell脚本</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
                       
 
@@ -324,6 +359,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -332,7 +380,7 @@
           
             <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="shell" data-title="shell" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/02/shell/"></div>
+	<div class="ds-thread" data-thread-key="shell" data-title="shell脚本" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/02/shell/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -460,10 +508,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LINUX</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>

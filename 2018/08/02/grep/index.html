@@ -9,14 +9,13 @@
   <title>grep使用 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一、grep 基本介绍Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件. 二、grep 基本用法 1234567">
-<meta name="keywords" content="LINUX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grep使用">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/grep/index.html">
 <meta property="og:site_name">
 <meta property="og:description" content="一、grep 基本介绍Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件. 二、grep 基本用法 1234567">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-02T03:24:22.436Z">
+<meta property="og:updated_time" content="2018-08-02T10:37:56.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grep使用">
 <meta name="twitter:description" content="一、grep 基本介绍Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件. 二、grep 基本用法 1234567">
@@ -187,6 +186,30 @@
       
         <!-- 目录内容 -->
         
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+          </p>
+          <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本介绍"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-基本用法"><span class="toc-number">2.</span> <span class="toc-text">二、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#grep-命令选项介绍"><span class="toc-number">3.</span> <span class="toc-text">grep 命令选项介绍</span></a></li></ol>
+          </div>
+          <script type="text/javascript">
+            function showToc() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:block");
+              show_toc_btn.setAttribute("style", "display:none");
+            };
+            function showBtn() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:none");
+              show_toc_btn.setAttribute("style", "display:block");
+            };
+          </script>
+          
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
@@ -236,18 +259,18 @@
             <div class="article-info article-info-index">
               
                   
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
+                    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LINUX</a>
+        			<a href="/linuxNotes/categories/grep//" class="article-tag-list-link color5">grep</a>
         		</li>
       		
 		</ul>
 	</div>
 
-                    
 
                       
 
@@ -315,7 +338,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          shell
+          shell脚本
         
       </div>
     </a>
@@ -341,6 +364,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本介绍"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-基本用法"><span class="toc-number">2.</span> <span class="toc-text">二、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#grep-命令选项介绍"><span class="toc-number">3.</span> <span class="toc-text">grep 命令选项介绍</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -478,10 +514,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LINUX</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>
