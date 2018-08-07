@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>grep使用 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="grep 介绍以及怎么使用">
+  <meta name="description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
 <meta name="keywords" content="grep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grep使用">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/grep/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="grep 介绍以及怎么使用">
+<meta property="og:description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-07T09:36:18.804Z">
+<meta property="og:updated_time" content="2018-08-07T14:06:48.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grep使用">
-<meta name="twitter:description" content="grep 介绍以及怎么使用">
+<meta name="twitter:description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本介绍"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-基本用法"><span class="toc-number">2.</span> <span class="toc-text">二、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#grep-命令选项介绍"><span class="toc-number">3.</span> <span class="toc-text">grep 命令选项介绍</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本用法"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-命令选项介绍"><span class="toc-number">2.</span> <span class="toc-text">二、grep 命令选项介绍</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -219,12 +219,11 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p>grep 介绍以及怎么使用</p>
+                        <blockquote><p>Linux  文本处理三剑客之一，<br>Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。<br>REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则<br>模式：由正则表达式字符及文本字符所编写的过滤条件.</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="一、grep-基本介绍"><a href="#一、grep-基本介绍" class="headerlink" title="一、grep 基本介绍"></a>一、grep 基本介绍</h1><p>Linux  文本处理三剑客之一，<br>Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。<br>REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则<br>模式：由正则表达式字符及文本字符所编写的过滤条件.</p>
-<h1 id="二、grep-基本用法"><a href="#二、grep-基本用法" class="headerlink" title="二、grep 基本用法"></a>二、grep 基本用法</h1> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   grep [options]  pattern  [file...]</span><br><span class="line">例子：grep root /etc/passwd </span><br><span class="line">在passwd文件中搜索当前用户也可以写成下面格式</span><br><span class="line">grep <span class="string">"<span class="variable">$USER</span>"</span> /etc/passwd 搜索结果 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">grep ‘<span class="variable">$USER</span>’ /etc/passwd 如果写成单引号模式他将把<span class="variable">$USER</span>当做字符串而不是变量来搜索，所以结果为空</span><br><span class="line">pattern 除了可以用变量也可以用命令比如：</span><br><span class="line">grep `whoami` /etc/passwd</span><br></pre></td></tr></table></figure>
-<h1 id="grep-命令选项介绍"><a href="#grep-命令选项介绍" class="headerlink" title="grep 命令选项介绍"></a>grep 命令选项介绍</h1><p>–color=auto 对匹配到的文本着色显示<br>用法：\grep root /etc/passwd –color=auto<br>-v 显示不被匹配到的行<br>用法：grep -v root /etc/passwd 将显示除了root 之外的行<br>-i 忽略大小写<br>用法:grep -i ROOT /etc/passwd<br>-n 显示匹配的行号<br>-c 统计匹配的行数<br>-o 仅显示匹配到的字符串<br>-q 静默模式，不输出任何信息<br>-A # 后#行 #代表数字<br>用法：grep -A2 root /etc/passwd 将显示出包括root匹配行跟后边的2行<br>-B # 前#行<br>-C# 前后个#行<br>-e 实现多个选项间的逻辑or关系<br>用法：grep -e ‘cat’ -e ‘dog’  file<br>-w 匹配整个单词<br>-E 使用扩展正则表达式ERE<br>-F相当于fgrep ,按字符串搜索，不支持正则表达式<br>用法：fgrep “root” /etc/passwd</p>
+<h1 id="一、grep-基本用法"><a href="#一、grep-基本用法" class="headerlink" title="一、grep 基本用法"></a>一、grep 基本用法</h1> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   grep [options]  pattern  [file...]</span><br><span class="line">例子：grep root /etc/passwd </span><br><span class="line">在passwd文件中搜索当前用户也可以写成下面格式</span><br><span class="line">grep <span class="string">"<span class="variable">$USER</span>"</span> /etc/passwd 搜索结果 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">grep ‘<span class="variable">$USER</span>’ /etc/passwd 如果写成单引号模式他将把<span class="variable">$USER</span>当做字符串而不是变量来搜索，所以结果为空</span><br><span class="line">pattern 除了可以用变量也可以用命令比如：</span><br><span class="line">grep `whoami` /etc/passwd</span><br></pre></td></tr></table></figure>
+<h1 id="二、grep-命令选项介绍"><a href="#二、grep-命令选项介绍" class="headerlink" title="二、grep 命令选项介绍"></a>二、grep 命令选项介绍</h1><p>–color=auto 对匹配到的文本着色显示<br>用法：\grep root /etc/passwd –color=auto<br>-v 显示不被匹配到的行<br>用法：grep -v root /etc/passwd 将显示除了root 之外的行<br>-i 忽略大小写<br>用法:grep -i ROOT /etc/passwd<br>-n 显示匹配的行号<br>-c 统计匹配的行数<br>-o 仅显示匹配到的字符串<br>-q 静默模式，不输出任何信息<br>-A # 后#行 #代表数字<br>用法：grep -A2 root /etc/passwd 将显示出包括root匹配行跟后边的2行<br>-B # 前#行<br>-C# 前后个#行<br>-e 实现多个选项间的逻辑or关系<br>用法：grep -e ‘cat’ -e ‘dog’  file<br>-w 匹配整个单词<br>-E 使用扩展正则表达式ERE<br>-F相当于fgrep ,按字符串搜索，不支持正则表达式<br>用法：fgrep “root” /etc/passwd</p>
 
                           
 
@@ -392,7 +391,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本介绍"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-基本用法"><span class="toc-number">2.</span> <span class="toc-text">二、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#grep-命令选项介绍"><span class="toc-number">3.</span> <span class="toc-text">grep 命令选项介绍</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、grep-基本用法"><span class="toc-number">1.</span> <span class="toc-text">一、grep 基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、grep-命令选项介绍"><span class="toc-number">2.</span> <span class="toc-text">二、grep 命令选项介绍</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -597,7 +596,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,14 +613,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
             
             <div class="clearfix"></div>
