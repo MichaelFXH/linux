@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>shell脚本 | </title>
+  <title>linuxtar | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行">
-<meta name="keywords" content="shell script">
+  <meta name="description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
+<meta name="keywords" content="打包压缩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell脚本">
-<meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/shell/index.html">
+<meta property="og:title" content="linuxtar">
+<meta property="og:url" content="https://michaelfxh.github.io/2018/08/09/linuxtar/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行">
+<meta property="og:description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-07T14:02:40.692Z">
+<meta property="og:updated_time" content="2018-08-09T06:29:22.724Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell脚本">
-<meta name="twitter:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行">
+<meta name="twitter:title" content="linuxtar">
+<meta name="twitter:description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                <article id="post-shell" class="article article-type-post "
+                <article id="post-linuxtar" class="article article-type-post "
   itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -174,18 +174,18 @@
         
   
     <h1 class="article-title" itemprop="name">
-      shell脚本
+      linuxtar
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/02/shell/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/09/linuxtar/" class="pageViews">0</span>次
   </a>
 
           
-            <a href="/linuxNotes/2018/08/02/shell/" class="archive-article-date">
-  	<time datetime="2018-08-02T03:25:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
+            <a href="/linuxNotes/2018/08/09/linuxtar/" class="archive-article-date">
+  	<time datetime="2018-08-09T06:07:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
 </a>
               
       </header>
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本的规范跟用途"><span class="toc-number">1.</span> <span class="toc-text">脚本的规范跟用途</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell脚本规范"><span class="toc-number">1.1.</span> <span class="toc-text">shell脚本规范:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本的用途："><span class="toc-number">1.2.</span> <span class="toc-text">脚本的用途：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建第一个脚本"><span class="toc-number">2.</span> <span class="toc-text">创建第一个脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本基本知识"><span class="toc-number">3.</span> <span class="toc-text">脚本基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本调试"><span class="toc-number">3.1.</span> <span class="toc-text">脚本调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">3.2.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bash中变量的种类"><span class="toc-number">3.2.1.</span> <span class="toc-text">bash中变量的种类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#局部变量：生效范围为当前shell进程"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">局部变量：生效范围为当前shell进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量：生效范围为当前shell进程及其子进程"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">环境变量：生效范围为当前shell进程及其子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地变量：生效范围为当前shell进程中某代码片断，通常指函数"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">本地变量：生效范围为当前shell进程中某代码片断，通常指函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置变量：-1-2-…来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数"><span class="toc-number">3.2.1.4.</span> <span class="toc-text">位置变量：$1, $2, …来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊变量：-0"><span class="toc-number">3.2.1.5.</span> <span class="toc-text">特殊变量：$?, $0, $*, $@, $#,$$</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算术运算"><span class="toc-number">3.3.</span> <span class="toc-text">算术运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑运算"><span class="toc-number">3.4.</span> <span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件测试"><span class="toc-number">3.5.</span> <span class="toc-text">条件测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test命令"><span class="toc-number">3.6.</span> <span class="toc-text">Test命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数字测试"><span class="toc-number">3.7.</span> <span class="toc-text">数字测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串测试"><span class="toc-number">3.8.</span> <span class="toc-text">字符串测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件测试"><span class="toc-number">3.9.</span> <span class="toc-text">文件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存在性测试"><span class="toc-number">3.9.1.</span> <span class="toc-text">存在性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限测试"><span class="toc-number">3.9.2.</span> <span class="toc-text">权限测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性测试"><span class="toc-number">3.9.3.</span> <span class="toc-text">属性测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件属性测试"><span class="toc-number">3.9.3.1.</span> <span class="toc-text">文件属性测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件双目测试"><span class="toc-number">3.9.3.2.</span> <span class="toc-text">文件双目测试</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#compress"><span class="toc-number">1.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gzip"><span class="toc-number">2.</span> <span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bzip2"><span class="toc-number">3.</span> <span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xz"><span class="toc-number">4.</span> <span class="toc-text">xz</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zip"><span class="toc-number">5.</span> <span class="toc-text">zip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tar-打包"><span class="toc-number">6.</span> <span class="toc-text">tar  打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">7.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#将文件全部打包成tar包："><span class="toc-number">7.1.</span> <span class="toc-text">将文件全部打包成tar包：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><span class="toc-number">7.2.</span> <span class="toc-text">在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查阅上述tar包内有哪些文件："><span class="toc-number">7.3.</span> <span class="toc-text">查阅上述tar包内有哪些文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><span class="toc-number">7.4.</span> <span class="toc-text">由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将tar包解压缩："><span class="toc-number">7.5.</span> <span class="toc-text">将tar包解压缩：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只将tar内的部分文件解压出来："><span class="toc-number">7.6.</span> <span class="toc-text">只将tar内的部分文件解压出来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><span class="toc-number">7.7.</span> <span class="toc-text">我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件备份下来，并且保存其权限："><span class="toc-number">7.8.</span> <span class="toc-text">文件备份下来，并且保存其权限：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><span class="toc-number">7.9.</span> <span class="toc-text">这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在文件夹当中，比某个日期新的文件才备份："><span class="toc-number">7.10.</span> <span class="toc-text">在文件夹当中，比某个日期新的文件才备份：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备份文件夹内容是排除部分文件："><span class="toc-number">7.11.</span> <span class="toc-text">备份文件夹内容是排除部分文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-解压到指定的目录"><span class="toc-number">7.12.</span> <span class="toc-text">-C 解压到指定的目录</span></a></li></ol></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -219,32 +219,24 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p>shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行</p>
+                        <blockquote><p> tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。<br>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
 </blockquote>
-<a id="more"></a>
-<h1 id="脚本的规范跟用途"><a href="#脚本的规范跟用途" class="headerlink" title="脚本的规范跟用途"></a>脚本的规范跟用途</h1><h2 id="shell脚本规范"><a href="#shell脚本规范" class="headerlink" title="shell脚本规范:"></a>shell脚本规范:</h2><p>包含一些命令或声明，并符合一定格式的文本文件<br>1、第一行一般为调用使用的语言<br>2、程序名，避免更改文件名为无法找到正确的文件<br>3、版本号<br>4、更改后的时间<br>5、作者相关信息<br>6、该程序的作用，及注意事项<br>7、最后是各版本的更新简要说明</p>
-<h2 id="脚本的用途："><a href="#脚本的用途：" class="headerlink" title="脚本的用途："></a>脚本的用途：</h2><p> 自动化常用命令<br> 执行系统管理和故障排除<br> 创建简单的应用程序<br> 处理文本或文件</p>
-<h1 id="创建第一个脚本"><a href="#创建第一个脚本" class="headerlink" title="创建第一个脚本"></a>创建第一个脚本</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># ------------------------------------------</span></span><br><span class="line"><span class="comment"># Filename: hello.sh</span></span><br><span class="line"><span class="comment"># Revision: 1.1</span></span><br><span class="line"><span class="comment"># Date: 2018/08/01</span></span><br><span class="line"><span class="comment"># Author: michael</span></span><br><span class="line"><span class="comment"># Email: michael@126.com</span></span><br><span class="line"><span class="comment"># Website: www.fengxinhua.cn</span></span><br><span class="line"><span class="comment"># Description: This is the first script</span></span><br><span class="line"><span class="comment"># ------------------------------------------</span></span><br><span class="line"><span class="comment"># Copyright: 2018</span></span><br><span class="line"><span class="comment"># License: GPL</span></span><br><span class="line"><span class="built_in">echo</span> “hello world”</span><br></pre></td></tr></table></figure>
-<h1 id="脚本基本知识"><a href="#脚本基本知识" class="headerlink" title="脚本基本知识"></a>脚本基本知识</h1><h2 id="脚本调试"><a href="#脚本调试" class="headerlink" title="脚本调试"></a>脚本调试</h2><p>检测脚本中的语法错误<br>bash -n /path/to/some_script<br>调试执行<br>bash -x /path/to/some_script</p>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量分为强类型，弱类型。强类型不经过强制转换，他永远是这个数据类型。弱类型语言的运行时会隐式做数据类型转换。<br>变量的命名规则：<br>1、不能使程序中的保留字：例如if, for<br>2、只能使用数字、字母及下划线，且不能以数字开头<br>3、见名知义<br>4、统一命名规则：驼峰命名法<br>作用：<br>1、数据存储格式<br>2、参与的运算<br>3、表示的数据范围<br>类型：<br>1、字符<br>2、整型、<br>3、浮点型</p>
-<h3 id="bash中变量的种类"><a href="#bash中变量的种类" class="headerlink" title="bash中变量的种类"></a>bash中变量的种类</h3><h4 id="局部变量：生效范围为当前shell进程"><a href="#局部变量：生效范围为当前shell进程" class="headerlink" title="局部变量：生效范围为当前shell进程"></a>局部变量：生效范围为当前shell进程</h4><p>变量赋值：name=‘value’<br>可以使用引用value:<br>(1) 可以是直接字串; name=“root”<br>(2) 变量引用：name=”$USER”<br>(3) 命令引用：name=<code>COMMAND</code> name=$(COMMAND)<br>变量引用：${name} $name<br>“”：弱引用，其中的变量引用会被替换为变量值<br>‘’：强引用，其中的变量引用不会被替换为变量值，而保持原字符串<br>显示已定义的所有变量：set<br>删除变量：unset name</p>
-<h4 id="环境变量：生效范围为当前shell进程及其子进程"><a href="#环境变量：生效范围为当前shell进程及其子进程" class="headerlink" title="环境变量：生效范围为当前shell进程及其子进程"></a>环境变量：生效范围为当前shell进程及其子进程</h4><p>变量声明、赋值：<br>export name=VALUE<br>declare -x name=VALUE<br>变量引用：$name, ${name}<br>显示所有环境变量：<br>env<br>printenv<br>export<br>declare -x<br>删除变量：<br>unset name</p>
-<h4 id="本地变量：生效范围为当前shell进程中某代码片断，通常指函数"><a href="#本地变量：生效范围为当前shell进程中某代码片断，通常指函数" class="headerlink" title="本地变量：生效范围为当前shell进程中某代码片断，通常指函数"></a>本地变量：生效范围为当前shell进程中某代码片断，通常指函数</h4><h4 id="位置变量：-1-2-…来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数"><a href="#位置变量：-1-2-…来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数" class="headerlink" title="位置变量：$1, $2, …来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数"></a>位置变量：$1, $2, …来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数</h4><p>$1, $2, …：对应第1、第2等参数，shift [n]换位置<br>$0: 命令本身<br>$<em>: 传递给脚本的所有参数，全部参数合为一个字符串<br>$@: 传递给脚本的所有参数，每个参数为独立字符串<br>$#: 传递给脚本的参数的个数<br>$@ $</em> 只在被双引号包起来的时候才会有差异<br>set – 清空所有位置变量</p>
-<h4 id="特殊变量：-0"><a href="#特殊变量：-0" class="headerlink" title="特殊变量：$?, $0, $*, $@, $#,$$"></a>特殊变量：$?, $0, $*, $@, $#,$$</h4><p>$? 上一条命令执行返回的结果正确返回0，错误返回非0<br>$0 脚本的第一个参数，一般指的是脚本名<br>$* 脚本所有的参数<br>$@ 脚本所有的参数<br>$# 脚本中的参数个数<br>$$ </p>
-<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p>bash中的算术运算:help let<br>+, -, <em>, /, %取模（取余）, **（乘方）<br>实现算术运算：<br>(1) let var=算术表达式<br>(2) var=$[算术表达式]<br>(3) var=$((算术表达式))<br>(4) var=$(expr arg1 arg2 arg3 …)<br>(5) declare –i var = 数值<br>(6) echo ‘算术表达式’ | bc<br>乘法符号有些场景中需要转义，如</em><br>bash有内建的随机数生成器：$RANDOM（0-32767）<br>echo $[$RANDOM%50] ：0-49之间随机数</p>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><p>非：！<br>! 1 = 0<br>! 0 = 1<br>短路运算<br>短路与<br>第一个为0，结果必定为0<br>第一个为1，第二个必须要参与运算<br> 短路或<br>第一个为1，结果必定为1<br>第一个为0，第二个必须要参与运算<br>异或：^<br> 异或的两个值,相同为假，不同为真</p>
-<h2 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h2><p>判断某需求是否满足，需要由测试机制来实现<br> 专用的测试表达式需要由测试命令辅助完成测试过程<br>评估布尔声明，以便用在条件性执行中<br>• 若真，则返回0<br>• 若假，则返回1<br>测试命令：<br>• test EXPRESSION<br>• [ EXPRESSION ]<br>• [[ EXPRESSION ]]<br> 注意：EXPRESSION前后必须有空白字符<br> 根据退出状态而定，命令可以有条件地运行<br>• &amp;&amp; 代表条件性的AND THEN<br>• || 代表条件性的OR ELSE<br>例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">grep -q no_such_user /etc/passwd \</span><br><span class="line">|| <span class="built_in">echo</span> <span class="string">'No such user'</span></span><br><span class="line">No such user</span><br><span class="line"></span><br><span class="line">ping -c1 -W2 station1 &amp;&gt; /dev/null \</span><br><span class="line">&gt; &amp;&amp; <span class="built_in">echo</span> <span class="string">"station1 is up"</span> \</span><br><span class="line">&gt; || (<span class="built_in">echo</span> <span class="string">'station1 is unreachable'</span>; <span class="built_in">exit</span> 1)</span><br><span class="line">station1 is up</span><br></pre></td></tr></table></figure></p>
-<h2 id="Test命令"><a href="#Test命令" class="headerlink" title="Test命令"></a>Test命令</h2><p>长格式的例子：<br>test “$A” = “$B” &amp;&amp; echo “Strings are equal”<br>test “$A”-eq “$B” &amp;&amp; echo “Integers are equal”<br>简写格式的例子：<br>[ “$A” = “$B” ] &amp;&amp; echo “Strings are equal”<br>[ “$A” -eq “$B” ] &amp;&amp; echo “Integers are equal</p>
-<h2 id="数字测试"><a href="#数字测试" class="headerlink" title="数字测试"></a>数字测试</h2><p>-gt 是否大于<br>-ge 是否大于等于<br>-eq 是否等于<br>-ne 是否不等于<br>-lt 是否小于<br>-le 是否小于等于</p>
-<h2 id="字符串测试"><a href="#字符串测试" class="headerlink" title="字符串测试"></a>字符串测试</h2><p>= 是否等于</p>
-<blockquote>
-<p>ascii码是否大于ascii码<br>&lt; 是否小于<br>!= 是否不等于<br>=~ 左侧字符串是否能够被右侧的PATTERN所匹配<br> 注意: 此表达式一般用于[[ ]]中；扩展的正则表达式<br> -z “STRING“ 字符串是否为空，空为真，不空为假<br> -n “STRING“ 字符串是否不空，不空为真，空为假</p>
-</blockquote>
-<h2 id="文件测试"><a href="#文件测试" class="headerlink" title="文件测试"></a>文件测试</h2><h3 id="存在性测试"><a href="#存在性测试" class="headerlink" title="存在性测试"></a>存在性测试</h3><p>-a FILE：同-e<br>-e FILE: 文件存在性测试，存在为真，否则为假<br>存在性及类别测试<br>-b FILE：是否存在且为块设备文件<br>-c FILE：是否存在且为字符设备文件<br>-d FILE：是否存在且为目录文件<br>-f FILE：是否存在且为普通文件<br>-h FILE 或 -L FILE：存在且为符号链接文件<br>-p FILE：是否存在且为命名管道文件<br>-S FILE：是否存在且为套接字文件</p>
-<h3 id="权限测试"><a href="#权限测试" class="headerlink" title="权限测试"></a>权限测试</h3><p>-r FILE：是否存在且可读<br>-w FILE: 是否存在且可写<br>-x FILE: 是否存在且可执行<br>文件特殊权限测试：<br>-u FILE：是否存在且拥有suid权限<br>-g FILE：是否存在且拥有sgid权限<br>-k FILE：是否存在且拥有sticky权限</p>
-<h3 id="属性测试"><a href="#属性测试" class="headerlink" title="属性测试"></a>属性测试</h3><h4 id="文件属性测试"><a href="#文件属性测试" class="headerlink" title="文件属性测试"></a>文件属性测试</h4><p>-s FILE: 是否存在且非空<br>-t fd: fd 文件描述符是否在某终端已经打开<br>-N FILE：文件自从上一次被读取之后是否被修改过<br>-O FILE：当前有效用户是否为文件属主<br>-G FILE：当前有效用户是否为文件属组</p>
-<h4 id="文件双目测试"><a href="#文件双目测试" class="headerlink" title="文件双目测试"></a>文件双目测试</h4><p>FILE1 -ef FILE2: FILE1是否是FILE2的硬链接<br>FILE1 -nt FILE2: FILE1是否新于FILE2（mtime）<br>FILE1 -ot FILE2: FILE1是否旧于FILE2</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'hello world'</span>)</span><br></pre></td></tr></table></figure>
+<p>压缩、解压缩及归档工具</p>
+<h1 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h1><p>压缩<br>compress file<br>-c 选项不删除原文件<br>compress -c file<br>解压<br>compress -d file 或者  uncompress  file<br>这样也可以保留原文件  compress -dc m&gt;m.z</p>
+<h1 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h1><p>压缩<br>gzip file<br>压缩比  1-9 数字越高 压缩比越高<br>cat /etc/fstab |gzip &gt;fstab.gz<br>解压<br>gizip -d 或者 gunzip file </p>
+<h1 id="bzip2"><a href="#bzip2" class="headerlink" title="bzip2"></a>bzip2</h1><p>压缩<br>bzip2 -k file<br>解压<br>bzip2 -d file</p>
+<h1 id="xz"><a href="#xz" class="headerlink" title="xz"></a>xz</h1><p>压缩<br>xz -k file 保留原文件<br>解压<br>xz -d file 解压<br>xzcat: 不显式解压缩的前提下查看文本文件内容</p>
+<h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><p>打包压缩<br>zip -r /testdir/sysconfig(目的) /etc/sysconfig/ 原<br>解包解压缩<br>unzip sysconfig.zip </p>
+<h1 id="tar-打包"><a href="#tar-打包" class="headerlink" title="tar  打包"></a>tar  打包</h1><p>语法： tar(选项)(参数)<br>选项<br>-A或–catenate：新增文件到以存在的备份文件；<br>-B：设置区块大小；<br>-c或–create：建立新的备份文件；<br>-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。<br>-d：记录文件的差别；<br>-x或–extract或–get：从备份文件中还原文件；<br>-t或–list：列出备份文件的内容；<br>-z或–gzip或–ungzip：通过gzip指令处理备份文件；<br>-Z或–compress或–uncompress：通过compress指令处理备份文件；<br>-f&lt;备份文件&gt;或–file=&lt;备份文件&gt;：指定备份文件；<br>-v或–verbose：显示指令执行过程；<br>-r：添加文件到已经压缩的文件；<br>-u：添加改变了和现有的文件到已经存在的压缩文件；<br>-j：支持bzip2解压文件；<br>-v：显示操作过程；<br>-l：文件系统边界设置；<br>-k：保留原有文件不覆盖；<br>-m：保留文件不被覆盖；<br>-w：确认压缩文件的正确性；<br>-p或–same-permissions：用原来的文件权限还原文件；<br>-P或–absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；<br>-N &lt;日期格式&gt; 或 –newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；<br>–exclude=&lt;范本样式&gt;：排除符合范本样式的文件。<br>参数<br>文件或目录：指定要打包的文件或目录列表。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="将文件全部打包成tar包："><a href="#将文件全部打包成tar包：" class="headerlink" title="将文件全部打包成tar包："></a>将文件全部打包成tar包：</h2><p>tar -cvf log.tar log2012.log    仅打包，不压缩！<br>tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩<br>tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩 </p>
+<h2 id="在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><a href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。" class="headerlink" title="在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。"></a>在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</h2><h2 id="查阅上述tar包内有哪些文件："><a href="#查阅上述tar包内有哪些文件：" class="headerlink" title="查阅上述tar包内有哪些文件："></a>查阅上述tar包内有哪些文件：</h2><p>tar -ztvf log.tar.gz</p>
+<h2 id="由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><a href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。" class="headerlink" title="由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。"></a>由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</h2><h2 id="将tar包解压缩："><a href="#将tar包解压缩：" class="headerlink" title="将tar包解压缩："></a>将tar包解压缩：</h2><p>tar -zxvf /opt/soft/test/log.tar.gz</p>
+<h2 id="只将tar内的部分文件解压出来："><a href="#只将tar内的部分文件解压出来：" class="headerlink" title="只将tar内的部分文件解压出来："></a>只将tar内的部分文件解压出来：</h2><p>tar -zxvf /opt/soft/test/log30.tar.gz log2013.log</p>
+<h2 id="我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><a href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！" class="headerlink" title="我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"></a>我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</h2><h2 id="文件备份下来，并且保存其权限："><a href="#文件备份下来，并且保存其权限：" class="headerlink" title="文件备份下来，并且保存其权限："></a>文件备份下来，并且保存其权限：</h2><p>tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log</p>
+<h2 id="这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><a href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。" class="headerlink" title="这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"></a>这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</h2><h2 id="在文件夹当中，比某个日期新的文件才备份："><a href="#在文件夹当中，比某个日期新的文件才备份：" class="headerlink" title="在文件夹当中，比某个日期新的文件才备份："></a>在文件夹当中，比某个日期新的文件才备份：</h2><p>tar -N “2012/11/13” -zcvf log17.tar.gz test</p>
+<h2 id="备份文件夹内容是排除部分文件："><a href="#备份文件夹内容是排除部分文件：" class="headerlink" title="备份文件夹内容是排除部分文件："></a>备份文件夹内容是排除部分文件：</h2><p>tar –exclude scf/service -zcvf scf.tar.gz scf/*</p>
+<h2 id="C-解压到指定的目录"><a href="#C-解压到指定的目录" class="headerlink" title="-C 解压到指定的目录"></a>-C 解压到指定的目录</h2><p>其实最简单的使用 tar 就只要记忆底下的方式即可：<br>压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称<br>查　询：tar -jtv -f filename.tar.bz2<br>解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</p>
+
                           
 
                             
@@ -292,7 +284,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">shell script</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">打包压缩</a>
         		</li>
       		
 		</ul>
@@ -359,7 +351,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/02/shell/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/09/linuxtar/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -373,18 +365,18 @@
   
 <nav id="article-nav">
   
-    <a href="/linuxNotes/2018/08/02/gegexp/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/linuxNotes/2018/08/09/npmyun/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          正则表达式
+          npmyun
         
       </div>
     </a>
   
   
-    <a href="/linuxNotes/2018/08/02/grep/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">grep使用</div>
+    <a href="/linuxNotes/2018/08/09/linuxfind/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">find查找工具</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -411,7 +403,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本的规范跟用途"><span class="toc-number">1.</span> <span class="toc-text">脚本的规范跟用途</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell脚本规范"><span class="toc-number">1.1.</span> <span class="toc-text">shell脚本规范:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本的用途："><span class="toc-number">1.2.</span> <span class="toc-text">脚本的用途：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建第一个脚本"><span class="toc-number">2.</span> <span class="toc-text">创建第一个脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本基本知识"><span class="toc-number">3.</span> <span class="toc-text">脚本基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本调试"><span class="toc-number">3.1.</span> <span class="toc-text">脚本调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">3.2.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bash中变量的种类"><span class="toc-number">3.2.1.</span> <span class="toc-text">bash中变量的种类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#局部变量：生效范围为当前shell进程"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">局部变量：生效范围为当前shell进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量：生效范围为当前shell进程及其子进程"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">环境变量：生效范围为当前shell进程及其子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地变量：生效范围为当前shell进程中某代码片断，通常指函数"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">本地变量：生效范围为当前shell进程中某代码片断，通常指函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置变量：-1-2-…来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数"><span class="toc-number">3.2.1.4.</span> <span class="toc-text">位置变量：$1, $2, …来表示，用于让脚本在脚本代码中调用通过命令行传递给它的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊变量：-0"><span class="toc-number">3.2.1.5.</span> <span class="toc-text">特殊变量：$?, $0, $*, $@, $#,$$</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算术运算"><span class="toc-number">3.3.</span> <span class="toc-text">算术运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑运算"><span class="toc-number">3.4.</span> <span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件测试"><span class="toc-number">3.5.</span> <span class="toc-text">条件测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test命令"><span class="toc-number">3.6.</span> <span class="toc-text">Test命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数字测试"><span class="toc-number">3.7.</span> <span class="toc-text">数字测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串测试"><span class="toc-number">3.8.</span> <span class="toc-text">字符串测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件测试"><span class="toc-number">3.9.</span> <span class="toc-text">文件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存在性测试"><span class="toc-number">3.9.1.</span> <span class="toc-text">存在性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限测试"><span class="toc-number">3.9.2.</span> <span class="toc-text">权限测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性测试"><span class="toc-number">3.9.3.</span> <span class="toc-text">属性测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件属性测试"><span class="toc-number">3.9.3.1.</span> <span class="toc-text">文件属性测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件双目测试"><span class="toc-number">3.9.3.2.</span> <span class="toc-text">文件双目测试</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#compress"><span class="toc-number">1.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gzip"><span class="toc-number">2.</span> <span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bzip2"><span class="toc-number">3.</span> <span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xz"><span class="toc-number">4.</span> <span class="toc-text">xz</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zip"><span class="toc-number">5.</span> <span class="toc-text">zip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tar-打包"><span class="toc-number">6.</span> <span class="toc-text">tar  打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">7.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#将文件全部打包成tar包："><span class="toc-number">7.1.</span> <span class="toc-text">将文件全部打包成tar包：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><span class="toc-number">7.2.</span> <span class="toc-text">在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查阅上述tar包内有哪些文件："><span class="toc-number">7.3.</span> <span class="toc-text">查阅上述tar包内有哪些文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><span class="toc-number">7.4.</span> <span class="toc-text">由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将tar包解压缩："><span class="toc-number">7.5.</span> <span class="toc-text">将tar包解压缩：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只将tar内的部分文件解压出来："><span class="toc-number">7.6.</span> <span class="toc-text">只将tar内的部分文件解压出来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><span class="toc-number">7.7.</span> <span class="toc-text">我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件备份下来，并且保存其权限："><span class="toc-number">7.8.</span> <span class="toc-text">文件备份下来，并且保存其权限：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><span class="toc-number">7.9.</span> <span class="toc-text">这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在文件夹当中，比某个日期新的文件才备份："><span class="toc-number">7.10.</span> <span class="toc-text">在文件夹当中，比某个日期新的文件才备份：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备份文件夹内容是排除部分文件："><span class="toc-number">7.11.</span> <span class="toc-text">备份文件夹内容是排除部分文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-解压到指定的目录"><span class="toc-number">7.12.</span> <span class="toc-text">-C 解压到指定的目录</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -425,7 +417,7 @@
           
             <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="shell" data-title="shell脚本" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/02/shell/"></div>
+	<div class="ds-thread" data-thread-key="linuxtar" data-title="linuxtar" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/09/linuxtar/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -448,8 +440,8 @@
                   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "https://michaelfxh.github.io/linuxNotes/2018/08/02/shell/", 
-    sourceId: "shell",
+    url: "https://michaelfxh.github.io/linuxNotes/2018/08/09/linuxtar/", 
+    sourceId: "linuxtar",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
