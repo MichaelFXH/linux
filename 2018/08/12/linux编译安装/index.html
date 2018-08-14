@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>源码编译安装 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；  源代码有什么用1、自定义软件功能2、优化编译参数，提高性能3、解决不必要的软件间">
+  <meta name="description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；">
 <meta name="keywords" content="源码编译安装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码编译安装">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/12/linux编译安装/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；  源代码有什么用1、自定义软件功能2、优化编译参数，提高性能3、解决不必要的软件间">
+<meta property="og:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-13T05:20:09.762Z">
+<meta property="og:updated_time" content="2018-08-14T11:41:40.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="源码编译安装">
-<meta name="twitter:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；  源代码有什么用1、自定义软件功能2、优化编译参数，提高性能3、解决不必要的软件间">
+<meta name="twitter:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -221,6 +221,7 @@
               
                          <blockquote><p>顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；<br>但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="源代码有什么用"><a href="#源代码有什么用" class="headerlink" title="源代码有什么用"></a>源代码有什么用</h1><p>1、自定义软件功能<br>2、优化编译参数，提高性能<br>3、解决不必要的软件间依赖</p>
 <h1 id="源代码常见的打包格式"><a href="#源代码常见的打包格式" class="headerlink" title="源代码常见的打包格式"></a>源代码常见的打包格式</h1><p>一种是以 bzip2 格式的打包并压缩<br>tar jxvf file.tar.bz2<br>另外一种是以gzip 格式的打包并压缩<br>tar zxvf file.tar.gz</p>
 <h1 id="如何编译源码"><a href="#如何编译源码" class="headerlink" title="如何编译源码"></a>如何编译源码</h1><p>我们以httpd-2.4.25.tar.gz 包为例，到官网下载回来。</p>
@@ -603,15 +604,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,11 +612,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,7 +628,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,7 +636,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,11 +644,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">npmyum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
             
             <div class="clearfix"></div>
