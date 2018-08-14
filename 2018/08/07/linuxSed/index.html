@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="sed 是一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为”模式空间”（pattern space），接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容输出到屏幕，然后继续读入下一行，如果没有碰到入’D’的特殊命令，那会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。保留空间的初始为空，我们可以认为是一个空行。主要用来编辑一个">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-07T10:18:49.066Z">
+<meta property="og:updated_time" content="2018-08-14T03:14:46.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sed 文本处理工具">
 <meta name="twitter:description" content="sed 是一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为”模式空间”（pattern space），接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容输出到屏幕，然后继续读入下一行，如果没有碰到入’D’的特殊命令，那会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。保留空间的初始为空，我们可以认为是一个空行。主要用来编辑一个">
@@ -259,7 +259,7 @@
 <h3 id="保持和互换：h命令和x命令"><a href="#保持和互换：h命令和x命令" class="headerlink" title="保持和互换：h命令和x命令"></a>保持和互换：h命令和x命令</h3><p>互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换：<br>sed -e ‘/test/h’ -e ‘/check/x’ file</p>
 <h3 id="打印奇数行货偶数行："><a href="#打印奇数行货偶数行：" class="headerlink" title="打印奇数行货偶数行："></a>打印奇数行货偶数行：</h3><p>sed -n ‘1~2p’ test.txt  #奇数行<br>sed -n ‘2~2p’ test.txt  #偶数行<br>打印匹配字符串的下一行：<br>sed -n ‘/cccc/{n;p}’ file</p>
 <h3 id="删除备份文件"><a href="#删除备份文件" class="headerlink" title="删除备份文件"></a>删除备份文件</h3><p>删除文件的第2行然后备份文件<br>sed -i.bak ‘2d’ file</p>
-<h3 id="附加实例："><a href="#附加实例：" class="headerlink" title="附加实例："></a>附加实例：</h3><p>1、在/etc/default/grub文件中包含LINUX的行后边追加123<br>cat /etc/default/grub|sed -r ‘s/(LINUX.<em>)”/\1 123”/‘<br>cat /etc/default/grub|sed ‘/LINUX/s/“$/ 123”/‘ 写法先找出包含LINUX的行，然后再进行替换<br>2、取出centos 的版本号<br>CentOS Linux release 7.5.1804 (Core)<br> cat /etc/centos-release |sed -r ‘s/[^0-9]</em>([0-9]).<em>/\1/‘<br> 如果 要取 7.5.1804<br> cat /etc/centos-release|sed -r ‘s/[^0-9]</em>([0-9.]+).<em>/\1/‘<br>3、取出支持的cpu类型（/zsh-4.3.11-8.el6.centos.x86_64.rpm 要取x86_64），并且统计总数 /misc/cd/Packages<br>ls /misc/cd/Packages/</em> |sed -r ‘s/.<em>.([^./]+).rpm/\1/‘|sort|uniq -c<br>有点问题需要去掉    1 /misc/cd/Packages/TRANS.TBL<br>4、/etc/fstab 不是#开头的行加上#<br> cat /etc/fstab|sed -r ‘s/[^#](.</em>)/#\1/‘<br> 问题 cat /etc/fstab|sed -r ‘s/[^#].<em>/&amp;/‘ 为什么这样会把所有行都输出呢 ？<br>5、/etc/fstab 以#开头的行去掉#<br> cat /etc/fstab|sed -r ‘s/^#(.</em>)/\1/‘<br>6、获取ip地址<br>ifconfig eth0|sed -n ‘2p’|sed -r ‘s/inet addr:([0-9.]+).<em>/\1/‘<br>7、取出目录名跟基名<br>基名：echo ‘/etc/sysconfig/network-scripts/‘|sed -r ‘s#^/.</em>/([^/]+)/#\1#’<br>目录名： echo ‘/etc/sysconfig/network-scripts/‘|sed -r ‘s#(^/.<em>)/[^/]+#\1#’<br>8、在所有的文件后边追加随机数<br>ls /data/ |sed -r “s/.</em>/&amp;_$RANDOM/“<br>9、取出磁盘利用率<br>df |sed -n ‘/sd/p’|grep -Eo ‘[0-9]{1,3}%’<br>10、请把每个单词的首字母改成大写<br>echo “this is a dog” |sed ‘s/\b[a-z]/\u&amp;/g’<br>11、请把每个单词的大写字母转成小写<br>echo “THIS IS A DOG”|sed ‘s/[A-Z]/\l&amp;/g’<br>12、把a.txt b.txt c.txt 改成A.txt B.txt C.txt<br>ls|sed -r ‘s/[[:alpha:]].txt/\u&amp;/‘<br>13、把文件/etc/fstab 中字母都变成大写<br>cat /etc/fstab  |sed -r ‘s/[[:alpha:]]/\u&amp;/g’<br>14、把文件/etc/fstab 中单词首字母变成大写<br>cat /etc/fstab  |sed -r ‘s/\b[[:alpha:]]/\u&amp;/g’<br>15、把文件/etc/httpd/conf/httpd.conf &lt;VirtualHost 跟 &lt;\/VirtualHost 之间的#去掉<br>cat  /etc/httpd/conf/httpd.conf|sed -r ‘/^#&lt;VirtualHost/,/^#&lt;\/VirtualHost&gt;/s/#//‘</p>
+<h3 id="附加实例："><a href="#附加实例：" class="headerlink" title="附加实例："></a>附加实例：</h3><p>1、在/etc/default/grub文件中包含LINUX的行后边追加123<br>cat /etc/default/grub|sed -r ‘s/(LINUX.<em>)”/\1 123”/‘<br>cat /etc/default/grub|sed ‘/LINUX/s/“$/ 123”/‘ 写法先找出包含LINUX的行，然后再进行替换<br>2、取出centos 的版本号<br>CentOS Linux release 7.5.1804 (Core)<br> cat /etc/centos-release |sed -r ‘s/[^0-9]</em>([0-9]).<em>/\1/‘<br> 如果 要取 7.5.1804<br> cat /etc/centos-release|sed -r ‘s/[^0-9]</em>([0-9.]+).<em>/\1/‘<br>3、取出支持的cpu类型（/zsh-4.3.11-8.el6.centos.x86_64.rpm 要取x86_64），并且统计总数 /misc/cd/Packages<br>ls /misc/cd/Packages/</em> |sed -r ‘s/.<em>.([^./]+).rpm/\1/‘|sort|uniq -c<br>有点问题需要去掉    1 /misc/cd/Packages/TRANS.TBL<br>4、/etc/fstab 不是#开头的行加上#<br> cat /etc/fstab|sed -r ‘s/[^#](.</em>)/#\1/‘<br> 问题 cat /etc/fstab|sed -r ‘s/[^#].<em>/&amp;/‘ 为什么这样会把所有行都输出呢 ？<br>5、/etc/fstab 以#开头的行去掉#<br> cat /etc/fstab|sed -r ‘s/^#(.</em>)/\1/‘<br>6、获取ip地址<br>ifconfig eth0|sed -n ‘2p’|sed -r ‘s/inet addr:([0-9.]+).<em>/\1/‘<br>7、取出目录名跟基名<br>基名：echo “/etc/sysconfig/network-scripts/“|sed -r ‘s#^.</em>/([^/]+/)#\1#’<br>目录名：echo “/etc/sysconfig/network-scripts/“|sed -r ‘s#(^.<em>/)([^/]+/)#\1#’<br>8、在所有的文件后边追加随机数<br>ls /data/ |sed -r “s/.</em>/&amp;_$RANDOM/“<br>9、取出磁盘利用率<br>df |sed -n ‘/sd/p’|grep -Eo ‘[0-9]{1,3}%’<br>10、请把每个单词的首字母改成大写<br>echo “this is a dog” |sed ‘s/\b[a-z]/\u&amp;/g’<br>11、请把每个单词的大写字母转成小写<br>echo “THIS IS A DOG”|sed ‘s/[A-Z]/\l&amp;/g’<br>12、把a.txt b.txt c.txt 改成A.txt B.txt C.txt<br>ls|sed -r ‘s/[[:alpha:]].txt/\u&amp;/‘<br>13、把文件/etc/fstab 中字母都变成大写<br>cat /etc/fstab  |sed -r ‘s/[[:alpha:]]/\u&amp;/g’<br>14、把文件/etc/fstab 中单词首字母变成大写<br>cat /etc/fstab  |sed -r ‘s/\b[[:alpha:]]/\u&amp;/g’<br>15、把文件/etc/httpd/conf/httpd.conf &lt;VirtualHost 跟 &lt;\/VirtualHost 之间的#去掉<br>cat  /etc/httpd/conf/httpd.conf|sed -r ‘/^#&lt;VirtualHost/,/^#&lt;\/VirtualHost&gt;/s/#//‘</p>
 
                           
 
@@ -632,10 +632,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
@@ -644,11 +640,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,7 +648,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
