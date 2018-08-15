@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>打包压缩解压 | </title>
+  <title>文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
-<meta name="keywords" content="打包压缩">
+  <meta name="description" content="由于在特殊场景下一般权限难以控制，所以引入了特殊权限。">
+<meta name="keywords" content="SUID、SGID、chattr &amp; SBIT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="打包压缩解压">
-<meta property="og:url" content="https://michaelfxh.github.io/2018/08/09/linuxtar/index.html">
+<meta property="og:title" content="文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT">
+<meta property="og:url" content="https://michaelfxh.github.io/2018/08/14/linuxSuidSgidSbit/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
+<meta property="og:description" content="由于在特殊场景下一般权限难以控制，所以引入了特殊权限。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-09T06:35:18.117Z">
+<meta property="og:updated_time" content="2018-08-15T03:43:34.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="打包压缩解压">
-<meta name="twitter:description" content="tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。首先要弄清两个概念：打包和压缩。打包是指将一大堆">
+<meta name="twitter:title" content="文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT">
+<meta name="twitter:description" content="由于在特殊场景下一般权限难以控制，所以引入了特殊权限。">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                <article id="post-linuxtar" class="article article-type-post "
+                <article id="post-linuxSuidSgidSbit" class="article article-type-post "
   itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -174,18 +174,18 @@
         
   
     <h1 class="article-title" itemprop="name">
-      打包压缩解压
+      文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/09/linuxtar/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/14/linuxSuidSgidSbit/" class="pageViews">0</span>次
   </a>
 
           
-            <a href="/linuxNotes/2018/08/09/linuxtar/" class="archive-article-date">
-  	<time datetime="2018-08-09T06:07:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
+            <a href="/linuxNotes/2018/08/14/linuxSuidSgidSbit/" class="archive-article-date">
+  	<time datetime="2018-08-14T15:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-14</time>
 </a>
               
       </header>
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#compress"><span class="toc-number">1.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gzip"><span class="toc-number">2.</span> <span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bzip2"><span class="toc-number">3.</span> <span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xz"><span class="toc-number">4.</span> <span class="toc-text">xz</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zip"><span class="toc-number">5.</span> <span class="toc-text">zip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tar-打包"><span class="toc-number">6.</span> <span class="toc-text">tar  打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">7.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#将文件全部打包成tar包："><span class="toc-number">7.1.</span> <span class="toc-text">将文件全部打包成tar包：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><span class="toc-number">7.2.</span> <span class="toc-text">在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查阅上述tar包内有哪些文件："><span class="toc-number">7.3.</span> <span class="toc-text">查阅上述tar包内有哪些文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><span class="toc-number">7.4.</span> <span class="toc-text">由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将tar包解压缩："><span class="toc-number">7.5.</span> <span class="toc-text">将tar包解压缩：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只将tar内的部分文件解压出来："><span class="toc-number">7.6.</span> <span class="toc-text">只将tar内的部分文件解压出来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><span class="toc-number">7.7.</span> <span class="toc-text">我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件备份下来，并且保存其权限："><span class="toc-number">7.8.</span> <span class="toc-text">文件备份下来，并且保存其权限：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><span class="toc-number">7.9.</span> <span class="toc-text">这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在文件夹当中，比某个日期新的文件才备份："><span class="toc-number">7.10.</span> <span class="toc-text">在文件夹当中，比某个日期新的文件才备份：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备份文件夹内容是排除部分文件："><span class="toc-number">7.11.</span> <span class="toc-text">备份文件夹内容是排除部分文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-解压到指定的目录"><span class="toc-number">7.12.</span> <span class="toc-text">-C 解压到指定的目录</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UID"><span class="toc-number">1.</span> <span class="toc-text">UID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GID"><span class="toc-number">2.</span> <span class="toc-text">GID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#STICK-BIT"><span class="toc-number">3.</span> <span class="toc-text">STICK_BIT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chattr"><span class="toc-number">4.</span> <span class="toc-text">chattr</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -219,23 +219,16 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p> tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。<br>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
+                        <blockquote><p>由于在特殊场景下一般权限难以控制，所以引入了特殊权限。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h1><p>压缩<br>compress file<br>-c 选项不删除原文件<br>compress -c file<br>解压<br>compress -d file 或者  uncompress  file<br>这样也可以保留原文件  compress -dc m&gt;m.z</p>
-<h1 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h1><p>压缩<br>gzip file<br>压缩比  1-9 数字越高 压缩比越高<br>cat /etc/fstab |gzip &gt;fstab.gz<br>解压<br>gizip -d 或者 gunzip file </p>
-<h1 id="bzip2"><a href="#bzip2" class="headerlink" title="bzip2"></a>bzip2</h1><p>压缩<br>bzip2 -k file<br>解压<br>bzip2 -d file</p>
-<h1 id="xz"><a href="#xz" class="headerlink" title="xz"></a>xz</h1><p>压缩<br>xz -k file 保留原文件<br>解压<br>xz -d file 解压<br>xzcat: 不显式解压缩的前提下查看文本文件内容</p>
-<h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><p>打包压缩<br>zip -r /testdir/sysconfig(目的) /etc/sysconfig/ 原<br>解包解压缩<br>unzip sysconfig.zip </p>
-<h1 id="tar-打包"><a href="#tar-打包" class="headerlink" title="tar  打包"></a>tar  打包</h1><p>语法： tar(选项)(参数)<br>选项<br>-A或–catenate：新增文件到以存在的备份文件；<br>-B：设置区块大小；<br>-c或–create：建立新的备份文件；<br>-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。<br>-d：记录文件的差别；<br>-x或–extract或–get：从备份文件中还原文件；<br>-t或–list：列出备份文件的内容；<br>-z或–gzip或–ungzip：通过gzip指令处理备份文件；<br>-Z或–compress或–uncompress：通过compress指令处理备份文件；<br>-f&lt;备份文件&gt;或–file=&lt;备份文件&gt;：指定备份文件；<br>-v或–verbose：显示指令执行过程；<br>-r：添加文件到已经压缩的文件；<br>-u：添加改变了和现有的文件到已经存在的压缩文件；<br>-j：支持bzip2解压文件；<br>-v：显示操作过程；<br>-l：文件系统边界设置；<br>-k：保留原有文件不覆盖；<br>-m：保留文件不被覆盖；<br>-w：确认压缩文件的正确性；<br>-p或–same-permissions：用原来的文件权限还原文件；<br>-P或–absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；<br>-N &lt;日期格式&gt; 或 –newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；<br>–exclude=&lt;范本样式&gt;：排除符合范本样式的文件。<br>参数<br>文件或目录：指定要打包的文件或目录列表。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="将文件全部打包成tar包："><a href="#将文件全部打包成tar包：" class="headerlink" title="将文件全部打包成tar包："></a>将文件全部打包成tar包：</h2><p>tar -cvf log.tar log2012.log    仅打包，不压缩！<br>tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩<br>tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩 </p>
-<h2 id="在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><a href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。" class="headerlink" title="在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。"></a>在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</h2><h2 id="查阅上述tar包内有哪些文件："><a href="#查阅上述tar包内有哪些文件：" class="headerlink" title="查阅上述tar包内有哪些文件："></a>查阅上述tar包内有哪些文件：</h2><p>tar -ztvf log.tar.gz</p>
-<h2 id="由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><a href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。" class="headerlink" title="由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。"></a>由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</h2><h2 id="将tar包解压缩："><a href="#将tar包解压缩：" class="headerlink" title="将tar包解压缩："></a>将tar包解压缩：</h2><p>tar -zxvf /opt/soft/test/log.tar.gz</p>
-<h2 id="只将tar内的部分文件解压出来："><a href="#只将tar内的部分文件解压出来：" class="headerlink" title="只将tar内的部分文件解压出来："></a>只将tar内的部分文件解压出来：</h2><p>tar -zxvf /opt/soft/test/log30.tar.gz log2013.log</p>
-<h2 id="我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><a href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！" class="headerlink" title="我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"></a>我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</h2><h2 id="文件备份下来，并且保存其权限："><a href="#文件备份下来，并且保存其权限：" class="headerlink" title="文件备份下来，并且保存其权限："></a>文件备份下来，并且保存其权限：</h2><p>tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log</p>
-<h2 id="这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><a href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。" class="headerlink" title="这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"></a>这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</h2><h2 id="在文件夹当中，比某个日期新的文件才备份："><a href="#在文件夹当中，比某个日期新的文件才备份：" class="headerlink" title="在文件夹当中，比某个日期新的文件才备份："></a>在文件夹当中，比某个日期新的文件才备份：</h2><p>tar -N “2012/11/13” -zcvf log17.tar.gz test</p>
-<h2 id="备份文件夹内容是排除部分文件："><a href="#备份文件夹内容是排除部分文件：" class="headerlink" title="备份文件夹内容是排除部分文件："></a>备份文件夹内容是排除部分文件：</h2><p>tar –exclude scf/service -zcvf scf.tar.gz scf/*</p>
-<h2 id="C-解压到指定的目录"><a href="#C-解压到指定的目录" class="headerlink" title="-C 解压到指定的目录"></a>-C 解压到指定的目录</h2><p>其实最简单的使用 tar 就只要记忆底下的方式即可：<br>压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称<br>查　询：tar -jtv -f filename.tar.bz2<br>解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</p>
+<h1 id="UID"><a href="#UID" class="headerlink" title="UID"></a>UID</h1><p>SetUID(或者 s 权限）：当一个具有执行权限的文件设置SetUID权限后，用户执行这个文件时将以文件所有者的身份执行。<br>进程运行时能够访问哪些资源或文件，不取决于进程文件的属主属组，而是取决于运行该命令的用户身份的uid/gid，以该身份获取各种系统资源.<br>SUID只对二进制可执行程序有效<br>SUID设置在目录上无意义<br>SUID设置在目录上无意义</p>
+<p>通过chmod u+s file 设置文件的uid</p>
+<h1 id="GID"><a href="#GID" class="headerlink" title="GID"></a>GID</h1><p>对目录设置了gid后，用户创建文件时，其属组为此用户所属的主组.<br>一旦某目录被设定了SGID，则对此目录有写权限的用户在此目录中创建的文件<br>所属的组为此目录的属组</p>
+<p>通过chmod g+s file 设置文件的gid</p>
+<h1 id="STICK-BIT"><a href="#STICK-BIT" class="headerlink" title="STICK_BIT"></a>STICK_BIT</h1><p>具有写权限的目录通常用户可以删除该目录中的任何文件，无论该文件的权限或拥有权,<br>在目录设置Sticky 位，只有文件的所有者或root可以删除该文件<br>sticky 设置在文件上无意义</p>
+<p>通过chmod o+t 目录名 设置目录的SBIT</p>
+<h1 id="chattr"><a href="#chattr" class="headerlink" title="chattr"></a>chattr</h1><p>chattr +i 不能删除，改名，更改<br>chattr +a 只能追加内容<br>lsattr 显示特定属性</p>
 
                           
 
@@ -284,7 +277,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">打包压缩</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SUID、SGID、chattr & SBIT</a>
         		</li>
       		
 		</ul>
@@ -351,7 +344,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/09/linuxtar/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/14/linuxSuidSgidSbit/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -365,18 +358,9 @@
   
 <nav id="article-nav">
   
-    <a href="/linuxNotes/2018/08/09/npmyun/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          软件包管理
-        
-      </div>
-    </a>
   
-  
-    <a href="/linuxNotes/2018/08/09/linuxfind/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">find查找工具</div>
+    <a href="/linuxNotes/2018/08/14/linuxAcl/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ACL访问控制列表</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -403,7 +387,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#compress"><span class="toc-number">1.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gzip"><span class="toc-number">2.</span> <span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bzip2"><span class="toc-number">3.</span> <span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xz"><span class="toc-number">4.</span> <span class="toc-text">xz</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#zip"><span class="toc-number">5.</span> <span class="toc-text">zip</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tar-打包"><span class="toc-number">6.</span> <span class="toc-text">tar  打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">7.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#将文件全部打包成tar包："><span class="toc-number">7.1.</span> <span class="toc-text">将文件全部打包成tar包：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在选项f之后的文件档名是自己取的，我们习惯上都用-tar-来作为辨识。-如果加z选项，则以-tar-gz或-tgz来代表gzip压缩过的tar包；如果加j选项，则以-tar-bz2来作为tar包名。"><span class="toc-number">7.2.</span> <span class="toc-text">在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查阅上述tar包内有哪些文件："><span class="toc-number">7.3.</span> <span class="toc-text">查阅上述tar包内有哪些文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于我们使用-gzip-压缩的log-tar-gz，所以要查阅log-tar-gz包内的文件时，就得要加上z这个选项了。"><span class="toc-number">7.4.</span> <span class="toc-text">由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将tar包解压缩："><span class="toc-number">7.5.</span> <span class="toc-text">将tar包解压缩：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只将tar内的部分文件解压出来："><span class="toc-number">7.6.</span> <span class="toc-text">只将tar内的部分文件解压出来：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我可以透过tar-ztvf来查阅-tar-包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！"><span class="toc-number">7.7.</span> <span class="toc-text">我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件备份下来，并且保存其权限："><span class="toc-number">7.8.</span> <span class="toc-text">文件备份下来，并且保存其权限：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。"><span class="toc-number">7.9.</span> <span class="toc-text">这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在文件夹当中，比某个日期新的文件才备份："><span class="toc-number">7.10.</span> <span class="toc-text">在文件夹当中，比某个日期新的文件才备份：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备份文件夹内容是排除部分文件："><span class="toc-number">7.11.</span> <span class="toc-text">备份文件夹内容是排除部分文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-解压到指定的目录"><span class="toc-number">7.12.</span> <span class="toc-text">-C 解压到指定的目录</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UID"><span class="toc-number">1.</span> <span class="toc-text">UID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GID"><span class="toc-number">2.</span> <span class="toc-text">GID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#STICK-BIT"><span class="toc-number">3.</span> <span class="toc-text">STICK_BIT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chattr"><span class="toc-number">4.</span> <span class="toc-text">chattr</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -417,7 +401,7 @@
           
             <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="linuxtar" data-title="打包压缩解压" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/09/linuxtar/"></div>
+	<div class="ds-thread" data-thread-key="linuxSuidSgidSbit" data-title="文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/14/linuxSuidSgidSbit/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -440,8 +424,8 @@
                   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "https://michaelfxh.github.io/linuxNotes/2018/08/09/linuxtar/", 
-    sourceId: "linuxtar",
+    url: "https://michaelfxh.github.io/linuxNotes/2018/08/14/linuxSuidSgidSbit/", 
+    sourceId: "linuxSuidSgidSbit",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
