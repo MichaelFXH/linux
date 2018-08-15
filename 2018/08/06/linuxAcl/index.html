@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>Tag: 一般权限 | </title>
+  <title>ACL访问控制列表 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title">
-<meta property="og:url" content="https://michaelfxh.github.io/tags/一般权限/index.html">
+  <meta name="description" content="ACL(Access Control List)，访问控制列表。实现灵活的权限管理">
+<meta name="keywords" content="ACL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACL访问控制列表">
+<meta property="og:url" content="https://michaelfxh.github.io/2018/08/06/linuxAcl/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="ACL(Access Control List)，访问控制列表。实现灵活的权限管理">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-15T04:12:24.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title">
+<meta name="twitter:title" content="ACL访问控制列表">
+<meta name="twitter:description" content="ACL(Access Control List)，访问控制列表。实现灵活的权限管理">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -161,53 +166,126 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                
-  
-  
+                <article id="post-linuxAcl" class="article article-type-post "
+  itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/linuxNotes/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/linuxNotes/2018/08/03/linux一般权限/" class="archive-article-date">
-  	<time datetime="2018-08-03T15:20:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/linuxNotes/2018/08/03/linux一般权限/">一般权限</a>
+    <h1 class="article-title" itemprop="name">
+      ACL访问控制列表
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/03/linux一般权限/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/06/linuxAcl/" class="pageViews">0</span>次
   </a>
 
-        <div class="article-info info-on-right">
           
+            <a href="/linuxNotes/2018/08/06/linuxAcl/" class="archive-article-date">
+  	<time datetime="2018-08-06T15:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
+</a>
+              
+      </header>
+      
+        <!-- 目录内容 -->
+        
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+          </p>
+          <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是ACL"><span class="toc-number">1.</span> <span class="toc-text">什么是ACL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看系统是否支持-ACL"><span class="toc-number">2.</span> <span class="toc-text">查看系统是否支持 ACL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过ACL设置权限"><span class="toc-number">3.</span> <span class="toc-text">通过ACL设置权限</span></a></li></ol>
+          </div>
+          <script type="text/javascript">
+            function showToc() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:block");
+              show_toc_btn.setAttribute("style", "display:none");
+            };
+            function showBtn() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:none");
+              show_toc_btn.setAttribute("style", "display:block");
+            };
+          </script>
+          
+            <!-- 目录内容结束 -->
+            <div class="article-entry" itemprop="articleBody">
+              
+                        <blockquote><p>ACL(Access Control List)，访问控制列表。实现灵活的权限管理</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是ACL"><a href="#什么是ACL" class="headerlink" title="什么是ACL"></a>什么是ACL</h1><p>假如有个项目文件目录，对我们部门的人所属人，所属组都有权限，对于其他人来说不给权限的，突然有一天呢，从别的部门来了个同时想要临时性的加入我们的项目，那么一般权限就无法满足我们的需求了，也有办法，但是不太靠谱。比如：<br>1）可以建一个用户，然后加入到组里<br>2）给其他人赋予读写执行权限 这样显然不合理<br>ACL可以灵活的针对某一个用户设置权限，而不影响其他的用户。所以ACL就登场了。</p>
+<h1 id="查看系统是否支持-ACL"><a href="#查看系统是否支持-ACL" class="headerlink" title="查看系统是否支持 ACL"></a>查看系统是否支持 ACL</h1><p>由于ACL是必须依托文件系统的，因此并不是每个文件系统都支持ACL。<br>执行命令<br>tune2fs -l /dev/sda2 | grep options<br>显示 user_xattr acl 表示我们的系统支持acl</p>
+<p>如果不支持可以使用下边命令添加<br>tune2fs -o acl /dev/sda1<br>或者<br>mount -o remount,acl /dev/sda1(挂载点)</p>
+<h1 id="通过ACL设置权限"><a href="#通过ACL设置权限" class="headerlink" title="通过ACL设置权限"></a>通过ACL设置权限</h1><p>ACL的相关的操作主要有 3 个命令，分别是 getface、setfacl和chacl，常用的主要是getfacl 和 setfacl。<br>getfacl    查看文件/目录的ACL设定内容<br>setfacl    设置文件/目录的ACL内容</p>
+<p>setfacl 是使用最多的，基本 ACL 方面的操作都是它,常用的选项<br>-b ：删除所有的 acl 参数<br>-k ：删除预设的 acl 参数<br>-R ：递归设置后面的 acl 参数<br>-d ：设置预设的 acl 参数（只对目录有效，在该目录新建的文件也会使用此ACL默认值）<br>-m ：设置（修改）后面 acl 参数<br>-x ：删除后面指定的 acl 参数</p>
+<p>实例：<br>给用户michael对data目录 增加读执行权限<br>setfacl -m u:michael:rx /data<br>如果是给组赋权限<br>setfacl -m g:组名:rx /data  </p>
+<p>如果希望所有在此目录下建立的文件都可以被michael用户所访问，<br>setfacl -d -m user:michael:rw /data</p>
+<p>查看/data 的权限<br>getfacl data</p>
+<p>删除acl 权限<br>setfacl -b data </p>
+
+                          
+
+                            
+                              <div class="page-reward">
+                                <a href="javascript:;" class="page-reward-btn tooltip-top">
+                                  <div class="tooltip tooltip-east">
+                                    <span class="tooltip-item">
+                                      赏
+                                    </span>
+                                    <span class="tooltip-content">
+                                      <span class="tooltip-text">
+                                        <span class="tooltip-inner">
+                                          <p class="reward-p">
+                                            <i class="icon icon-quo-left"></i>
+                                            您的支持是我最大的努力
+                                              <i class="icon icon-quo-right"></i>
+                                          </p>
+                                          <div class="reward-box">
+                                            
+                                              <div class="reward-box-item">
+                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <span class="reward-type">支付宝</span>
+                                              </div>
+                                              
+                                                
+                                                  <div class="reward-box-item">
+                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <span class="reward-type">微信</span>
+                                                  </div>
+                                                  
+                                          </div>
+                                        </span>
+                                      </span>
+                                    </span>
+                                  </div>
+                                </a>
+                              </div>
+                              
+            </div>
+            <div class="article-info article-info-index">
+              
+                  
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">一般权限</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+                    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -220,19 +298,158 @@
 	</div>
 
 
+                      
+
+                          
+                            
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/06/linuxAcl/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+                              
+                                <div class="clearfix"></div>
+            </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/linuxNotes/2018/08/07/linuxSed/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          sed 文本处理工具
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/linuxNotes/2018/08/03/linux一般权限/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一般权限</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
 
     
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是ACL"><span class="toc-number">1.</span> <span class="toc-text">什么是ACL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看系统是否支持-ACL"><span class="toc-number">2.</span> <span class="toc-text">查看系统是否支持 ACL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过ACL设置权限"><span class="toc-number">3.</span> <span class="toc-text">通过ACL设置权限</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
 
 
+        
+          
+            <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="linuxAcl" data-title="ACL访问控制列表" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+              
+
+                
+                  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/", 
+    sourceId: "linuxAcl",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+                    
+
+                      
+
+                            
+
+                                
+                                      
               </div>
             </div>
           </div>
@@ -256,9 +473,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

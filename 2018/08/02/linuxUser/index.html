@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>Tag: 一般权限 | </title>
+  <title>用户跟权限管理 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title">
-<meta property="og:url" content="https://michaelfxh.github.io/tags/一般权限/index.html">
+  <meta name="description" content="Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。 每个用户账号都拥有一个惟一的用户名和各自的口令。 用户在登录时键入正确的用户名和口令后，就能够进入系统和自己">
+<meta name="keywords" content="用户跟权限管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户跟权限管理">
+<meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/linuxUser/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。 每个用户账号都拥有一个惟一的用户名和各自的口令。 用户在登录时键入正确的用户名和口令后，就能够进入系统和自己">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-15T04:11:58.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title">
+<meta name="twitter:title" content="用户跟权限管理">
+<meta name="twitter:description" content="Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。 每个用户账号都拥有一个惟一的用户名和各自的口令。 用户在登录时键入正确的用户名和口令后，就能够进入系统和自己">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -161,53 +166,140 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                
-  
-  
+                <article id="post-linuxUser" class="article article-type-post "
+  itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/linuxNotes/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/linuxNotes/2018/08/03/linux一般权限/" class="archive-article-date">
-  	<time datetime="2018-08-03T15:20:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/linuxNotes/2018/08/03/linux一般权限/">一般权限</a>
+    <h1 class="article-title" itemprop="name">
+      用户跟权限管理
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/03/linux一般权限/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/02/linuxUser/" class="pageViews">0</span>次
   </a>
 
-        <div class="article-info info-on-right">
           
+            <a href="/linuxNotes/2018/08/02/linuxUser/" class="archive-article-date">
+  	<time datetime="2018-08-02T08:10:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
+</a>
+              
+      </header>
+      
+        <!-- 目录内容 -->
+        
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+          </p>
+          <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#账号管理"><span class="toc-number">1.</span> <span class="toc-text">账号管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例创建账号useradd"><span class="toc-number">1.1.</span> <span class="toc-text">实例创建账号useradd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例修改账号usermod"><span class="toc-number">1.2.</span> <span class="toc-text">实例修改账号usermod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户的口令管理passwd"><span class="toc-number">1.3.</span> <span class="toc-text">用户的口令管理passwd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除账号"><span class="toc-number">1.4.</span> <span class="toc-text">删除账号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户组的管理"><span class="toc-number">2.</span> <span class="toc-text">用户组的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#增加组"><span class="toc-number">2.1.</span> <span class="toc-text">增加组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改组"><span class="toc-number">2.2.</span> <span class="toc-text">修改组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除组"><span class="toc-number">2.3.</span> <span class="toc-text">删除组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#与用户账号有关的系统文件"><span class="toc-number">3.</span> <span class="toc-text">与用户账号有关的系统文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量添加用户"><span class="toc-number">4.</span> <span class="toc-text">批量添加用户</span></a></li></ol>
+          </div>
+          <script type="text/javascript">
+            function showToc() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:block");
+              show_toc_btn.setAttribute("style", "display:none");
+            };
+            function showBtn() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:none");
+              show_toc_btn.setAttribute("style", "display:block");
+            };
+          </script>
+          
+            <!-- 目录内容结束 -->
+            <div class="article-entry" itemprop="articleBody">
+              
+                        <blockquote><p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
+<p>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。</p>
+<p>每个用户账号都拥有一个惟一的用户名和各自的口令。</p>
+<p>用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
+<p>实现用户账号的管理，要完成的工作主要有如下几个方面：</p>
+<p>用户账号的添加、删除与修改。<br>用户口令的管理。<br>用户组的管理。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="账号管理"><a href="#账号管理" class="headerlink" title="账号管理"></a>账号管理</h1><p>useradd命令用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。</p>
+<h2 id="实例创建账号useradd"><a href="#实例创建账号useradd" class="headerlink" title="实例创建账号useradd"></a>实例创建账号useradd</h2><p>选项：<br>-c&lt;备注&gt;：加上备注文字。备注文字会保存在passwd的备注栏位中；<br>-d&lt;登入目录&gt;：指定用户的家目录；<br>-D：变更预设值；<br>-e&lt;有效期限&gt;：指定帐号的有效期限；<br>-f&lt;缓冲天数&gt;：指定在密码过期后多少天即关闭该帐号；<br>-g&lt;群组&gt;：指定用户所属的群组；<br>-G&lt;群组&gt;：指定用户所属的附加群组；<br>-m：自动建立用户的登入目录；<br>-M：不要自动建立用户的登入目录；<br>-n：取消建立以用户名称为名的群组；<br>-r：建立系统帐号；<br>-s<shell>：指定用户登入后所使用的shell；<br>-u<uid>：指定用户id。</uid></shell></p>
+<p>新建用户user1 指定主组sales，附加组为company,employee<br>useradd -g sales -G company,employee user1<br>建立一个新用户，并设置uid<br>useradd  -u 544 user2<br>创建了一个用户sam，其中/user/sam 为sam 的家目录<br>useradd  -d /usr/sam  sam<br>新建了一个用户gem，该用户的登录Shell是 /bin/sh，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。<br>useradd -s /bin/sh -g group -G adm,root gem</p>
+<p>增加用户账号就是在/etc/passwd文件中为新用户增加一条记录，同时更新其他系统文件如/etc/shadow, /etc/group等。<br>Linux提供了集成的系统管理工具userconf，它可以用来对用户账号进行统一管理。</p>
+<h2 id="实例修改账号usermod"><a href="#实例修改账号usermod" class="headerlink" title="实例修改账号usermod"></a>实例修改账号usermod</h2><p>-c&lt;备注&gt;：修改用户帐号的备注文字；<br>-d&lt;登入目录&gt;：修改用户登入时的目录；<br>-e&lt;有效期限&gt;：修改帐号的有效期限；<br>-f&lt;缓冲天数&gt;：修改在密码过期后多少天即关闭该帐号；<br>-g&lt;群组&gt;：修改用户所属的群组；<br>-G&lt;群组&gt;；修改用户所属的附加群组；<br>-l&lt;帐号名称&gt;：修改用户帐号名称；<br>-L：锁定用户密码，使密码无效；<br>-s<shell>：修改用户登入后所使用的shell；<br>-u<uid>：修改用户ID；<br>-U:解除密码锁定。<br>将用户user1 添加到附加组中<br>usermod -G staff user1<br>修改用户user1 改为user2<br>usermod -G user1 user2 注意user2必须存在</uid></shell></p>
+<h2 id="用户的口令管理passwd"><a href="#用户的口令管理passwd" class="headerlink" title="用户的口令管理passwd"></a>用户的口令管理passwd</h2><p>-d：删除指定用户密码<br>-l：锁定指定用户<br>-u：解锁指定用户<br>-e：强制用户下次登录修改密码<br>-f：强制操作<br>-n mindays：指定最短使用期限<br>-x maxdays：最大使用期限<br>-w warndays：提前多少天开始警告<br>-i inactivedays：非活动期限<br>–stdin：从标准输入接收用户密码<br>echo “PASSWORD” | passwd –stdin USERNAME</p>
+<p>把用户michael的密码删除<br>passwd -d michael </p>
+<p>把用户michael 锁定,使其不能登陆<br>passwd -l michael </p>
+<h2 id="删除账号"><a href="#删除账号" class="headerlink" title="删除账号"></a>删除账号</h2><p>userdel -r 包括家目录一起删除</p>
+<h1 id="用户组的管理"><a href="#用户组的管理" class="headerlink" title="用户组的管理"></a>用户组的管理</h1><h2 id="增加组"><a href="#增加组" class="headerlink" title="增加组"></a>增加组</h2><p>groupadd 选项 用户组<br>-g GID 指定新用户组的组标识号（GID）<br>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同<br>增加了一个新组group1<br>groupadd group1<br>增加了一个新组group2，同时指定新组的组标识号是101<br>groupadd -g 101 group2</p>
+<p>查看用户有哪些组<br>查看某个组里包含哪些用户</p>
+<h2 id="修改组"><a href="#修改组" class="headerlink" title="修改组"></a>修改组</h2><p>groupmod 选项 用户组<br>-g GID 为用户组指定新的组标识号。<br>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。<br>-n新用户组 将用户组的名字改为新名字</p>
+<p>此命令将组group2的组标识号修改为102<br>groupmod -g 102 group2<br>将组group2的标识号改为10000，组名修改为group3<br>groupmod –g 10000 -n group3 group2</p>
+<h2 id="删除组"><a href="#删除组" class="headerlink" title="删除组"></a>删除组</h2><p>groupdel group1</p>
+<p>如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限<br>当前用户切换到root用户组，前提条件是root用户组确实是该用户的主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管理工具来完成<br>newgroup root </p>
+<h1 id="与用户账号有关的系统文件"><a href="#与用户账号有关的系统文件" class="headerlink" title="与用户账号有关的系统文件"></a>与用户账号有关的系统文件</h1><p>用户有关的信息shadow<br>例如：jack:X:503:504:::/home/jack/:/bin/bash<br>jack　　//用户名<br>X　　//口令、密码<br>503　　//用户id（0代表root、普通新建用户从500开始）<br>504　　//所在组<br>:　　//描述<br>/home/jack/　　//用户主目录<br>/bin/bash　　//用户缺省Shell<br>用户组相关的信息gshadow<br>例如：jack:$!$:???:13801:0:99999:7:<em>:</em>:<br>jack　　//组名<br>$!$　　//被加密的口令<br>13801　　//创建日期与今天相隔的天数<br>0　　//口令最短位数<br>99999　　//用户口令<br>7　　//到7天时提醒<br><em>　　//禁用天数
+</em>　　//过期天数</p>
+<h1 id="批量添加用户"><a href="#批量添加用户" class="headerlink" title="批量添加用户"></a>批量添加用户</h1><p>添加和删除用户对每位Linux系统管理员都是轻而易举的事，比较棘手的是如果要添加几十个、上百个甚至上千个用户时，我们不太可能还使用useradd一个一个地添加，必然要找一种简便的创建大量用户的方法。Linux系统提供了创建大量用户的工具，可以让您立即创建大量用户，方法如下：<br>（1）先编辑一个文本用户文件。<br>每一列按照/etc/passwd密码文件的格式书写，要注意每个用户的用户名、UID、宿主目录都不可以相同，其中密码栏可以留做空白或输入x号。一个范例文件user.txt内容如下：<br>user001::600:100:user:/home/user001:/bin/bash<br>user002::601:100:user:/home/user002:/bin/bash<br>user003::602:100:user:/home/user003:/bin/bash<br>user004::603:100:user:/home/user004:/bin/bash<br>user005::604:100:user:/home/user005:/bin/bash<br>user006::605:100:user:/home/user006:/bin/bash<br>（2）以root身份执行命令 /usr/sbin/newusers，从刚创建的用户文件user.txt中导入数据，创建用户：<br> newusers &lt; user.txt<br>然后可以执行命令 vipw 或 vi /etc/passwd 检查 /etc/passwd 文件是否已经出现这些用户的数据，并且用户的宿主目录是否已经创建。<br>（3）执行命令/usr/sbin/pwunconv。<br>将 /etc/shadow 产生的 shadow 密码解码，然后回写到 /etc/passwd 中，并将/etc/shadow的shadow密码栏删掉。这是为了方便下一步的密码转换工作，即先取消 shadow password 功能。<br> pwunconv<br>（4）编辑每个用户的密码对照文件。<br>范例文件 passwd.txt 内容如下：<br>user001:密码<br>user002:密码<br>user003:密码<br>user004:密码<br>user005:密码<br>user006:密码<br>（5）以root身份执行命令 /usr/sbin/chpasswd。<br>创建用户密码，chpasswd 会将经过 /usr/bin/passwd 命令编码过的密码写入 /etc/passwd 的密码栏。<br> chpasswd &lt; passwd.txt<br>（6）确定密码经编码写入/etc/passwd的密码栏后。<br>执行命令 /usr/sbin/pwconv 将密码编码为 shadow password，并将结果写入 /etc/shadow。<br> pwconv</p>
+
+                          
+
+                            
+                              <div class="page-reward">
+                                <a href="javascript:;" class="page-reward-btn tooltip-top">
+                                  <div class="tooltip tooltip-east">
+                                    <span class="tooltip-item">
+                                      赏
+                                    </span>
+                                    <span class="tooltip-content">
+                                      <span class="tooltip-text">
+                                        <span class="tooltip-inner">
+                                          <p class="reward-p">
+                                            <i class="icon icon-quo-left"></i>
+                                            您的支持是我最大的努力
+                                              <i class="icon icon-quo-right"></i>
+                                          </p>
+                                          <div class="reward-box">
+                                            
+                                              <div class="reward-box-item">
+                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <span class="reward-type">支付宝</span>
+                                              </div>
+                                              
+                                                
+                                                  <div class="reward-box-item">
+                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <span class="reward-type">微信</span>
+                                                  </div>
+                                                  
+                                          </div>
+                                        </span>
+                                      </span>
+                                    </span>
+                                  </div>
+                                </a>
+                              </div>
+                              
+            </div>
+            <div class="article-info article-info-index">
+              
+                  
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">一般权限</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">用户跟权限管理</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+                    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -220,19 +312,158 @@
 	</div>
 
 
+                      
+
+                          
+                            
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/02/linuxUser/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+                              
+                                <div class="clearfix"></div>
+            </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/linuxNotes/2018/08/03/linux一般权限/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          一般权限
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/linuxNotes/2018/08/02/gegexp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">正则表达式</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
 
     
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#账号管理"><span class="toc-number">1.</span> <span class="toc-text">账号管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例创建账号useradd"><span class="toc-number">1.1.</span> <span class="toc-text">实例创建账号useradd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例修改账号usermod"><span class="toc-number">1.2.</span> <span class="toc-text">实例修改账号usermod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户的口令管理passwd"><span class="toc-number">1.3.</span> <span class="toc-text">用户的口令管理passwd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除账号"><span class="toc-number">1.4.</span> <span class="toc-text">删除账号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户组的管理"><span class="toc-number">2.</span> <span class="toc-text">用户组的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#增加组"><span class="toc-number">2.1.</span> <span class="toc-text">增加组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改组"><span class="toc-number">2.2.</span> <span class="toc-text">修改组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除组"><span class="toc-number">2.3.</span> <span class="toc-text">删除组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#与用户账号有关的系统文件"><span class="toc-number">3.</span> <span class="toc-text">与用户账号有关的系统文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量添加用户"><span class="toc-number">4.</span> <span class="toc-text">批量添加用户</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
 
 
+        
+          
+            <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="linuxUser" data-title="用户跟权限管理" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+              
+
+                
+                  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/", 
+    sourceId: "linuxUser",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+                    
+
+                      
+
+                            
+
+                                
+                                      
               </div>
             </div>
           </div>
@@ -256,9 +487,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
