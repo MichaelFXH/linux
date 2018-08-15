@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-14T11:41:40.699Z">
+<meta property="og:updated_time" content="2018-08-15T06:59:53.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="源码编译安装">
 <meta name="twitter:description" content="顾名思义，源码包就是源代码的可见的软件包，基于Linux和BSD系统的软件最常见；但软件的源代码可见并不等于软件是开源的，我们还要以软件的许可为准；比如有些软件是源码可见的，但他约定用户只能按他约定的内容来修改；所以一个软件是否是开源软件，得具备两个条件；一是源代码可见；二是要有宽松的许可证书，比如GPL证书等；">
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码有什么用"><span class="toc-number">1.</span> <span class="toc-text">源代码有什么用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码常见的打包格式"><span class="toc-number">2.</span> <span class="toc-text">源代码常见的打包格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何编译源码"><span class="toc-number">3.</span> <span class="toc-text">如何编译源码</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码有什么用"><span class="toc-number">1.</span> <span class="toc-text">源代码有什么用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码常见的打包格式"><span class="toc-number">2.</span> <span class="toc-text">源代码常见的打包格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何编译源码"><span class="toc-number">3.</span> <span class="toc-text">如何编译源码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）解压我们刚刚下载回来的压缩包"><span class="toc-number">3.1.</span> <span class="toc-text">（一）解压我们刚刚下载回来的压缩包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）下面我们开始进入编译步骤"><span class="toc-number">3.2.</span> <span class="toc-text">（二）下面我们开始进入编译步骤</span></a></li></ol></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -225,13 +225,15 @@
 <h1 id="源代码有什么用"><a href="#源代码有什么用" class="headerlink" title="源代码有什么用"></a>源代码有什么用</h1><p>1、自定义软件功能<br>2、优化编译参数，提高性能<br>3、解决不必要的软件间依赖</p>
 <h1 id="源代码常见的打包格式"><a href="#源代码常见的打包格式" class="headerlink" title="源代码常见的打包格式"></a>源代码常见的打包格式</h1><p>一种是以 bzip2 格式的打包并压缩<br>tar jxvf file.tar.bz2<br>另外一种是以gzip 格式的打包并压缩<br>tar zxvf file.tar.gz</p>
 <h1 id="如何编译源码"><a href="#如何编译源码" class="headerlink" title="如何编译源码"></a>如何编译源码</h1><p>我们以httpd-2.4.25.tar.gz 包为例，到官网下载回来。</p>
-<p>##（一）解压我们刚刚下载回来的压缩包<br>     tar -xvf httpd-2.4.25.tar.gz<br>     cd httpd-2.4.25 进入目录<br>     查看configure 的配置参数<br>     我们输入./configre 可以看到有关的一些配置比如：<br>   –prefix 安装路径<br>   也可以用下面的参数指定相关的路径，如果不指定那么统一使用–prefix 配置的路径来安装<br>   –bindir   二进制程序存放路径<br>   –sbindir  管理类的二进制<br>   –libexecdir  库文件<br>   –sysconfdir  配置文件<br>   –mandir  man 帮助文档</p>
+<h2 id="（一）解压我们刚刚下载回来的压缩包"><a href="#（一）解压我们刚刚下载回来的压缩包" class="headerlink" title="（一）解压我们刚刚下载回来的压缩包"></a>（一）解压我们刚刚下载回来的压缩包</h2><pre><code>tar -xvf httpd-2.4.25.tar.gz
+cd httpd-2.4.25 进入目录
+查看configure 的配置参数
+我们输入./configre 可以看到有关的一些配置比如：
+</code></pre><p>   –prefix 安装路径<br>   也可以用下面的参数指定相关的路径，如果不指定那么统一使用–prefix 配置的路径来安装<br>   –bindir   二进制程序存放路径<br>   –sbindir  管理类的二进制<br>   –libexecdir  库文件<br>   –sysconfdir  配置文件<br>   –mandir  man 帮助文档</p>
 <p>   –还有一些特性配置<br>   –enable-ssl<br>   –enable-proxy </p>
 <p>另外我们可以看下源码包里的  README  INSTALL文件查看源码包的编译安装跟使用</p>
-<p>##（二）下面我们开始进入编译步骤<br>（1）比如我们要把主程序安装在/app/httpd 目录下，配置文件安装在/etc/http2/ 并且开启ssl 安装传输<br> ./configure –prefix=/app/httpd –sysconfdir=/etc/http2/<br>–enable-ssl<br> 发下报错了，<br> 一般我们建议编译前把我们的开发包组安装一下<br> yum groupinstall “Development Tools”<br> yum install apr-devel<br> yum install apr-util-devel<br> yum install gcc<br> yum install pcre-devel<br> yum install openssl-devel </p>
-<p>（2）make -j cpu数量 </p>
-<p>（3）make install </p>
-<p> (4)进入app下查看</p>
+<h2 id="（二）下面我们开始进入编译步骤"><a href="#（二）下面我们开始进入编译步骤" class="headerlink" title="（二）下面我们开始进入编译步骤"></a>（二）下面我们开始进入编译步骤</h2><p>（1）比如我们要把主程序安装在/app/httpd 目录下，配置文件安装在/etc/http2/ 并且开启ssl 安装传输<br> ./configure –prefix=/app/httpd –sysconfdir=/etc/http2/<br>–enable-ssl<br> 发下报错了，<br> 一般我们建议编译前把我们的开发包组安装一下<br> yum groupinstall “Development Tools”<br> yum install apr-devel<br> yum install apr-util-devel<br> yum install gcc<br> yum install pcre-devel<br> yum install openssl-devel </p>
+<p>（2）make -j cpu数量<br>（3）make install<br>（4）进入app下查看<br>（5）配置环境变量<br>echo ‘PATH=/app/httpd/bin:$PATH’ &gt; /etc/profile.d/httpd.sh<br>（6）生效<br>. /etc/profile.d/httpd.sh<br>（7）启动服务<br> apachectl  start</p>
 
                           
 
@@ -399,7 +401,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码有什么用"><span class="toc-number">1.</span> <span class="toc-text">源代码有什么用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码常见的打包格式"><span class="toc-number">2.</span> <span class="toc-text">源代码常见的打包格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何编译源码"><span class="toc-number">3.</span> <span class="toc-text">如何编译源码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码有什么用"><span class="toc-number">1.</span> <span class="toc-text">源代码有什么用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码常见的打包格式"><span class="toc-number">2.</span> <span class="toc-text">源代码常见的打包格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何编译源码"><span class="toc-number">3.</span> <span class="toc-text">如何编译源码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）解压我们刚刚下载回来的压缩包"><span class="toc-number">3.1.</span> <span class="toc-text">（一）解压我们刚刚下载回来的压缩包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）下面我们开始进入编译步骤"><span class="toc-number">3.2.</span> <span class="toc-text">（二）下面我们开始进入编译步骤</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -604,11 +606,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,7 +618,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,15 +630,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sort,uniq,cut,wc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,6 +671,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
             
             <div class="clearfix"></div>
