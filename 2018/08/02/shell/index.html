@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T09:11:36.617Z">
+<meta property="og:updated_time" content="2018-08-15T14:29:53.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell脚本">
 <meta name="twitter:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行">
@@ -250,8 +250,14 @@
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>1、编写脚本/root/bin/systeminfo.sh,显示当前主机系统信息，包括主机名，<br>IPv4地址，操作系统版本，内核版本，CPU型号，内存大小，硬盘大小<br>获取ip地址：<br>ifconfig | grep -Eo “(([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|[1-9]?[0-9]|2[0-4][0-9]|25[0-5])”</p>
 <p>[[  “$ip” =~ ^(([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|[1-9]?[0-9]|2[0-4][0-9]|25[0-5])$ ]] &amp;&amp; echo true || echo false</p>
 <p>主机名：hostname<br>ipv4地址：ifconfig | grep -Eo “(([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|[1-9]?[0-9]|2[0-4][0-9]|25[0-5])” |head -n1<br>操作系统版本：cat /etc/centos-release |sed -r ‘s/[^0-9]<em>([0-9]).</em>/\1/‘<br>内核版本： uname -r<br>cpu型号:lscpu |grep “Model name”|tr -s “ “|cut -d: -f2<br>内存大小： free -mh|head -n 2|tail -n 1|tr -s “ “|cut -d” “ -f2<br>硬盘大小： fdisk -l|head -n 2|tr -s “ “|cut -d” “ -f3,4<br>vim /root/bin/systeminfo.sh</p>
-<p>#! /bin/bash<br>echo ‘主机名：’<code>hostname</code><br>echo ipv4地址：<code>ifconfig | grep -Eo &quot;(([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|[1-9]?[0-9]|2[0-4][0-9]|25[0-5])&quot; |head -n1</code><br>echo 操作系统版本：<code>cat /etc/centos-release |sed -r &#39;s/[^0-9]*([0-9]).*/\1/&#39;</code><br>echo 内核版本： <code>uname -r</code><br>echo cpu型号:<code>lscpu |grep &quot;Model name&quot;|tr -s &quot; &quot;|cut -d: -f2</code><br>echo 内存大小： <code>free -mh|head -n 2|tail -n 1|tr -s &quot; &quot;|cut -d&quot; &quot; -f2</code><br>echo 硬盘大小： <code>fdisk -l|head -n 2|tr -s &quot; &quot;|cut -d&quot; &quot; -f3,4</code><br>2、编写脚本/root/bin/backup.sh，可实现每日将/etc/目录备份到/root/etcYYYY-mm-dd中</p>
-<p>3、编写脚本/root/bin/disk.sh,显示当前硬盘分区中空间利用率最大的值<br>4、编写脚本/root/bin/links.sh,显示正连接本主机的每个远程主机的IPv4地址<br>和连接数，并按连接数从大到小排序<br>5、让所有用户的PATH环境变量的值多出一个路径，例如：<br>/usr/local/apache/bin<br>6、用户root登录时，将命令指示符变成红色，并自动启用如下别名：<br>rm=‘rm –i’<br>cdnet=‘cd /etc/sysconfig/network-scripts/’<br>editnet=‘vim /etc/sysconfig/network-scripts/ifcfg-eth0’<br>editnet=‘vim /etc/sysconfig/network-scripts/ifcfg-eno16777736 或 ifcfg-ens33 ’ (如果系<br>统是CentOS7)<br>7、任意用户登录系统时，显示红色字体的警示提醒信息“Hi,dangerous！”<br>8、编写生成脚本基本格式的脚本，包括作者，联系方式，版本，时间，描述等<br>9、编写用户的环境初始化脚本reset.sh，包括别名，登录提示符，vim的设置，<br>环境变量等<br>10、编写脚本/bin/per.sh,判断当前用户对指定参数文件，是否不可读并且不可写<br>11、编写脚本/root/bin/excute.sh ，判断参数文件是否为sh后缀的普通文件，如<br>果是，添加所有人可执行权限，否则提示用户非脚本文件<br>12、编写脚本/root/bin/nologin.sh和login.sh,实现禁止和充许普通用户登录系统<br>13、编写脚本/root/bin/argsnum.sh，接受一个文件路径作为参数；如果参数<br>个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数<br>不小于1，则显示第一个参数所指向的文件中的空白行数<br>14、编写脚本/root/bin/hostping.sh，接受一个主机的IPv4地址做为参数，测<br>试是否可连通。如果能ping通，则提示用户“该IP地址可访问”；如果不可<br>ping通，则提示用户“该IP地址不可访问”<br>15、编写脚本/root/bin/checkdisk.sh，检查磁盘分区空间和inode使用率，如<br>果超过80%，就发广播警告空间将满<br>16、写一个创建用户的脚本，会询问用户用户名及密码，要求密码输入过程不可见<br>read -p “Please Enter your username: “ name<br>echo -n “Please Enter the password for $name: “<br>stty -echo<br>read password<br>stty echo<br>echo<br>useradd $name<br>echo $password |passwd –stdin $name &amp;&gt; /dev/null<br>echo “$name created”<br>或者<br>read -p “Please Enter your username: “ name<br>read -sp “Please Enter the password for $name: “ password<br>echo<br>useradd $name<br>echo $password |passwd –stdin $name &amp;&gt; /dev/null<br>echo “$name created”</p>
+<p>#! /bin/bash<br>echo ‘主机名：’<code>hostname</code><br>echo ipv4地址：<code>ifconfig | grep -Eo &quot;(([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|[1-9]?[0-9]|2[0-4][0-9]|25[0-5])&quot; |head -n1</code><br>echo 操作系统版本：<code>cat /etc/centos-release |sed -r &#39;s/[^0-9]*([0-9]).*/\1/&#39;</code><br>echo 内核版本： <code>uname -r</code><br>echo cpu型号:<code>lscpu |grep &quot;Model name&quot;|tr -s &quot; &quot;|cut -d: -f2</code><br>echo 内存大小： <code>free -mh|head -n 2|tail -n 1|tr -s &quot; &quot;|cut -d&quot; &quot; -f2</code><br>echo 硬盘大小： <code>fdisk -l|head -n 2|tr -s &quot; &quot;|cut -d&quot; &quot; -f3,4</code><br>2、编写脚本/root/bin/backup.sh，可实现每日将/etc/目录备份到/root/etcYYYY-mm-dd中<br>cp -a /etc/ /root/etc<code>date +%Y-%m-%d</code><br>3、编写脚本/root/bin/disk.sh,显示当前硬盘分区中空间利用率最大的值<br> echo “当前硬盘分区中空间利用率最大的值:$( df |grep -o “[0-9]{1,3}%” |sort -rn |head -1)”<br>4、编写脚本/root/bin/links.sh,显示正连接本主机的每个远程主机的IPv4地址<br>和连接数，并按连接数从大到小排序<br>5、让所有用户的PATH环境变量的值多出一个路径，例如：<br>/usr/local/apache/bin<br>6、用户root登录时，将命令指示符变成红色，并自动启用如下别名：<br>rm=‘rm –i’<br>cdnet=‘cd /etc/sysconfig/network-scripts/’<br>editnet=‘vim /etc/sysconfig/network-scripts/ifcfg-eth0’<br>editnet=‘vim /etc/sysconfig/network-scripts/ifcfg-eno16777736 或 ifcfg-ens33 ’ (如果系<br>统是CentOS7)<br>7、任意用户登录系统时，显示红色字体的警示提醒信息“Hi,dangerous！”<br>9、编写用户的环境初始化脚本reset.sh，包括别名，登录提示符，vim的设置，<br>环境变量等</p>
+<p>cat &lt;&lt; EOF &gt;&gt; ~/.bashrc<br>alias ipconfig=’ifconfig etho’<br>PS1=’[\e[32;40m][\u@\h \W]\$ ‘<br>EOF<br>cat &lt;&lt; EOF &gt;&gt; ~/.vimrc<br>set nu<br>EOF<br>echo ‘echo welcome’ &gt;&gt; /etc/bashrc</p>
+<p>10、编写脚本/bin/per.sh,判断当前用户对指定参数文件，是否不可读并且不可写<br>[ ! -r $1 -a ! -w $1 ] &amp;&amp; echo “$1 file not read and not write”<br>11、编写脚本/root/bin/excute.sh ，判断参数文件是否为sh后缀的普通文件，如<br>果是，添加所有人可执行权限，否则提示用户非脚本文件<br>[ $# == 0 ] &amp;&amp; read -p “please input fimename” name || name=$1<br>[ -f $name ] &amp;&amp; [[ “$name” =~ .sh$ ]] &amp;&amp; chmod a+x $name || echo “$name not scripts file”<br>12、编写脚本/root/bin/nologin.sh和login.sh,实现禁止和充许普通用户登录系统<br>nologin:usermod $1 -s /bin/bash/nolgin<br>login:usermod $1 -s /bin/bash<br>13、编写脚本/root/bin/argsnum.sh，接受一个文件路径作为参数；如果参数<br>个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数<br>不小于1，则显示第一个参数所指向的文件中的空白行数<br>[ $# -lt 1 ] &amp;&amp; (echo “please input a arge” &amp;&amp; exit ) || echo “<code>grep &quot;^$&quot; $1 | wc -l</code>“<br>14、编写脚本/root/bin/hostping.sh，接受一个主机的IPv4地址做为参数，测<br>试是否可连通。如果能ping通，则提示用户“该IP地址可访问”；如果不可<br>ping通，则提示用户“该IP地址不可访问”<br>a1=<code>echo $1|cut -d. -f1</code><br>a2=<code>echo $1|cut -d. -f2</code><br>a3=<code>echo $1|cut -d. -f3</code><br>a4=<code>echo $1|cut -d. -f4</code><br>[ $a1 -le 255 ] &amp;&amp; [ $a2 -le 255 ] &amp;&amp; [ $a3 -le 255 ] &amp;&amp; [ $a4 -le 255 ] || echo “IP地址不合法” &amp;&amp; exi<br>t 1<br>ping -c1 -W1 $1 &amp;&gt; /dev/null &amp;&amp; echo “该IP可访问” || echo “该IP不可访问”</p>
+<p>15、编写脚本/root/bin/checkdisk.sh，检查磁盘分区空间和inode使用率，如<br>果超过80%，就发广播警告空间将满<br>usagea=$(df |grep “^/.<em>sd” |egrep -o “[0-9]{1,3}%” |tr -d % |sort -n |tail -1)<br>usageb=$(df -i |grep “^/.</em>sd” |egrep -o “[0-9]{1,3}%” |tr -d % |sort -n |tail -1)<br>[ $usagea -ge 80 -o $usageb -ge 80 ] &amp;&amp; wall warning || echo health<br>16、写一个创建用户的脚本，会询问用户用户名及密码，要求密码输入过程不可见<br>read -p “Please Enter your username: “ name<br>echo -n “Please Enter the password for $name: “<br>stty -echo<br>read password<br>stty echo<br>echo<br>useradd $name<br>echo $password |passwd –stdin $name &amp;&gt; /dev/null<br>echo “$name created”<br>或者<br>read -p “Please Enter your username: “ name<br>read -sp “Please Enter the password for $name: “ password<br>echo<br>useradd $name<br>echo $password |passwd –stdin $name &amp;&gt; /dev/null<br>echo “$name created”<br>17、编写一个脚本，名为/root/bin/createscripts.sh ，当执行该脚本时，输入 createscripts.sh /path/newsh.sh 则会在指定路径生成脚本文件，并涵盖注释信息如下：<br>并自动打开该 文件，开始编辑，在编辑结束后，自动给该脚本加上执行权限。<br>#<br>A=<code>basename $1 |grep -o &quot;\.sh$&quot;</code> </p>
+<p>#echo $A<br>if [ -n “$A” ];then<br>        echo -e “#!/bin/bash \n#” &gt;&gt; $1<br>        echo  “#—————————————“ &gt;&gt; $1<br>        echo  “# Filename:    <code>basename $1</code>“ &gt;&gt; $1<br>        echo  “# Revision:    1.0” &gt;&gt; $1<br>        echo  “# Date:        <code>date +&quot;%F %T&quot;</code>“&gt;&gt; $1<br>        echo  “# Author:      <code>id -nu</code>“ &gt;&gt; $1<br>        echo  “# Email:       <a href="mailto:sezina_f@163.com" target="_blank" rel="noopener">sezina_f@163.com</a>“ &gt;&gt; $1<br>        echo  “# Description:” &gt;&gt; $1<br>        echo  “#—————————————“ &gt;&gt; $1<br>        echo  “# Copyright:   2018 tzx” &gt;&gt; $1<br>        echo  “# License:     GPL” &gt;&gt; $1<br>        echo  &gt;&gt; $1<br>        vim +13 $1<br>        chmod +x $1<br>    else<br>        echo “Usage: Please end file with .sh.”</p>
+<p>fi<br>18、创建用户并修改密码，首次登陆强制修改密码<br>useradd $1<br>echo $1 is created<br>echo magedu | passwd –stdin $1  &amp;&gt;/dev/null<br>passwd -e  $1 &amp;&gt; /dev/null<br>echo $1 password is reset</p>
+<p>19、提示用户输入yes or no<br>read -p “Please input yes or no: “ answer<br>[[ “$answer” =~   ^<a href="[Ee][Ss]">Yy</a>?$ ]] &amp;&amp;  echo Your answer is YES &amp;&amp; exit<br>[[ “$answer” =~   ^[Nn][Oo]?$ ]] &amp;&amp;  echo Your answer is NO  &amp;&amp; exit<br>echo “Your answer is false,please input yes or no</p>
+<p>20、 判断字符串是否为空<br>-z 当串的长度为0时为真<br>-n 当串的长度大于0时为真<br>STRING=$1<br>if [ -z “$STRING” ]; then<br>    echo “STRING is empty”<br>fi<br>if [ -n “$STRING” ]; then<br>    echo “STRING is not empty”<br>fi</p>
 
                           
 
@@ -624,31 +630,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,15 +638,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,7 +670,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,7 +678,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
