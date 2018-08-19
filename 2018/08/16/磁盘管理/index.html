@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>磁盘管理 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。  磁盘分类结构 固态硬盘（Solid state drive）用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。固态硬盘在接口的规范和定义、功能及使用方法上与普通硬盘的完全相同，在产品外形和尺寸上也与普通硬盘一致.相对于HDD，SSD">
+  <meta name="description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
 <meta name="keywords" content="磁盘管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="磁盘管理">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/16/磁盘管理/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。  磁盘分类结构 固态硬盘（Solid state drive）用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。固态硬盘在接口的规范和定义、功能及使用方法上与普通硬盘的完全相同，在产品外形和尺寸上也与普通硬盘一致.相对于HDD，SSD">
+<meta property="og:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/固态硬盘.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/机械硬盘.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/添加硬盘.png">
-<meta property="og:updated_time" content="2018-08-19T13:35:54.001Z">
+<meta property="og:updated_time" content="2018-08-19T13:38:02.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="磁盘管理">
-<meta name="twitter:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。  磁盘分类结构 固态硬盘（Solid state drive）用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。固态硬盘在接口的规范和定义、功能及使用方法上与普通硬盘的完全相同，在产品外形和尺寸上也与普通硬盘一致.相对于HDD，SSD">
+<meta name="twitter:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
 <meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/固态硬盘.png">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
@@ -225,6 +225,7 @@
               
                         <blockquote><p>本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="磁盘分类结构"><a href="#磁盘分类结构" class="headerlink" title="磁盘分类结构"></a>磁盘分类结构</h1><ol>
 <li>固态硬盘（Solid state drive）<br>用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。固态硬盘在接口的规范和定义、功能及使用方法上与普通硬盘的完全相同，在产品外形和尺寸上也与普通硬盘一致.相对于HDD，SSD防震抗摔，传输速度上明显有优势.但是费用昂贵。</li>
 <li><p>机械硬盘（hard disk drive）<br>即是传统普通硬盘，主要由：盘片，磁头，盘片转轴及控制电机，磁头控制器，数据转换器，接口，缓存等几个部分组成。机械硬盘中所有的盘片都装在一个旋转轴上，每张盘片之间是平行的，在每个盘片的存储面上有一个磁头，磁头与盘片之间的距离比头发丝的直径还小，所有的磁头联在一个磁头控制器上，由磁头控制器负责各个磁头的运动。磁头可沿盘片的半径方向运动，加上盘片每分钟几千转的高速旋转，磁头就可以定位在盘片的指定位置上进行数据的读写操作。数据通过磁头由电磁流来改变极性方式被电磁流写到磁盘上，也可以通过相反方式读取。硬盘为精密设备，进入硬盘的空气必须过滤.<br>虽然ssd在很多方面有优势，但是致命的是寿命不长，硬盘有价，数据无价,目前SSD还不能完全取代HDD.<br>2种磁盘的结构是不一样的，工作原理当然也是不一样的，我觉得对磁盘结构以及工作原理的理解有助于我们后边的开发。可以提高磁盘的存取速度。</p>
@@ -741,10 +742,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
@@ -753,11 +750,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,11 +794,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,11 +806,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
             
             <div class="clearfix"></div>
