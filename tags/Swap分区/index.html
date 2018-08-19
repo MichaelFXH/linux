@@ -6,22 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>httpd 安装问题 | </title>
+  <title>Tag: Swap分区 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="httpd 安装问题">
-<meta name="keywords" content="httpd">
-<meta property="og:type" content="article">
-<meta property="og:title" content="httpd 安装问题">
-<meta property="og:url" content="https://michaelfxh.github.io/2018/08/09/LinuxhttpdProblem/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title">
+<meta property="og:url" content="https://michaelfxh.github.io/tags/Swap分区/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="httpd 安装问题">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/httpd服务.png">
-<meta property="og:updated_time" content="2018-08-09T14:37:02.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="httpd 安装问题">
-<meta name="twitter:description" content="httpd 安装问题">
-<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/httpd服务.png">
+<meta name="twitter:title">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -168,95 +161,53 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                <article id="post-LinuxhttpdProblem" class="article article-type-post "
-  itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+                
   
-    <h1 class="article-title" itemprop="name">
-      httpd 安装问题
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/linuxNotes/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/linuxNotes/2018/08/19/linux逻辑卷/" class="archive-article-date">
+  	<time datetime="2018-08-19T14:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/linuxNotes/2018/08/19/linux逻辑卷/">linux逻辑卷</a>
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/09/LinuxhttpdProblem/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/19/linux逻辑卷/" class="pageViews">0</span>次
   </a>
 
+        <div class="article-info info-on-right">
           
-            <a href="/linuxNotes/2018/08/09/LinuxhttpdProblem/" class="archive-article-date">
-  	<time datetime="2018-08-09T14:29:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
-</a>
-              
-      </header>
-      
-        <!-- 目录内容 -->
-        
-            <!-- 目录内容结束 -->
-            <div class="article-entry" itemprop="articleBody">
-              
-                        <blockquote><p>httpd 安装问题 </p>
-</blockquote>
-<a id="more"></a>
-<p>service httpd start<br>报错<br>Could not reliably determine the server’s fully qualified domain name, using 127.0.0.1 for ServerName<br>解决办法：<br>find / -name “httpd.conf”<br>编辑  /etc/httpd/conf/httpd.conf<br>添加ServerName localhost:80<br>重启服务 apachectl restart </p>
-<p>发现只能在虚拟机里访问，外边主机无法访问，应该是iptables中限制远程访问80端口<br>开放端口<br>iptables -I INPUT -p tcp –dport 80 -j ACCEPT<br>保存配置<br>service iptables save<br>重启防火墙<br>service iptables restart<br>查看配置<br>iptables status<br>然后在输入ip 地址可以正常访问了<br><img src="/linuxNotes/Linux/httpd服务.png" alt="logo"></p>
-
-                          
-
-                            
-                              <div class="page-reward">
-                                <a href="javascript:;" class="page-reward-btn tooltip-top">
-                                  <div class="tooltip tooltip-east">
-                                    <span class="tooltip-item">
-                                      赏
-                                    </span>
-                                    <span class="tooltip-content">
-                                      <span class="tooltip-text">
-                                        <span class="tooltip-inner">
-                                          <p class="reward-p">
-                                            <i class="icon icon-quo-left"></i>
-                                            您的支持是我最大的努力
-                                              <i class="icon icon-quo-right"></i>
-                                          </p>
-                                          <div class="reward-box">
-                                            
-                                              <div class="reward-box-item">
-                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
-                                                <span class="reward-type">支付宝</span>
-                                              </div>
-                                              
-                                                
-                                                  <div class="reward-box-item">
-                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
-                                                    <span class="reward-type">微信</span>
-                                                  </div>
-                                                  
-                                          </div>
-                                        </span>
-                                      </span>
-                                    </span>
-                                  </div>
-                                </a>
-                              </div>
-                              
-            </div>
-            <div class="article-info article-info-index">
-              
-                  
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">httpd</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swap分区</a>
         		</li>
       		
 		</ul>
 	</div>
 
-                    
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -269,145 +220,73 @@
 	</div>
 
 
-                      
-
-                          
-                            
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/09/LinuxhttpdProblem/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-                              
-                                <div class="clearfix"></div>
-            </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/linuxNotes/2018/08/19/linuxswap分区/" class="archive-article-date">
+  	<time datetime="2018-08-19T13:50:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/linuxNotes/2018/08/19/linuxswap分区/">Swap分区</a>
+    </h1>
+  
 
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/linuxNotes/2018/08/19/linuxswap分区/" class="pageViews">0</span>次
+  </a>
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swap分区</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/linuxNotes/categories/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
-<nav id="article-nav">
   
-    <a href="/linuxNotes/2018/08/10/linuxSuidSgidSbit/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT
-        
-      </div>
-    </a>
+    </div></section>
   
-  
-    <a href="/linuxNotes/2018/08/09/npmyun/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">软件包管理</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
 
     
-      <aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
-        
-          
-            <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="LinuxhttpdProblem" data-title="httpd 安装问题" data-url="https://michaelfxh.github.io/linuxNotes/2018/08/09/LinuxhttpdProblem/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-              
-
-                
-                  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "https://michaelfxh.github.io/linuxNotes/2018/08/09/LinuxhttpdProblem/", 
-    sourceId: "LinuxhttpdProblem",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-                    
-
-                      
-
-                            
-
-                                
-                                      
               </div>
             </div>
           </div>
@@ -431,9 +310,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
