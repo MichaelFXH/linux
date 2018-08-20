@@ -16,6 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid.jpg">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid0.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid1.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid5.png">
@@ -23,11 +24,11 @@
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid10.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid01.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid50.png">
-<meta property="og:updated_time" content="2018-08-20T15:54:00.518Z">
+<meta property="og:updated_time" content="2018-08-20T16:08:21.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raid详解">
 <meta name="twitter:description" content="RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解">
-<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid0.png">
+<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid.jpg">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -227,7 +228,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p>RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
+                        <blockquote><p><img src="/linuxNotes/Linux/raid.jpg" alt="logo"><br>RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="radi分类"><a href="#radi分类" class="headerlink" title="radi分类"></a><font color="#339966">radi分类</font></h1><p>  一般高性能的磁盘阵列都是以硬件的形式来达成,进一步的把磁盘存取控制及磁盘阵列结合在一个控制器(RAID controler)或控制卡上,针对不同的用户解决人们对磁盘输输入输出系统的四大要求:<br>  (1)增加存取速度,<br>  (2)容错(fault tolerance),即安全性<br>  (3)有效的利用磁盘利用率;<br>  (4)尽量的平衡CPU,内存及磁盘的性能差异,提高主机的整体工作性能。</p>
@@ -661,15 +662,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +702,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,7 +718,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,7 +726,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
               <li class="article-tag-list-item">
