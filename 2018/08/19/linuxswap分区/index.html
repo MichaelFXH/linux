@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Linux内核为了提高读写效率与速度，会将文件在内存中进行缓存，这部分内存就是Cache Memory(缓存内存)。即使你的程序运行结束后，Cache Memory也不会自动释放。这就会导致你在Linux系统中程序频繁读写文件后，你会发现可用物理内存变少。当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-19T14:42:56.586Z">
+<meta property="og:updated_time" content="2018-08-20T01:08:08.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swap分区">
 <meta name="twitter:description" content="Linux内核为了提高读写效率与速度，会将文件在内存中进行缓存，这部分内存就是Cache Memory(缓存内存)。即使你的程序运行结束后，Cache Memory也不会自动释放。这就会导致你在Linux系统中程序频繁读写文件后，你会发现可用物理内存变少。当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的">
@@ -230,8 +230,9 @@
 <li>4G以内的物理内存，SWAP 设置为内存的2倍。</li>
 <li>4-8G的物理内存，SWAP 等于内存大小。</li>
 <li>8-64G 的物理内存，SWAP 设置为8G。</li>
-<li>64-256G物理内存，SWAP 设置为16G。<h1 id="释放Swap分区空间"><a href="#释放Swap分区空间" class="headerlink" title="释放Swap分区空间"></a>释放Swap分区空间</h1>使用swapoff关闭交换分区<br>swapoff /dev/sda5<br>swapon /dev/sda5 </li>
+<li>64-256G物理内存，SWAP 设置为16G。<h1 id="释放Swap分区空间"><a href="#释放Swap分区空间" class="headerlink" title="释放Swap分区空间"></a>释放Swap分区空间</h1></li>
 </ul>
+<p>使用swapoff关闭交换分区<br>swapoff /dev/sda5<br>swapon /dev/sda5 </p>
 <h1 id="调整Swap分区的大小"><a href="#调整Swap分区的大小" class="headerlink" title="调整Swap分区的大小"></a>调整Swap分区的大小</h1><ol>
 <li><p>查看Swap的使用情况以及相关信息<br>swapon -s<br>free -m</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># free -mh</span></span><br><span class="line">           total       used       free     shared    buffers     cached</span><br><span class="line">  Mem:          1.9G       673M       1.3G       2.6M        73M       182M</span><br><span class="line">  -/+ buffers/cache:       417M       1.5G</span><br><span class="line">  Swap:         2.0G         0B       2.0G</span><br></pre></td></tr></table></figure>
@@ -621,10 +622,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
@@ -633,11 +630,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +642,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,7 +650,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,15 +674,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
