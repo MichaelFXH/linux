@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。 与传统的磁盘与分区相比，LVM为计算机提供了更高层">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-20T01:01:23.156Z">
+<meta property="og:updated_time" content="2018-08-21T11:34:38.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux逻辑卷">
 <meta name="twitter:description" content="LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。 与传统的磁盘与分区相比，LVM为计算机提供了更高层">
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容当前分区"><span class="toc-number">3.</span> <span class="toc-text">扩容当前分区</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -229,28 +229,25 @@
 <p> 前面谈到，LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：</p>
 <p>物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。<br>    物理卷（physical volume）：物理卷就是指硬盘分区或从逻辑上与磁盘分区具有同样功能的设备(如RAID)，是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。<br>    卷组（Volume Group）：LVM卷组类似于非LVM系统中的物理硬盘，其由物理卷组成。可以在卷组上创建一个或多个“LVM分区”（逻辑卷），LVM卷组由一个或多个物理卷组成。<br>    逻辑卷（logical volume）：LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统(比如/home或者/usr等)。<br>    PE（physical extent）：每一个物理卷被划分为称为PE(Physical Extents)的基本单元，具有唯一编号的PE是可以被LVM寻址的最小单元。PE的大小是可配置的，默认为4MB。<br>    LE（logical extent）：逻辑卷也被划分为被称为LE(Logical Extents) 的可被寻址的基本单位。在同一个卷组中，LE的大小和PE是相同的，并且一一对应。<br>    简单来说就是：<br>    PV:是物理的磁盘分区<br>    VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。<br>    LV：也就是从VG中划分的逻辑分区</p>
 <h1 id="创建跟管理LVM"><a href="#创建跟管理LVM" class="headerlink" title="创建跟管理LVM"></a>创建跟管理LVM</h1><ol>
-<li><p>创建分区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"> WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">    switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">    sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   Command (m for help): n</span></span><br><span class="line"><span class="string">   Command action</span></span><br><span class="line"><span class="string">   l   logical (5 or over)</span></span><br><span class="line"><span class="string">   p   primary partition (1-4)</span></span><br><span class="line"><span class="string">   p   选主分区</span></span><br><span class="line"><span class="string">   Selected partition 4</span></span><br><span class="line"><span class="string">   First cylinder (92-2610, default 92): </span></span><br><span class="line"><span class="string">   Using default value 92</span></span><br><span class="line"><span class="string">   Last cylinder, +cylinders or +size&#123;K,M,G&#125; (92-262, default 262): +500M   500M大小</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   Command (m for help): t</span></span><br><span class="line"><span class="string">   Partition number (1-5): 3</span></span><br><span class="line"><span class="string">   Hex code (type L to list codes): 8e</span></span><br><span class="line"><span class="string">   Changed system type of partition 3 to 8e (Linux LVM)</span></span><br></pre></td></tr></table></figure>
-<p>一定要指定分区的格式为8e，这是LVM的分区格式</p>
-</li>
-<li>创建PV<br>pvdisplay 查看当前存在的pv<br>pvcreate /dev/DEVICE</li>
-<li>创建VG<br>vgdisplay 查看当前存在的pv<br>vgcreate  volueGroupName /dev/DEVICE<br>创建完成VG之后，才能从VG中划分一个LV。</li>
-<li>创建LV<br>lvcreate -L 100M -n lvData volueGroupName<br>lvdisplay 查看lv信息<br>创建了一个名字为lvData，容量大小是100M的分区，其中：-L：指定LV的大小 -n：指定LV的名。Vo1Group00：表示从这个VG中划分LV。</li>
-<li><p>LV格式化及挂载<br>下一步需要对LV进行格式化（使用mksf进行格式化操作），然后LV才能存储资料<br>mkfs -t ext3 /dev/volueGroupName/lvData<br>格式化以后/dev/volueGroupName/lvData 就跟普通目录一样可以存储数据了。</p>
-<blockquote>
-<p>挂载</p>
-</blockquote>
-<p>mount /dev/volueGroupName/lvData /data/test/<br>如果要保存，防止系统重启后失效<br>我们将配置写入etc/fstab 文件中</p>
+<li>创建分区<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"> WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">    switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">    sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   Command (m for help): n</span></span><br><span class="line"><span class="string">   Command action</span></span><br><span class="line"><span class="string">   l   logical (5 or over)</span></span><br><span class="line"><span class="string">   p   primary partition (1-4)</span></span><br><span class="line"><span class="string">   p   选主分区</span></span><br><span class="line"><span class="string">   Selected partition 4</span></span><br><span class="line"><span class="string">   First cylinder (92-2610, default 92): </span></span><br><span class="line"><span class="string">   Using default value 92</span></span><br><span class="line"><span class="string">   Last cylinder, +cylinders or +size&#123;K,M,G&#125; (92-262, default 262): +500M   500M大小</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   Command (m for help): t</span></span><br><span class="line"><span class="string">   Partition number (1-5): 3</span></span><br><span class="line"><span class="string">   Hex code (type L to list codes): 8e</span></span><br><span class="line"><span class="string">   Changed system type of partition 3 to 8e (Linux LVM)</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="扩容当前分区"><a href="#扩容当前分区" class="headerlink" title="扩容当前分区"></a>扩容当前分区</h1><blockquote>
-<p>首先创建一块新的分区：</p>
-</blockquote>
-<p>fdisk  /dev/hda<br>n<br>l     #选择逻辑分区，如果没有，则首先创建扩展分区，然后再添加逻辑分区（硬盘：最多四个分区P-P-P-P或P-P-P-E）<br>6     #分区号（从5开始），/dev/hda6<br>t     8e   #分区类型8e表示LVM分区<br>w      #写入分区表<br>partprobe   #重读分区表<br>mkfs –t ext3 /dev/hda6 #格式化<br>partx /dev/hda #查看当前硬盘的分区表及使用情况</p>
-<blockquote>
-<p>创建PV，扩容VG，LV</p>
-</blockquote>
-<p>pvcreate /dev/hda6<br>vgdisplay #查看当前已经存在的VG信息，以存在VG：VolGroup00为例<br>vgextend VolGroup00 /dev/hda6    #扩展VolGroup00<br>lvdisplay #查看已经存在的LV信息，以存在LV：LogVol01为例<br>lvextend –L 1G /dev/VolGroup00/LogVol01 #扩展LV<br>resize2fs /dev/VolGroup00/LogVol01 #执行该重设大小，对于当前正在使用的LogVol01有效<br>df –h #查看挂载情况，已经扩容</p>
+<p>一定要指定分区的格式为8e，这是LVM的分区格式</p>
+<ol start="2">
+<li>创建PV<br>pvdisplay 查看当前存在的pv<br>pvcreate /dev/sdb</li>
+<li>创建VG<br>vgdisplay 查看当前存在的pv<br>vgcreate  volueGroupName /dev/sdb<br>创建完成VG之后，才能从VG中划分一个LV。</li>
+<li>创建LV<br>lvcreate -L 100M -n lvData volueGroupName<br>lvdisplay 查看lv信息<br>创建了一个名字为lvData，容量大小是100M的分区，其中：-L：指定LV的大小 -n：指定LV的名。Vo1Group00：表示从这个VG中划分LV。</li>
+<li>LV格式化及挂载<br>下一步需要对LV进行格式化（使用mksf进行格式化操作），然后LV才能存储资料<br>mkfs -t ext3 /dev/volueGroupName/lvData<br>格式化以后/dev/volueGroupName/lvData 就跟普通目录一样可以存储数据了。</li>
+<li>挂载<br>mount /dev/volueGroupName/lvData /data/test/<br>如果要保存，防止系统重启后失效<br>我们将配置写入etc/fstab 文件中</li>
+</ol>
+<h1 id="扩容LVM分区"><a href="#扩容LVM分区" class="headerlink" title="扩容LVM分区"></a>扩容LVM分区</h1><ol>
+<li>首先创建一块新的分区：</li>
+</ol>
+<p>fdisk  /dev/sde<br>n<br>l     #选择逻辑分区，如果没有，则首先创建扩展分区，然后再添加逻辑分区（硬盘：最多四个主分区，1个扩展分区，多个逻辑分区）<br>6      #分区号（从5开始），/dev/sde<br>t      8e   #分区类型8e表示LVM分区<br>w      #写入分区表<br>partprobe   #同步分区表<br>mkfs –t ext3 /dev/sde #格式化<br>partx /dev/sde #查看当前硬盘的分区表及使用情况</p>
+<ol start="2">
+<li>创建PV，扩容VG，LV</li>
+</ol>
+<p>pvcreate /dev/sde<br>vgdisplay #查看当前已经存在的VG信息，以存在VG：VolGroup00为例<br>vgextend VolGroup00 /dev/sde    #扩展VolGroup00<br>lvdisplay #查看已经存在的LV信息，以存在LV：LogVol01为例<br>lvextend –L 1G /dev/VolGroup00/LogVol01 #扩展LV<br>resize2fs /dev/VolGroup00/LogVol01 #执行该重设大小，对于当前正在使用的LogVol01有效<br>df –h #查看挂载情况，已经扩容</p>
 
                           
 
@@ -418,7 +415,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容当前分区"><span class="toc-number">3.</span> <span class="toc-text">扩容当前分区</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -623,6 +620,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
@@ -639,15 +640,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,11 +652,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,19 +664,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,7 +676,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,11 +692,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
             
             <div class="clearfix"></div>

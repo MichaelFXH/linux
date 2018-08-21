@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid10.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid01.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid50.png">
-<meta property="og:updated_time" content="2018-08-21T09:38:03.215Z">
+<meta property="og:updated_time" content="2018-08-21T11:29:05.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raid详解">
 <meta name="twitter:description" content="在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。RAID：（Redundant A">
@@ -208,7 +208,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raid分类"><span class="toc-number">1.</span> <span class="toc-text">raid分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mdadm工具介绍"><span class="toc-number">2.</span> <span class="toc-text">mdadm工具介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个RAID的基本过程"><span class="toc-number">3.</span> <span class="toc-text">创建一个RAID的基本过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘阵列的管理"><span class="toc-number">4.</span> <span class="toc-text">磁盘阵列的管理</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raid分类"><span class="toc-number">1.</span> <span class="toc-text">raid分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mdadm工具介绍"><span class="toc-number">2.</span> <span class="toc-text">mdadm工具介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个RAID的基本过程"><span class="toc-number">3.</span> <span class="toc-text">创建一个RAID的基本过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘阵列的管理"><span class="toc-number">4.</span> <span class="toc-text">磁盘阵列的管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结raid5的创建过程"><span class="toc-number">5.</span> <span class="toc-text">总结raid5的创建过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">6.</span> <span class="toc-text">实验</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -254,21 +254,37 @@
 <p>我们分别从sdb,sdc里分出1G来创建raid设备.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"></span><br><span class="line">WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">         switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">         sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): n</span></span><br><span class="line"><span class="string">Command action</span></span><br><span class="line"><span class="string">   e   extended</span></span><br><span class="line"><span class="string">   p   primary partition (1-4)</span></span><br><span class="line"><span class="string">p</span></span><br><span class="line"><span class="string">Partition number (1-4): 1</span></span><br><span class="line"><span class="string">First cylinder (1-2610, default 1): </span></span><br><span class="line"><span class="string">Using default value 1</span></span><br><span class="line"><span class="string">Last cylinder, +cylinders or +size&#123;K,M,G&#125; (1-2610, default 2610): +1G</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): t</span></span><br><span class="line"><span class="string">Selected partition 1</span></span><br><span class="line"><span class="string">Hex code (type L to list codes): fd  指定raid标识</span></span><br><span class="line"><span class="string">Changed system type of partition 1 to fd (Linux raid autodetect)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): p</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Disk /dev/sdb: 21.5 GB, 21474836480 bytes</span></span><br><span class="line"><span class="string">255 heads, 63 sectors/track, 2610 cylinders</span></span><br><span class="line"><span class="string">Units = cylinders of 16065 * 512 = 8225280 bytes</span></span><br><span class="line"><span class="string">Sector size (logical/physical): 512 bytes / 512 bytes</span></span><br><span class="line"><span class="string">I/O size (minimum/optimal): 512 bytes / 512 bytes</span></span><br><span class="line"><span class="string">Disk identifier: 0x7d9e381f</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Device Boot      Start         End      Blocks   Id  System</span></span><br><span class="line"><span class="string">/dev/sdb1               1         132     1060258+  fd  Linux raid autodetect</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): w</span></span><br><span class="line"><span class="string">The partition table has been altered!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Calling ioctl() to re-read partition table.</span></span><br><span class="line"><span class="string">Syncing disks.</span></span><br><span class="line"><span class="string">``` </span></span><br><span class="line"><span class="string">接下来sdc 我们直接用sdb 复制就可以了 </span></span><br><span class="line"><span class="string">``` bash</span></span><br><span class="line"><span class="string">dd if=/dev/sdb of=/dev/sdc bs=1 count=66 skip=446 seek=446  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">lsblk 发现没有sdc1 分区，应该是分区没有同步的原因</span></span><br><span class="line"><span class="string">[root@centos6 ~]# lsblk</span></span><br><span class="line"><span class="string">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span></span><br><span class="line"><span class="string">sr0     11:0    1  3.7G  0 rom  </span></span><br><span class="line"><span class="string">sda      8:0    0  200G  0 disk </span></span><br><span class="line"><span class="string">├─sda1   8:1    0    1G  0 part /boot</span></span><br><span class="line"><span class="string">├─sda2   8:2    0 48.8G  0 part /</span></span><br><span class="line"><span class="string">├─sda3   8:3    0 29.3G  0 part /data</span></span><br><span class="line"><span class="string">├─sda4   8:4    0    1K  0 part </span></span><br><span class="line"><span class="string">└─sda5   8:5    0    2G  0 part [SWAP]</span></span><br><span class="line"><span class="string">sdc      8:32   0   20G  0 disk </span></span><br><span class="line"><span class="string">sdb      8:16   0   20G  0 disk </span></span><br><span class="line"><span class="string">└─sdb1   8:17   0    1G  0 part</span></span><br></pre></td></tr></table></figure></p>
 <p>我们执行同步分区命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partx -a /dev/sdc</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># lsblk</span></span><br><span class="line">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sr0     11:0    1  3.7G  0 rom  </span><br><span class="line">sda      8:0    0  200G  0 disk </span><br><span class="line">├─sda1   8:1    0    1G  0 part /boot</span><br><span class="line">├─sda2   8:2    0 48.8G  0 part /</span><br><span class="line">├─sda3   8:3    0 29.3G  0 part /data</span><br><span class="line">├─sda4   8:4    0    1K  0 part </span><br><span class="line">└─sda5   8:5    0    2G  0 part [SWAP]</span><br><span class="line">sdc      8:32   0   20G  0 disk </span><br><span class="line">└─sdc1   8:33   0    1G  0 part    出来了</span><br><span class="line">sdb      8:16   0   20G  0 disk </span><br><span class="line">└─sdb1   8:17   0    1G  0 part</span><br></pre></td></tr></table></figure>
-<p>上边我们把raid分区给做好了，接下来我们把他们逻辑的组合在一起，创建磁盘阵列。<br><strong>建立磁盘阵列</strong><br>创建由分区sdb1,sdc1组成的设备名称为md0,raid 级别为raid0。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">      [root@centos6 ~]<span class="comment"># mdadm -C /dev/md0 -a yes -l 0 -n 2 /dev/sdb1 /dev/sdc1</span></span><br><span class="line">        mdadm: /dev/sdb1 appears to be part of a raid array:</span><br><span class="line">            level=raid0 devices=0 ctime=Thu Jan  1 08:00:00 1970</span><br><span class="line">        mdadm: partition table exists on /dev/sdb1 but will be lost or</span><br><span class="line">            meaningless after creating array</span><br><span class="line">        Continue creating array? Y</span><br><span class="line">        mdadm: Defaulting to version 1.2 metadata</span><br><span class="line">        mdadm: array /dev/md0 started.</span><br><span class="line">``` </span><br><span class="line">上面提示可以把文件系统给删掉</span><br><span class="line">``` bash</span><br><span class="line"> dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb1</span><br></pre></td></tr></table></figure></p>
+<p>上边我们把raid分区给做好了，接下来我们把他们逻辑的组合在一起，创建磁盘阵列。<br><strong>建立磁盘阵列</strong><br>创建由分区sdb1,sdc1组成的设备名称为md0,raid 级别为raid0。<br>如果是raid5  mdadm -C /dev/md0 -a yes -l 5 -n 4 -x 1  /dev/sdb1 /dev/sdc1 /dev/sdd1  /dev/sde1<br>用-x 指定备用设备<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">      [root@centos6 ~]<span class="comment"># mdadm -C /dev/md0 -a yes -l 0 -n 2 /dev/sdb1 /dev/sdc1</span></span><br><span class="line">        mdadm: /dev/sdb1 appears to be part of a raid array:</span><br><span class="line">            level=raid0 devices=0 ctime=Thu Jan  1 08:00:00 1970</span><br><span class="line">        mdadm: partition table exists on /dev/sdb1 but will be lost or</span><br><span class="line">            meaningless after creating array</span><br><span class="line">        Continue creating array? Y</span><br><span class="line">        mdadm: Defaulting to version 1.2 metadata</span><br><span class="line">        mdadm: array /dev/md0 started.</span><br><span class="line">``` </span><br><span class="line">下面命令可以把文件系统给删掉</span><br><span class="line">``` bash</span><br><span class="line"> dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb1</span><br></pre></td></tr></table></figure></p>
 <p><strong>使用mdadm检查RAID设备的状况</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mdadm --detail /dev/md0</span><br><span class="line">或者</span><br><span class="line">mdadm -D /dev/md0</span><br></pre></td></tr></table></figure></p>
 <p> mdadm -Ds /dev/md0<br><strong>看内核是否以模块的形式已经加载MD驱动</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    cat /proc/mdstat  </span><br><span class="line">```   </span><br><span class="line">或者</span><br><span class="line">cat /proc/devices是否有md块设备 </span><br><span class="line">``` bash</span><br><span class="line">cat /proc/devices |grep md</span><br></pre></td></tr></table></figure></p>
 <p>或者查看MD是否以模块形式加载到系统中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep md</span><br></pre></td></tr></table></figure></p>
 <p><strong>mdadm.conf是该软件的默认配置文件，以确保下次启动后开启阵列</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">echo</span> <span class="string">"DEVICE /dev/sdb1 /dev/sdc1"</span> &gt;&gt; /etc/mdadm.conf  </span><br><span class="line">    或者</span><br><span class="line">    mdadm -Ds /dev/md0 &gt;&gt; /etc/mdadm.conf  </span><br><span class="line">```  </span><br><span class="line">**用文件系统对每个RAID设备进行格式化**</span><br><span class="line">``` bash</span><br><span class="line">      mkfs.ext4 /dev/md0</span><br><span class="line">      或者</span><br><span class="line">      mkfs.xfs  /dev/md0</span><br></pre></td></tr></table></figure></p>
-<p>创建完文件系统以后我们就可以查看了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">blkid /dev/md0</span><br><span class="line">/dev/md0: UUID=<span class="string">"e8141423-f8e8-485a-9d15-3e548839f7b9"</span> TYPE=<span class="string">"ext4"</span> </span><br><span class="line">``` </span><br><span class="line">**挂载md0到/mnt/raid0目录下**</span><br><span class="line">``` bash</span><br><span class="line">mkdir /mnt/raid0</span><br></pre></td></tr></table></figure></p>
+<p><strong>创建完文件系统以后我们就可以查看了</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">blkid /dev/md0</span><br><span class="line">/dev/md0: UUID=<span class="string">"e8141423-f8e8-485a-9d15-3e548839f7b9"</span> TYPE=<span class="string">"ext4"</span> </span><br><span class="line">``` </span><br><span class="line">**给raid设备新增加一块硬盘后同步文件系统**</span><br><span class="line">``` bash</span><br><span class="line">xfs_growfs /mnt/raid5</span><br></pre></td></tr></table></figure></p>
+<p>如果是ext 系列的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/sd5</span><br></pre></td></tr></table></figure></p>
+<p><strong>挂载md0到/mnt/raid0目录下</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/raid0</span><br></pre></td></tr></table></figure></p>
 <p>如果要永久挂载，我们要写入etc/fstab文件中<br>vim /etc/fstab文件中<br>:r!blkid /dev/md0<br>UUID=e8141423-f8e8-485a-9d15-3e548839f7b9       /mnt/raid0  ext4 0 0<br>wq 保存退出。<br>然后执行  mount -a 挂载</p>
 <p><strong>执行df -h 查看</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 raid0]<span class="comment"># df -h</span></span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/sda2        48G  4.4G   42G  10% /</span><br><span class="line">tmpfs           995M   72K  995M   1% /dev/shm</span><br><span class="line">/dev/sda1       976M   39M  887M   5% /boot</span><br><span class="line">/dev/sda3        29G   83M   28G   1% /data</span><br><span class="line">/dev/md0        2.0G  3.1M  1.9G   1% /mnt/raid0   2G</span><br></pre></td></tr></table></figure></p>
 <p><strong>测试raid的性能</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选项 conv=fdatasync  避免使用缓存</span><br><span class="line">[root@centos6 raid0]<span class="comment"># dd if=/dev/zero of=/mnt/raid0/f1 bs=1M count=1024  conv=fdatasync </span></span><br><span class="line">1024+0 records <span class="keyword">in</span></span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB) copied, 12.5683 s, 85.4 MB/s</span><br></pre></td></tr></table></figure></p>
-<h1 id="磁盘阵列的管理"><a href="#磁盘阵列的管理" class="headerlink" title="磁盘阵列的管理"></a><font color="#339966">磁盘阵列的管理</font></h1><p><strong>增加新的成员</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm –G /dev/md0 –n4 -a /dev/sde1</span><br></pre></td></tr></table></figure></p>
+<h1 id="磁盘阵列的管理"><a href="#磁盘阵列的管理" class="headerlink" title="磁盘阵列的管理"></a><font color="#339966">磁盘阵列的管理</font></h1><p><strong>查看raid</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm -D /dev/md0</span><br></pre></td></tr></table></figure></p>
+<p><strong>增加新的成员</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mdadm /dev/md0 –a /dev/sdb1</span><br><span class="line">mdadm –G /dev/md0 –n4 -a /dev/sde1</span><br></pre></td></tr></table></figure></p>
 <p><strong>模拟故障</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm /dev/md0 -f /dev/sdb1</span><br></pre></td></tr></table></figure></p>
 <p><strong>移除磁盘</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm /dev/md0 –r /dev/sdb1</span><br></pre></td></tr></table></figure></p>
 <p><strong>停止某个整列</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm -S /dev/md0</span><br></pre></td></tr></table></figure></p>
-<p><strong>开启raid</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm -As</span><br></pre></td></tr></table></figure></p>
-<p><strong>删除阵列</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.umount /mnt/raid0  </span><br><span class="line">2.mdadm -Ss /mnt/raid0  </span><br><span class="line">3.mdadm --zero-superblock /dev/sd&#123;b,c&#125;1 </span><br><span class="line">4.rm /etc/mdadm.conf</span><br></pre></td></tr></table></figure></p>
+<p><strong>开启raid</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm -As  /dev/md0</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除阵列</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.umount /mnt/raid0   </span><br><span class="line">2.mdadm -Ss /mnt/raid0  </span><br><span class="line">3.mdadm --zero-superblock /dev/sd&#123;b,c&#125;1  清掉磁盘上的raid信息，表示是一个干净的硬盘</span><br><span class="line">4.rm /etc/mdadm.conf  </span><br><span class="line">5.同时要删除etc/fstab 文件中的raid配置</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结raid5的创建过程"><a href="#总结raid5的创建过程" class="headerlink" title="总结raid5的创建过程"></a>总结raid5的创建过程</h1><ol>
+<li>准备5个分区(fd)或硬盘</li>
+<li>mdadm -C /dev/md5 -a yes -l 5 -n 4 -x 1 /dev/sd{b,c,d,e}1 /dev/sdf </li>
+<li>mkfs.ext4 /dev/md5</li>
+<li>mount /dev/md5 /mnt/raid <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><blockquote>
+<p>实现raid10 的2种方法</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li>先创建2个raid0<br>mdadm -C /dev/md0 -a yes -l 1 -n 2 /dev/sd{b,c}1<br>mdadm -C /dev/md1 -a yes -l 1 -n 2 /dev/sd{e,f}1<br>然后把2个组合起来创建raid1<br>mdadm -C /dev/md2 -a yes -l 0 -n 2 /dev/md{0,1} </li>
+<li>一步创建<br>mdadm -C /dev/md0 -a yes -l10 -n 2 /dev/sd{b,c,e,f}1 </li>
+</ol>
 
                           
 
@@ -427,7 +443,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raid分类"><span class="toc-number">1.</span> <span class="toc-text">raid分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mdadm工具介绍"><span class="toc-number">2.</span> <span class="toc-text">mdadm工具介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个RAID的基本过程"><span class="toc-number">3.</span> <span class="toc-text">创建一个RAID的基本过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘阵列的管理"><span class="toc-number">4.</span> <span class="toc-text">磁盘阵列的管理</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#raid分类"><span class="toc-number">1.</span> <span class="toc-text">raid分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mdadm工具介绍"><span class="toc-number">2.</span> <span class="toc-text">mdadm工具介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个RAID的基本过程"><span class="toc-number">3.</span> <span class="toc-text">创建一个RAID的基本过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘阵列的管理"><span class="toc-number">4.</span> <span class="toc-text">磁盘阵列的管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结raid5的创建过程"><span class="toc-number">5.</span> <span class="toc-text">总结raid5的创建过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">6.</span> <span class="toc-text">实验</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -632,6 +648,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
@@ -648,15 +668,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,11 +680,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,19 +692,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -700,7 +704,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +720,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
             
             <div class="clearfix"></div>
