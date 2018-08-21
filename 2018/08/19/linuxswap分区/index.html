@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Linux内核为了提高读写效率与速度，会将文件在内存中进行缓存，这部分内存就是Cache Memory(缓存内存)。即使你的程序运行结束后，Cache Memory也不会自动释放。这就会导致你在Linux系统中程序频繁读写文件后，你会发现可用物理内存变少。当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-20T01:08:08.357Z">
+<meta property="og:updated_time" content="2018-08-21T15:57:28.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swap分区">
 <meta name="twitter:description" content="Linux内核为了提高读写效率与速度，会将文件在内存中进行缓存，这部分内存就是Cache Memory(缓存内存)。即使你的程序运行结束后，Cache Memory也不会自动释放。这就会导致你在Linux系统中程序频繁读写文件后，你会发现可用物理内存变少。当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的">
@@ -199,7 +199,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap分区大小"><span class="toc-number">1.</span> <span class="toc-text">查看swap分区大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Swap分区大小设置"><span class="toc-number">2.</span> <span class="toc-text">Swap分区大小设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#释放Swap分区空间"><span class="toc-number">3.</span> <span class="toc-text">释放Swap分区空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调整Swap分区的大小"><span class="toc-number">4.</span> <span class="toc-text">调整Swap分区的大小</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap分区大小"><span class="toc-number">1.</span> <span class="toc-text">查看swap分区大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Swap分区大小设置"><span class="toc-number">2.</span> <span class="toc-text">Swap分区大小设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关闭跟开启swap"><span class="toc-number">3.</span> <span class="toc-text">关闭跟开启swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap-内存信息"><span class="toc-number">4.</span> <span class="toc-text">查看swap 内存信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#格式化swap分区"><span class="toc-number">5.</span> <span class="toc-text">格式化swap分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#启动swap分区-并增加到-etc-fstab自动挂载"><span class="toc-number">6.</span> <span class="toc-text">启动swap分区,并增加到/etc/fstab自动挂载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加swap"><span class="toc-number">7.</span> <span class="toc-text">增加swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除swap"><span class="toc-number">8.</span> <span class="toc-text">删除swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将home目录迁移到一个独立分区种"><span class="toc-number">9.</span> <span class="toc-text">将home目录迁移到一个独立分区种</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -230,25 +230,66 @@
 <li>4G以内的物理内存，SWAP 设置为内存的2倍。</li>
 <li>4-8G的物理内存，SWAP 等于内存大小。</li>
 <li>8-64G 的物理内存，SWAP 设置为8G。</li>
-<li>64-256G物理内存，SWAP 设置为16G。<h1 id="释放Swap分区空间"><a href="#释放Swap分区空间" class="headerlink" title="释放Swap分区空间"></a>释放Swap分区空间</h1></li>
+<li>64-256G物理内存，SWAP 设置为16G。</li>
 </ul>
-<p>使用swapoff关闭交换分区<br>swapoff /dev/sda5<br>swapon /dev/sda5 </p>
-<h1 id="调整Swap分区的大小"><a href="#调整Swap分区的大小" class="headerlink" title="调整Swap分区的大小"></a>调整Swap分区的大小</h1><ol>
-<li><p>查看Swap的使用情况以及相关信息<br>swapon -s<br>free -m</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># free -mh</span></span><br><span class="line">           total       used       free     shared    buffers     cached</span><br><span class="line">  Mem:          1.9G       673M       1.3G       2.6M        73M       182M</span><br><span class="line">  -/+ buffers/cache:       417M       1.5G</span><br><span class="line">  Swap:         2.0G         0B       2.0G</span><br></pre></td></tr></table></figure>
+<h1 id="关闭跟开启swap"><a href="#关闭跟开启swap" class="headerlink" title="关闭跟开启swap"></a>关闭跟开启swap</h1><p>使用swapoff关闭交换分区<br>swapoff /dev/sda5<br>swapon /dev/sda5 </p>
+<h1 id="查看swap-内存信息"><a href="#查看swap-内存信息" class="headerlink" title="查看swap 内存信息"></a>查看swap 内存信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/swaps</span><br></pre></td></tr></table></figure>
+<h1 id="格式化swap分区"><a href="#格式化swap分区" class="headerlink" title="格式化swap分区"></a>格式化swap分区</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sda5</span><br></pre></td></tr></table></figure>
+<h1 id="启动swap分区-并增加到-etc-fstab自动挂载"><a href="#启动swap分区-并增加到-etc-fstab自动挂载" class="headerlink" title="启动swap分区,并增加到/etc/fstab自动挂载"></a>启动swap分区,并增加到/etc/fstab自动挂载</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapon -a</span><br><span class="line">swapon /dev/sda5</span><br></pre></td></tr></table></figure>
+<h1 id="增加swap"><a href="#增加swap" class="headerlink" title="增加swap"></a>增加swap</h1><ol>
+<li><p>可以看到当前的swap 大小是2G</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># </span></span><br><span class="line"> [root@centos6 ~]<span class="comment"># free -mh</span></span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line"> Mem:          1.9G       362M       1.6G       1.3M        33M       122M</span><br><span class="line"> -/+ buffers/cache:       206M       1.7G</span><br><span class="line"> Swap:         2.0G         0B       2.0G</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>关闭交换分区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># swapon -s</span></span><br><span class="line"> Filename                                Type            Size    Used    Priority</span><br><span class="line"> /dev/sda5                               partition       2097148 0       -1</span><br></pre></td></tr></table></figure>
-<p>swapoff /dev/sda5</p>
+<li><p>创建一个swap 的分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"></span><br><span class="line">     WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">             switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">             sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Command (m for help): n</span></span><br><span class="line"><span class="string">     Command action</span></span><br><span class="line"><span class="string">       e   extended</span></span><br><span class="line"><span class="string">       p   primary partition (1-4)</span></span><br><span class="line"><span class="string">     p</span></span><br><span class="line"><span class="string">     Partition number (1-4): 3</span></span><br><span class="line"><span class="string">     First cylinder (395-2610, default 395): </span></span><br><span class="line"><span class="string">     Using default value 395</span></span><br><span class="line"><span class="string">     Last cylinder, +cylinders or +size&#123;K,M,G&#125; (395-2610, default 2610): +1G</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Command (m for help): t</span></span><br><span class="line"><span class="string">     Partition number (1-4): 3</span></span><br><span class="line"><span class="string">     Hex code (type L to list codes): 82</span></span><br><span class="line"><span class="string">     Changed system type of partition 3 to 82 (Linux swap / Solaris)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Command (m for help): w</span></span><br><span class="line"><span class="string">     The partition table has been altered!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Calling ioctl() to re-read partition table.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     WARNING: Re-reading the partition table failed with error 16: Device or resource busy.</span></span><br><span class="line"><span class="string">     The kernel still uses the old table. The new table will be used at</span></span><br><span class="line"><span class="string">     the next reboot or after you run partprobe(8) or kpartx(8)</span></span><br><span class="line"><span class="string">     Syncing disks.</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>格式化分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sdb3</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>这里是缩小Swap分区大小，如果是增大Swap分区大小，那么就需要扩展正在使用的swap分区的逻辑卷,此处使用lvreduce命令收缩逻辑卷。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvreduce -L 8G /dev/sda5</span><br></pre></td></tr></table></figure>
+<li><p>查看分区前10240个字节</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> hexdump -C dev/sdb3 -n 10240|less</span><br><span class="line"> ``` </span><br><span class="line"> 4. 写入fstab 文件里让永久生效</span><br><span class="line">UUID=2d5bdbc6-4c77-48a8-b0ac-ed54ec46698c       swap      swap   defaults 0 0 </span><br><span class="line">5. 挂载生效</span><br><span class="line">``` bash</span><br><span class="line">swapon -a</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>格式化swap分区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sda5</span><br></pre></td></tr></table></figure>
+</ol>
 </li>
-<li><p>启动swap分区,并增加到/etc/fstab自动挂载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br><span class="line">swapon /dev/sda5</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ol start="6">
+<li><p>查看swap大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># cat /proc/swaps</span></span><br><span class="line">Filename                                Type            Size    Used    Priority</span><br><span class="line">/dev/sda5                               partition       2097148 58796   -1</span><br><span class="line">/dev/sdb3                               partition       1060284 0       -2</span><br><span class="line"></span><br><span class="line">[root@centos6 ~]<span class="comment"># free -h</span></span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          1.9G       207M       1.7G       1.3M       6.4M        33M</span><br><span class="line">-/+ buffers/cache:       167M       1.8G</span><br><span class="line">Swap:         3.0G        57M       3.0G   可以看到swap 分区增加了1G</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>swap 优先级设置<br>数字越大优先级越大</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=2d5bdbc6-4c77-48a8-b0ac-ed54ec46698c       swap      swap   pri=10 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>让7配置的优先级生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapoff /dev/sdb3 </span><br><span class="line">swapon on</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="删除swap"><a href="#删除swap" class="headerlink" title="删除swap"></a>删除swap</h1><ol>
+<li>先禁用swap<br>swapoff /dev/sdb3 </li>
+<li>vim /etc/fstab<br>把有关dev/sdb3的信息删掉</li>
+<li>把dev/sdb3分区删掉<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"></span><br><span class="line">WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">        switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">        sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): d</span></span><br><span class="line"><span class="string">Partition number (1-4): 3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Command (m for help): w</span></span><br><span class="line"><span class="string">The partition table has been altered!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Calling ioctl() to re-read partition table.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING: Re-reading the partition table failed with error 16: Device or resource busy.</span></span><br><span class="line"><span class="string">The kernel still uses the old table. The new table will be used at</span></span><br><span class="line"><span class="string">the next reboot or after you run partprobe(8) or kpartx(8)</span></span><br><span class="line"><span class="string">Syncing disks.</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="将home目录迁移到一个独立分区种"><a href="#将home目录迁移到一个独立分区种" class="headerlink" title="将home目录迁移到一个独立分区种"></a>将home目录迁移到一个独立分区种</h1><ol>
+<li><p>首先创建分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line"></span><br><span class="line"> WARNING: DOS-compatible mode is deprecated. It<span class="string">'s strongly recommended to</span></span><br><span class="line"><span class="string">         switch off the mode (command '</span>c<span class="string">') and change display units to</span></span><br><span class="line"><span class="string">         sectors (command '</span>u<span class="string">').</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Command (m for help): n</span></span><br><span class="line"><span class="string"> Command action</span></span><br><span class="line"><span class="string">   e   extended</span></span><br><span class="line"><span class="string">   p   primary partition (1-4)</span></span><br><span class="line"><span class="string"> p</span></span><br><span class="line"><span class="string"> Partition number (1-4): 2</span></span><br><span class="line"><span class="string"> First cylinder (133-2610, default 133): </span></span><br><span class="line"><span class="string"> Using default value 133</span></span><br><span class="line"><span class="string"> Last cylinder, +cylinders or +size&#123;K,M,G&#125; (133-2610, default 2610): +2G</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Command (m for help): w</span></span><br><span class="line"><span class="string"> The partition table has been altered!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Calling ioctl() to re-read partition table.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> WARNING: Re-reading the partition table failed with error 16: Device or resource busy.</span></span><br><span class="line"><span class="string"> The kernel still uses the old table. The new table will be used at</span></span><br><span class="line"><span class="string"> the next reboot or after you run partprobe(8) or kpartx(8)</span></span><br><span class="line"><span class="string"> Syncing disks.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  mkfs.ext4 /dev/sdb2</span><br><span class="line">```  </span><br><span class="line">3. 挂载分区</span><br><span class="line">``` bash</span><br><span class="line"> mkdir /mnt/home </span><br><span class="line"> mount /dev/sdb2 /mnt/home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将home 目录拷贝到新增加的分区里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -av /home/* /mnt/home/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把挂载分区写入fstab文件里<br>写入fstab文件 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查拷贝文件是否全</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unmount /home  先取消挂载</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除原来的home 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /home/*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新挂载   这是我们访问的home 就是/mnt/home 下的了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br></pre></td></tr></table></figure></li>
 </ol>
 
                           
@@ -417,7 +458,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap分区大小"><span class="toc-number">1.</span> <span class="toc-text">查看swap分区大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Swap分区大小设置"><span class="toc-number">2.</span> <span class="toc-text">Swap分区大小设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#释放Swap分区空间"><span class="toc-number">3.</span> <span class="toc-text">释放Swap分区空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调整Swap分区的大小"><span class="toc-number">4.</span> <span class="toc-text">调整Swap分区的大小</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap分区大小"><span class="toc-number">1.</span> <span class="toc-text">查看swap分区大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Swap分区大小设置"><span class="toc-number">2.</span> <span class="toc-text">Swap分区大小设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关闭跟开启swap"><span class="toc-number">3.</span> <span class="toc-text">关闭跟开启swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看swap-内存信息"><span class="toc-number">4.</span> <span class="toc-text">查看swap 内存信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#格式化swap分区"><span class="toc-number">5.</span> <span class="toc-text">格式化swap分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#启动swap分区-并增加到-etc-fstab自动挂载"><span class="toc-number">6.</span> <span class="toc-text">启动swap分区,并增加到/etc/fstab自动挂载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加swap"><span class="toc-number">7.</span> <span class="toc-text">增加swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除swap"><span class="toc-number">8.</span> <span class="toc-text">删除swap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将home目录迁移到一个独立分区种"><span class="toc-number">9.</span> <span class="toc-text">将home目录迁移到一个独立分区种</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -622,11 +663,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,7 +675,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,15 +687,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,19 +699,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,7 +711,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,7 +719,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,11 +731,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>

@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid10.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid01.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid50.png">
-<meta property="og:updated_time" content="2018-08-21T11:29:05.624Z">
+<meta property="og:updated_time" content="2018-08-21T14:52:30.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raid详解">
 <meta name="twitter:description" content="在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。RAID：（Redundant A">
@@ -276,15 +276,16 @@
 <li>准备5个分区(fd)或硬盘</li>
 <li>mdadm -C /dev/md5 -a yes -l 5 -n 4 -x 1 /dev/sd{b,c,d,e}1 /dev/sdf </li>
 <li>mkfs.ext4 /dev/md5</li>
-<li>mount /dev/md5 /mnt/raid <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><blockquote>
-<p>实现raid10 的2种方法</p>
-</blockquote>
-</li>
+<li><p>mount /dev/md5 /mnt/raid </p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1></li>
 </ol>
+<blockquote>
+<p>实现raid10 的2种方法</p>
 <ol>
 <li>先创建2个raid0<br>mdadm -C /dev/md0 -a yes -l 1 -n 2 /dev/sd{b,c}1<br>mdadm -C /dev/md1 -a yes -l 1 -n 2 /dev/sd{e,f}1<br>然后把2个组合起来创建raid1<br>mdadm -C /dev/md2 -a yes -l 0 -n 2 /dev/md{0,1} </li>
 <li>一步创建<br>mdadm -C /dev/md0 -a yes -l10 -n 2 /dev/sd{b,c,e,f}1 </li>
 </ol>
+</blockquote>
 
                           
 
@@ -648,11 +649,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,7 +661,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,15 +673,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,19 +685,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,7 +697,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,7 +705,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,11 +717,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>
