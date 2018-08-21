@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid10.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid01.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid50.png">
-<meta property="og:updated_time" content="2018-08-21T03:30:02.427Z">
+<meta property="og:updated_time" content="2018-08-21T05:33:21.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raid详解">
 <meta name="twitter:description" content="RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以">
@@ -248,7 +248,7 @@
 </ol>
 <h1 id="mdadm工具介绍"><a href="#mdadm工具介绍" class="headerlink" title="mdadm工具介绍"></a><font color="#339966">mdadm工具介绍</font></h1><p> 对上面几种常用的RAID类型分析后，可知，RAID-0主要可以提高磁盘性能，RAID-1主要可以实现备份容错（RAID-5由于控制机制复杂在此暂不使用），所以可以在实际生产环境下考虑结合RAID-0和RAID-1来实现磁盘存储系统的高性能、高容错。<br> <strong>基本语法</strong><br> mdadm [mode] <raid-device> [options] <component-devices></component-devices></raid-device></p>
 <p> mode:<br>   Assemble：装配模式：加入一个以前定义的阵列；可以使挺值得阵列或从其他主机移出的阵列<br>   Build：  创建：创建一个没有超级块的阵列<br>   Create： 创建一个新的阵列，每个设备具有超级块<br>   Follow or Monitor: 监控RAID的状态，一般只对RAID-1/4/5/6/10等有冗余功能的模式来使用<br>   Grow：(Grow or shrink) 改变RAID的容量或阵列中的设备数目；收缩一般指的是数据收缩或重建；<br>   Manage： 管理阵列(如添加spare盘和删除故障盘)<br>   Incremental Assembly：添加一个设备到一个适当的阵列。<br>   Misc：  允许单独对阵列中的某个设备进行操作(如抹去superblocks 或停止阵列)<br>   Auto-detect： 此模式不作用于特定的设备或阵列，而是要求在Linux内核启动任何自动检测到的阵列。</p>
-<p>options:<br>   Assemble：装配模式：加入一个以前定义的阵列；可以使挺值得阵列或从其他主机移出的阵列<br>   Build：  创建：创建一个没有超级块的阵列<br>   Create： 创建一个新的阵列，每个设备具有超级块<br>   Follow or Monitor: 监控RAID的状态，一般只对RAID-1/4/5/6/10等有冗余功能的模式来使用<br>   Grow：(Grow or shrink) 改变RAID的容量或阵列中的设备数目；收缩一般指的是数据收缩或重建；<br>   Manage： 管理阵列(如添加spare盘和删除故障盘)<br>   Incremental Assembly：添加一个设备到一个适当的阵列。<br>   Misc：  允许单独对阵列中的某个设备进行操作(如抹去superblocks 或停止阵列)<br>   Auto-detect： 此模式不作用于特定的设备或阵列，而是要求在Linux内核启动任何自动检测到的阵列。</p>
+<p>options:<br>    -A, –assemble： 加入并开启一个以前定义的阵列<br>    -B, –build：   创建一个没有超级块的阵列(Build a legacy array without superblocks.)<br>    -C, –create：  创建一个新的阵列<br>    -F, –follow, –monitor：选择监控(Monitor)模式<br>    -G, –grow：   改变激活阵列的大小或形态<br>    -I, –incremental： 添加一个单独的设备到合适的阵列，并可能启动阵列<br>    –auto-detect：   请求内核启动任何自动检测到的阵列</p>
 <h1 id="创建一个RAID的基本过程"><a href="#创建一个RAID的基本过程" class="headerlink" title="创建一个RAID的基本过程"></a><font color="#339966">创建一个RAID的基本过程</font></h1><ol>
 <li>创建raid设备<br>linux中阵列组成单元是分区，分区可以是整个设备也可以是设备多个分区中的一个；在fdisk分区后需要将分区标志改为Linux raid auto类型。</li>
 <li>建立磁盘阵列<br>mdadm -C /dev/md0 -a yes -l 5 -n 3 /dev/sd{b,c,d}1<br>-C ：创建一个阵列，后跟阵列名称<br>-l ：指定阵列的级别；<br>-n ：指定阵列中活动devices的数目<br>-A ：装配<br>-F ：监控<br>-f ：标记指定磁盘为损坏<br>-r：  移除磁盘<br>-a ： 添加磁盘</li>
@@ -630,19 +630,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,11 +662,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,11 +678,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
