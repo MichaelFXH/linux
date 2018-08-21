@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。 每个用户账号都拥有一个惟一的用户名和各自的口令。 用户在登录时键入正确的用户名和口令后，就能够进入系统和自己">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-16T07:10:39.447Z">
+<meta property="og:updated_time" content="2018-08-21T03:15:39.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用户跟权限管理">
 <meta name="twitter:description" content="Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。 用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。 每个用户账号都拥有一个惟一的用户名和各自的口令。 用户在登录时键入正确的用户名和口令后，就能够进入系统和自己">
@@ -226,7 +226,7 @@
 <p>实现用户账号的管理，要完成的工作主要有如下几个方面：</p>
 <p>用户账号的添加、删除与修改。<br>用户口令的管理。<br>用户组的管理。</p>
 </blockquote>
-<a id="more"></a>
+<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
 <h1 id="账号管理"><a href="#账号管理" class="headerlink" title="账号管理"></a>账号管理</h1><p>useradd命令用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在/etc/passwd文本文件中。</p>
 <h2 id="实例创建账号useradd"><a href="#实例创建账号useradd" class="headerlink" title="实例创建账号useradd"></a>实例创建账号useradd</h2><p>选项：<br>-c&lt;备注&gt;：加上备注文字。备注文字会保存在passwd的备注栏位中；<br>-d&lt;登入目录&gt;：指定用户的家目录；<br>-D：变更预设值；<br>-e&lt;有效期限&gt;：指定帐号的有效期限；<br>-f&lt;缓冲天数&gt;：指定在密码过期后多少天即关闭该帐号；<br>-g&lt;群组&gt;：指定用户所属的群组；<br>-G&lt;群组&gt;：指定用户所属的附加群组；<br>-m：自动建立用户的登入目录；<br>-M：不要自动建立用户的登入目录；<br>-n：取消建立以用户名称为名的群组；<br>-r：建立系统帐号；<br>-s<shell>：指定用户登入后所使用的shell；<br>-u<uid>：指定用户id。</uid></shell></p>
 <p>新建用户user1 指定主组sales，附加组为company,employee<br>useradd -g sales -G company,employee user1<br>建立一个新用户，并设置uid<br>useradd  -u 544 user2<br>创建了一个用户sam，其中/user/sam 为sam 的家目录<br>useradd  -d /usr/sam  sam<br>新建了一个用户gem，该用户的登录Shell是 /bin/sh，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。<br>useradd -s /bin/sh -g group -G adm,root gem</p>
@@ -625,15 +625,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +653,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
