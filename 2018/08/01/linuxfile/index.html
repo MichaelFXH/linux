@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文将介绍最常见的顶级目录，并且可能作为Linux系统的用户进行交互。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/linux-folders.jpg">
-<meta property="og:updated_time" content="2018-08-15T04:11:35.970Z">
+<meta property="og:updated_time" content="2018-08-21T05:52:36.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件管理">
 <meta name="twitter:description" content="本文将介绍最常见的顶级目录，并且可能作为Linux系统的用户进行交互。">
@@ -239,10 +239,10 @@
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>cp(选项)(参数)</p>
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>-a：此参数的效果和同时指定”-dpR”参数相同；<br>-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；<br>-f：强行复制文件或目录，不论目标文件或目录是否已存在；<br>-i：覆盖既有文件之前先询问用户；<br>-l：对源文件建立硬连接，而非复制文件；<br>-p：保留源文件或目录的属性；<br>-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；<br>-s：对源文件建立符号连接，而非复制文件；<br>-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；<br>-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；<br>-b：覆盖已存在的文件目标前将目标文件备份；<br>-v：详细显示命令执行的操作。</p>
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>源文件：指定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用-R选项；<br>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点.或点点..的形式。例如，下面的命令将指定文件复制到当前目录下：<br>cp ../data1/ff .</p>
-<p>将文件passwd复制到目录/data/下，并改名为pwd<br>cp /etc/passwd /data/pwd</p>
-<p>将目录/data/下的所有文件及其子目录复制到目录/data1/中<br>cp -r /data/ /data1/</p>
-<p>交互式地将目录/data/中的以m打头的所有.c文件复制到目录/data1/中<br>cp -i /data/m*.c /data1/</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点.或点点..的形式。例如，下面的命令将指定文件复制到当前目录下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ../data1/ff .</span><br></pre></td></tr></table></figure></p>
+<p><strong>将文件passwd复制到目录/data/下，并改名为pwd</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/passwd /data/<span class="built_in">pwd</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>将目录/data/下的所有文件及其子目录复制到目录/data1/中</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r /data/ /data1/</span><br></pre></td></tr></table></figure></p>
+<p><strong>交互式地将目录/data/中的以m打头的所有.c文件复制到目录/data1/中</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -i /data/m*.c /data1/</span><br></pre></td></tr></table></figure></p>
 <h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote><p>mv命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source表示源文件或目录，target表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
 <p>mv命令可以用来将源文件移至一个目标文件中，或将一组文件移至一个目标目录中。源文件被移至目标文件有两种不同的结果：</p>
 <p>如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变。<br>如果目标文件不是目录文件，则源文件名（只能有一个）会变为此目标文件名，并覆盖己存在的同名文件。如果源文件和目标文件在同一个目录下，mv的作用就是改文件名。当目标文件是目录文件时，源文件或目录参数可以有多个，则所有的源文件都会被移至目标文件中。所有移到该目录下的文件都将保留以前的文件名。<br>注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</p>
@@ -250,8 +250,8 @@
 <h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>mv(选项)(参数)</p>
 <h3 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h3><p>–backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；<br>-b：当文件存在时，覆盖前，为其创建一个备份；<br>-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；<br>-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。<br>–strip-trailing-slashes：删除源文件中的斜杠“/”；<br>-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；<br>–target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；<br>-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</p>
 <h3 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h3><p>源文件：源文件列表。<br>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</p>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>将pa1重命名为pa2<br>mv pa1 pa2</p>
-<p>将/data 下的所有文件移动到/data1 下<br>mv /data/* /data1/</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p><strong>将pa1重命名为pa2</strong><br>mv pa1 pa2</p>
+<p><strong>将/data 下的所有文件移动到/data1 下</strong><br>mv /data/* /data1/</p>
 <h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><blockquote><p> mkdir命令用来创建目录。该命令创建由dirname命名的目录。如果在目录名的前面没有加任何路径名，则在当前目录下创建由dirname指定的目录；如果给出了一个已经存在的路径，将会在该目录下创建一个指定的目录。在创建目录时，应保证新建的目录与它所在目录下的文件没有重名。 </p>
 <p>注意：在创建文件时，不要把所有的文件都存放在主目录中，可以创建子目录，通过它们来更有效地组织文件。最好采用前后一致的命名方式来区分文件和目录。例如，目录名可以以大写字母开头，这样，在目录列表中目录名就出现在前面。</p>
 <p>在一个子目录中应包含类型相似或用途相近的文件。例如，应建立一个子目录，它包含所有的数据库文件，另有一个子目录应包含电子表格文件，还有一个子目录应包含文字处理文档，等等。目录也是文件，它们和普通文件一样遵循相同的命名规则，并且利用全路径可以唯一地指定一个目录。</p>
@@ -259,18 +259,19 @@
 <h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>mkdir (选项)(参数)</p>
 <h3 id="选项-2"><a href="#选项-2" class="headerlink" title="选项"></a>选项</h3><p>-Z：设置安全上下文，当使用SELinux时有效；<br>-m&lt;目标属性&gt;或–mode&lt;目标属性&gt;建立目录的同时设置目录的权限；<br>-p或–parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；<br>–version 显示版本信息。</p>
 <h3 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h3><p>目录：指定要创建的目录列表，多个目录之间用空格隔开。</p>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>在目录/data/下建立子目录test，并且只有文件主有读、写和执行权限，其他人无权访问<br>mkdir -m 700 /data/test</p>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p><strong>在目录/data/下建立子目录test，并且只有文件主有读、写和执行权限，其他人无权访问</strong><br>mkdir -m 700 /data/test</p>
 <h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><blockquote><p>ls命令用来显示目标列表，在Linux中是使用率较高的命令。ls命令的输出信息可以进行彩色加亮显示，以分区不同类型的文件。</p>
 </blockquote>
 <h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>ls（选项）（参数）</p>
 <h3 id="选项-3"><a href="#选项-3" class="headerlink" title="选项"></a>选项</h3><p>-a：显示所有档案及目录（ls内定将档案名或目录名称为“.”的视为影藏，不会列出）；<br>-A：显示除影藏文件“.”和“..”以外的所有文件列表；<br>-C：多列显示输出结果。这是默认选项；<br>-l：与“-C”选项功能相反，所有输出信息用单列格式输出，不输出为多列；<br>-F：在每个输出项后追加文件的类型标识符，具体含义：“<em>”表示具有可执行权限的普通文件，“/”表示目录，“@”表示符号链接，“|”表示命令管道FIFO，“=”表示sockets套接字。当文件为普通文件时，不输出任何标识符；<br>-b：将文件中的不可输出的字符以反斜线“”加字符编码的方式输出；<br>-c：与“-lt”选项连用时，按照文件状态时间排序输出目录内容，排序的依据是文件的索引节点中的ctime字段。与“-l”选项连用时，则排序的一句是文件的状态改变时间；<br>-d：仅显示目录名，而不显示目录下的内容列表。显示符号链接文件本身，而不显示其所指向的目录列表；<br>-f：此参数的效果和同时指定“aU”参数相同，并关闭“lst”参数的效果；<br>-i：显示文件索引节点号（inode）。一个索引节点代表一个文件；<br>–file-type：与“-F”选项的功能相同，但是不显示“</em>”；<br>-k：以KB（千字节）为单位显示文件大小；<br>-l：以长格式显示目录下的内容列表。输出的信息从左到右依次包括文件名，文件类型、权限模式、硬连接数、所有者、组、文件大小和文件的最后修改时间等；<br>-m：用“,”号区隔每个文件和目录的名称；<br>-n：以用户识别码和群组识别码替代其名称；<br>-r：以文件名反序排列并输出目录内容列表；<br>-s：显示文件和目录的大小，以区块为单位；<br>-t：用文件和目录的更改时间排序；<br>-L：如果遇到性质为符号链接的文件或目录，直接列出该链接所指向的原始文件或目录；<br>-R：递归处理，将指定目录下的所有文件及子目录一并处理；<br>–full-time：列出完整的日期与时间；<br>–color[=WHEN]：使用不同的颜色高亮显示不同类型的。</p>
 <h3 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h3><p>目录：指定要显示列表的目录，也可以是具体的文件。</p>
-<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><p>显示当前目录非隐藏的文件与目录<br>ls<br>显示当前目录下包括影藏文件在内的所有文件列表<br>ls -a</p>
-<p>输出长格式列表<br>ls -l</p>
-<p>显示inode 编号<br>ls -i </p>
-<p>最近修改的文件显示在前面<br>ls -t </p>
-<p>列出可读文件和文件夹详细信息<br>ls -lh</p>
-<p>列出文件并标记颜色分类<br>ls –color=auto </p>
+<h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><p><strong>显示当前目录非隐藏的文件与目录</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure></p>
+<p><strong>显示当前目录下包括影藏文件在内的所有文件列表</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -a</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出长格式列表</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure></p>
+<p><strong>显示inode 编号</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -i</span><br></pre></td></tr></table></figure></p>
+<p><strong>最近修改的文件显示在前面</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -t</span><br></pre></td></tr></table></figure></p>
+<p><strong>列出可读文件和文件夹详细信息</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -lh</span><br></pre></td></tr></table></figure></p>
+<p><strong>列出文件并标记颜色分类</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls --color=auto</span><br></pre></td></tr></table></figure></p>
 
                           
 
@@ -643,11 +644,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,19 +656,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,11 +680,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,11 +696,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
