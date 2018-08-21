@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="ACL(Access Control List)，访问控制列表。实现灵活的权限管理  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T03:16:17.830Z">
+<meta property="og:updated_time" content="2018-08-21T05:07:51.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACL访问控制列表">
 <meta name="twitter:description" content="ACL(Access Control List)，访问控制列表。实现灵活的权限管理  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
@@ -221,7 +221,7 @@
               
                         <blockquote><p>ACL(Access Control List)，访问控制列表。实现灵活的权限管理</p>
 </blockquote>
-<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
+<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
 <h1 id="什么是ACL"><a href="#什么是ACL" class="headerlink" title="什么是ACL"></a>什么是ACL</h1><p>假如有个项目文件目录，对我们部门的人所属人，所属组都有权限，对于其他人来说不给权限的，突然有一天呢，从别的部门来了个同时想要临时性的加入我们的项目，那么一般权限就无法满足我们的需求了，也有办法，但是不太靠谱。比如：<br>1）可以建一个用户，然后加入到组里<br>2）给其他人赋予读写执行权限 这样显然不合理<br>ACL可以灵活的针对某一个用户设置权限，而不影响其他的用户。所以ACL就登场了。</p>
 <h1 id="查看系统是否支持-ACL"><a href="#查看系统是否支持-ACL" class="headerlink" title="查看系统是否支持 ACL"></a>查看系统是否支持 ACL</h1><p>由于ACL是必须依托文件系统的，因此并不是每个文件系统都支持ACL。<br>执行命令<br>tune2fs -l /dev/sda2 | grep options<br>显示 user_xattr acl 表示我们的系统支持acl</p>
 <p>如果不支持可以使用下边命令添加<br>tune2fs -o acl /dev/sda1<br>或者<br>mount -o remount,acl /dev/sda1(挂载点)</p>
@@ -607,15 +607,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,11 +619,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,19 +639,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">

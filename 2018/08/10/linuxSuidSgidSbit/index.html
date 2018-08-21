@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="由于在特殊场景下一般权限难以控制，所以引入了特殊权限。  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T03:16:09.172Z">
+<meta property="og:updated_time" content="2018-08-21T05:08:07.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件权限与属性详解 之 SUID、SGID、chattr &amp; SBIT">
 <meta name="twitter:description" content="由于在特殊场景下一般权限难以控制，所以引入了特殊权限。  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
@@ -221,7 +221,7 @@
               
                         <blockquote><p>由于在特殊场景下一般权限难以控制，所以引入了特殊权限。</p>
 </blockquote>
-<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
+<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
 <h1 id="UID"><a href="#UID" class="headerlink" title="UID"></a>UID</h1><p>SetUID(或者 s 权限）：当一个具有执行权限的文件设置SetUID权限后，用户执行这个文件时将以文件所有者的身份执行。<br>进程运行时能够访问哪些资源或文件，不取决于进程文件的属主属组，而是取决于运行该命令的用户身份的uid/gid，以该身份获取各种系统资源.<br>SUID只对二进制可执行程序有效<br>SUID设置在目录上无意义<br>SUID设置在目录上无意义</p>
 <p>通过chmod u+s file 设置文件的uid</p>
 <h1 id="GID"><a href="#GID" class="headerlink" title="GID"></a>GID</h1><p>对目录设置了gid后，用户创建文件时，其属组为此用户所属的主组.<br>一旦某目录被设定了SGID，则对此目录有写权限的用户在此目录中创建的文件<br>所属的组为此目录的属组</p>
@@ -605,15 +605,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,11 +617,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,19 +637,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户跟权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
