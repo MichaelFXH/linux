@@ -192,7 +192,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                <blockquote><p> <div align="center"><img src="/linuxNotes/Linux/raid.jpg" alt="logo"></div><br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
+                <blockquote><p> <div align="center"><img src="/linuxNotes/Linux/raid.jpg" alt="logo"></div><br>在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。<br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
 </blockquote>
                   
                       
@@ -1276,7 +1276,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1288,7 +1288,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1296,19 +1300,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1336,11 +1336,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
