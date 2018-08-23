@@ -21,7 +21,8 @@
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/osi7层模型.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/数据包首部9.png">
 <meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/ip首部.png">
-<meta property="og:updated_time" content="2018-08-23T09:52:46.069Z">
+<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/三次握手.png">
+<meta property="og:updated_time" content="2018-08-23T15:02:25.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络管理">
 <meta name="twitter:description" content="本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。">
@@ -190,7 +191,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-OSI-7层模型以及各层作用"><span class="toc-number">1.</span> <span class="toc-text">一. OSI 7层模型以及各层作用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下面这幅图介绍了7层协议以及每一层的作用"><span class="toc-number">1.1.</span> <span class="toc-text">下面这幅图介绍了7层协议以及每一层的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp-ip-分层模型与通信实例"><span class="toc-number">1.3.</span> <span class="toc-text">tcp/ip 分层模型与通信实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-IP地址"><span class="toc-number">2.</span> <span class="toc-text">二. IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（1）IP详细介绍"><span class="toc-number">2.1.</span> <span class="toc-text">（1）IP详细介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）IP网段"><span class="toc-number">2.2.</span> <span class="toc-text">（2）IP网段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）2个主机分配同一个ip地址"><span class="toc-number">2.3.</span> <span class="toc-text">（2）2个主机分配同一个ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（4）那么我们怎么判断2个网络是不是同一个网段呢？"><span class="toc-number">2.4.</span> <span class="toc-text">（4）那么我们怎么判断2个网络是不是同一个网段呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（5）怎么划分网络"><span class="toc-number">2.5.</span> <span class="toc-text">（5）怎么划分网络</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-TCP-IP-怎么保证可靠传输"><span class="toc-number">3.</span> <span class="toc-text">三. TCP/IP 怎么保证可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-tcpip-穿透"><span class="toc-number">4.</span> <span class="toc-text">四. tcpip 穿透</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-tcpip-三次握手"><span class="toc-number">5.</span> <span class="toc-text">五.tcpip 三次握手</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-ARP-原理"><span class="toc-number">6.</span> <span class="toc-text">六.ARP 原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-基于linux的网络配置"><span class="toc-number">7.</span> <span class="toc-text">七. 基于linux的网络配置</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-OSI-7层模型以及各层作用"><span class="toc-number">1.</span> <span class="toc-text">一. OSI 7层模型以及各层作用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下面这幅图介绍了7层协议以及每一层的作用"><span class="toc-number">1.1.</span> <span class="toc-text">下面这幅图介绍了7层协议以及每一层的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp-ip-分层模型与通信实例"><span class="toc-number">1.3.</span> <span class="toc-text">tcp/ip 分层模型与通信实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-IP地址"><span class="toc-number">2.</span> <span class="toc-text">二. IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（1）IP详细介绍"><span class="toc-number">2.1.</span> <span class="toc-text">（1）IP详细介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）IP网段"><span class="toc-number">2.2.</span> <span class="toc-text">（2）IP网段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）2个主机分配同一个ip地址"><span class="toc-number">2.3.</span> <span class="toc-text">（2）2个主机分配同一个ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（4）那么我们怎么判断2个网络是不是同一个网段呢？"><span class="toc-number">2.4.</span> <span class="toc-text">（4）那么我们怎么判断2个网络是不是同一个网段呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（5）怎么划分网络"><span class="toc-number">2.5.</span> <span class="toc-text">（5）怎么划分网络</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-TCP-IP-怎么保证可靠传输"><span class="toc-number">3.</span> <span class="toc-text">三. TCP/IP 怎么保证可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-tcpip-穿透"><span class="toc-number">4.</span> <span class="toc-text">四. tcpip 穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-number">4.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">4.2.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-tcpip-三次握手"><span class="toc-number">5.</span> <span class="toc-text">五.tcpip 三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">5.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本步骤"><span class="toc-number">5.2.</span> <span class="toc-text">基本步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-ARP-原理"><span class="toc-number">6.</span> <span class="toc-text">六.ARP 原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#协议概述"><span class="toc-number">6.1.</span> <span class="toc-text">协议概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP攻击原理"><span class="toc-number">6.2.</span> <span class="toc-text">ARP攻击原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-基于linux的网络配置"><span class="toc-number">7.</span> <span class="toc-text">七. 基于linux的网络配置</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -282,12 +283,15 @@
 <li>IP地址中不能以十进制“127”作为开头，该类地址中数字127．0．0．1到127．255．255．255用于回路测试，如：127.0.0.1可以代表本-机IP地址，用“<a href="http://127.0.0.1”就可以测试本机中配置的Web服务器。" target="_blank" rel="noopener">http://127.0.0.1”就可以测试本机中配置的Web服务器。</a></li>
 <li>网络ID的第一个8位组也不能全置为“0”，全“0”表示本地网络。</li>
 </ol>
-<h2 id="（2）IP网段"><a href="#（2）IP网段" class="headerlink" title="（2）IP网段"></a>（2）IP网段</h2><p>IP地址根据网络ID的不同分为5种类型，A类地址、B类地址、C类地址、D类地址和E类地址。<br>查找ip有个cmd命令：traceroute 后面加ip地址，可以查所经过的路由!<br>在一个局域网中，有两个IP地址比较特殊，一个是网络号，一个是广播地址。网络号是用于三层寻址的地址，它代表了整个网络本身；另一个是广播地址，它代表了网络全部的主机。网络号是网段中的第一个地址，广播地址是网段中的最后一个地址，这两个地址是不能配置在计算机主机上的。<br>例如在192.168.0.0，255.255.255.0这样的网段中，网络号是192.168.0.0，广播地址是192.168.0.255。因此，在一个局域网中，能配置在计算机中的地址比网段内的地址要少两个（网络号、广播地址），这些地址称之为主机地址。在上面的例子中，主机地址就只有192.168.0.1至192.168.0.254可以配置在计算机上了。<br>因此我们得出以下公式：</p>
+<h2 id="（2）IP网段"><a href="#（2）IP网段" class="headerlink" title="（2）IP网段"></a>（2）IP网段</h2><p>IP地址根据网络ID的不同分为5种类型，A类地址、B类地址、C类地址、D类地址和E类地址。<br>查找ip有个cmd命令：traceroute 后面加ip地址，可以查所经过的路由!<br>在一个局域网中，有两个IP地址比较特殊，一个是网络号，一个是广播地址。网络号是用于三层寻址的地址，它代表了整个网络本身；另一个是广播地址，它代表了网络全部的主机。网络号是网段中的第一个地址，广播地址是网段中的最后一个地址，这两个地址是不能配置在计算机主机上的。<br>例如在192.168.0.0，255.255.255.0这样的网段中，网络号是192.168.0.0，广播地址是192.168.0.255。因此，在一个局域网中，能配置在计算机中的地址比网段内的地址要少两个（网络号、广播地址），这些地址称之为主机地址。在上面的例子中，主机地址就只有192.168.0.1至192.168.0.254可以配置在计算机上了。<br><code style="color:#c7254e">因此我们得出以下公式：</code></p>
 <ol>
 <li>网段数=2^可变的网络id位数</li>
 <li>主机数=2^主机id位数-2</li>
+<li>网络id=ip跟netmask的与</li>
+<li>判断目标主机是否和本主机是否在同一个网段，本机的netmask 分别与双方的ip 相与。再比较。</li>
+<li>划分子网：将一个大网分割成多个子网，网络id 向主机id 借N位。得到2的N次方个子网。<h2 id="（2）2个主机分配同一个ip地址"><a href="#（2）2个主机分配同一个ip地址" class="headerlink" title="（2）2个主机分配同一个ip地址"></a>（2）2个主机分配同一个ip地址</h2></li>
 </ol>
-<h2 id="（2）2个主机分配同一个ip地址"><a href="#（2）2个主机分配同一个ip地址" class="headerlink" title="（2）2个主机分配同一个ip地址"></a>（2）2个主机分配同一个ip地址</h2><p><code style="color:#c7254e">首先我们在2个不同的虚拟机里修改以下ip地址</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.0.1/24</span><br></pre></td></tr></table></figure></p>
+<p><code style="color:#c7254e">首先我们在2个不同的虚拟机里修改以下ip地址</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.0.1/24</span><br></pre></td></tr></table></figure></p>
 <p>然后arping</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arping 192.168.0.1</span><br></pre></td></tr></table></figure>
 <p>我们发现2个机器都有回应，我们使用arping 可以探测到是否有2个机器使用同一个ip地址.</p>
@@ -295,10 +299,36 @@
 <p>  附：1-100的二进制<br>    1=1<br>    2=10<br>    3=11<br>    4=100<br>    5=101<br>    6=110<br>    7=111<br>    8=1000<br>    9=1001<br>    10=1010<br>    11=1011<br>    12=1100<br>    13=1101<br>    14=1110<br>    15=1111<br>    16=10000<br>    17=10001<br>    18=10010<br>    19=10011<br>    20=10100<br>    另外 网络id=ip 与 netmask  记住任何数与1相与都保留原值，与0相与都是0<br>    比如ip 192.168.32.8  netmask 255.255.255.0<br>    168 转二进制等于160+8   160的二进制10100000  8的二进制位1000<br>    10100000<br>        1000<br>    10101000<br>   168的二进制为 10101000,这里要注意逢二进1<br>    192.168.32.8  转成二进制  11000000.10101000.00100000.00001000<br>    255.255.255.0 转成二进制  11111111.11111111.11111111.00000000<br>                             11000000.10101000.00100000.00000000<br>                      十进制  192.168.32.0<br>    那么得出他的网络id是192.168.32                   </p>
 <h2 id="（5）怎么划分网络"><a href="#（5）怎么划分网络" class="headerlink" title="（5）怎么划分网络"></a>（5）怎么划分网络</h2><p>  <strong>实例1：IP：192.168.200.100 子网掩码：255.255.240.0 此ip所在网段最多有多少主机</strong><br>   首先我们算出网络号多少位，然后（2^32-网络位）-2 就是此网段内最多的主机<br>   前面2个255是16位，后边的240 转成二进制 11110000 我们看到他有4个1，那么我们得出网络位为16+4=20.<br>   此ip所在网段最多有2^12-2=4094个主机。<br>  <strong>实例2：10.0.0.200/19  此ip netmask是多少，所在网络最多有多少主机</strong><br>    19代表网络id为19位，那么我们知道此ip内最多可以存放2^13-2=8190个主机<br>    子网掩码是255.255 这是16位 还差3位11100000， 那么得出子网掩码255.255.224.0<br>  <strong>实例3：ip:203.110.0.163/22 netmask是多少，所在网络最多有多少个主机，网络id多少</strong><br>    首先由网络位是22 ，那么子网掩码是 255.255.11111100.0 得出子网掩码是 255.255.252.0<br>    主机数等于 2^10-2=1022<br>    网络id =ip 与 子网掩码<br>    203.110.0.163<br>    255.255.252.0<br>    203.110.0.0<br>    得出网络id 为   203.110.0.0/22<br>  <strong>实例4：</strong><br>  <strong>有2个ip地址通信，</strong><br>  <strong>A：ip:192.168.32.1 netmask:255.255.0.0</strong><br>  <strong>B: ip:192.168.33.1 netmask:255.255.255.0</strong><br>  假设我现在在B 要与A通信，那么我们线算出B的网络id 是不是属于同一个网段<br>  前面我们说了网络id 是ip地址与netmask<br>  自己的ip地址跟自己的子网掩码与<br>  192.168.33.1<br>  255.255.255.0<br>  192.168.33.0<br>接下来拿A的ip地址跟B的子网掩码与<br>  192.168.32.1<br>  255.255.255.0<br>  192.168.32.0<br> 判断出不在一个网段。</p>
 <p> 如果是A与B通信呢,判断是不是在同一个网段内<br> A的ip       192.168.32.1<br> A的子网掩码  255.255.0.0<br>             192.168.0.0</p>
-<p>然后再拿B的ip与A的子网掩码与<br>192.168.33.1<br>255.255.0.0<br>192.168.0.0<br>判断出2个在同一个网段内。</p>
-<h1 id="三-TCP-IP-怎么保证可靠传输"><a href="#三-TCP-IP-怎么保证可靠传输" class="headerlink" title="三. TCP/IP 怎么保证可靠传输"></a>三. TCP/IP 怎么保证可靠传输</h1><h1 id="四-tcpip-穿透"><a href="#四-tcpip-穿透" class="headerlink" title="四. tcpip 穿透"></a>四. tcpip 穿透</h1><h1 id="五-tcpip-三次握手"><a href="#五-tcpip-三次握手" class="headerlink" title="五.tcpip 三次握手"></a>五.tcpip 三次握手</h1><h1 id="六-ARP-原理"><a href="#六-ARP-原理" class="headerlink" title="六.ARP 原理"></a>六.ARP 原理</h1><p><a href="https://www.cnblogs.com/manue1/p/4462327.html" target="_blank" rel="noopener">https://www.cnblogs.com/manue1/p/4462327.html</a></p>
-<h1 id="七-基于linux的网络配置"><a href="#七-基于linux的网络配置" class="headerlink" title="七. 基于linux的网络配置"></a>七. 基于linux的网络配置</h1><p>路由控制  4.4</p>
-
+<p>然后再拿B的ip与A的子网掩码与<br>192.168.33.1<br>255.255.0.0<br>192.168.0.0<br>判断出2个在同一个网段内。<br>得出一个结论判断2个ip是否在同一个网段内，要跟本机的netmask 相与得出是否一样。</p>
+<p><strong>假设有2000台主机，都放在同一个网段中，netmask 应该是多少</strong><br>  我们想想2的11次方接近2000  那么主机位数就确定了应该是11个0，相应的得出网络位数。<br>  进而计算出netmask是多少。<br>  11111111 11111111  11111000  00000000<br>  255.255.248.0<br><strong>中国移动 10.10.10.0/8 32个省市要划分32个子网</strong></p>
+<ol>
+<li>子网netmask 是多少<br>要划分32个子网得出网络id数位2^5 =32 网络位为原来的8+5=13<br>那么得出子网掩码  255.248.0.0</li>
+<li>每个子网的主机数是多少<br>2^19-2=524286 </li>
+<li>最小的子网ip范围<br>10.00000  000.00000000.00000000.0000001<br>我们知道主机位借了5位，那么最小的ip 就是10.0.0.0.1<br>最大的ip地址是 10.00000  111.11111111.11111111.254<br>十进制是    10.7.255.254</li>
+<li><p>最大的子网网络id是多少<br>10.11111  000.11111111.11111111.254<br>10.248.0.0/13 </p>
+<p><strong>中国移动 10.24.0.0/13 划分18个子网</strong></p>
+</li>
+<li>子网netmask 是多少<br>2^5 更接近于18，我们得出网络位数位13+5=18   18个1<br>11111111.1111111.11000000.00000000<br>255.255.192.0</li>
+<li>每个子网的主机数是多少<br>2^14-2=16382</li>
+<li>最小和最大的网络id<br>最小的网络id 10.24.0.0   10.00011000.00  000000.0000000 借了18位那么最小的就是10.24.0.0/18<br>最大的网络id 10.24.0.0   10.00011 100.01  000000.0000001 最大的就是 10.28.64.0/18</li>
+<li>最大的子网ip范围是多少<br>最小的子网ip  10.00011 100.01  000000.0000001<br>最大的子网ip  10.00011 100.01  111111.254 <h1 id="三-TCP-IP-怎么保证可靠传输"><a href="#三-TCP-IP-怎么保证可靠传输" class="headerlink" title="三. TCP/IP 怎么保证可靠传输"></a>三. TCP/IP 怎么保证可靠传输</h1>TCP提供一种面向连接的，可靠的字节流服务；<br>什么是字节流服务：<br>TCP不在字节流中插入记录标志符就被称为是字节流服务；<br>TCP对字节流的处理方式：<br>TCP对字节流的内容不做任何解释，因为TCP分不清传输的是哪种类型的数据；对字节流的解释是由TCP连接双方的应用层来解释的；<br>TCP的这种对字节流的处理方式与UNIX操作系统对文件的处理方式很相似；<br>UNIX操作系统对文件的处理方式是： UNIX的内核对一个应用的读或写的内容不做任何解释，而是交给应用程序去解释，因为UNIX内核无法区分二进制文件和文本文件<br>在一个TCP连接中，仅有两方进行通信；<br>报文段的定义：<br>由TCP传递给IP的信息单位称为报文段或段；<br>以下是TCP提供可靠性的方式：<br>（1）应用数据被分割成TCP认为的最合适发送的数据块；<br>（2）当TCP发出一个报文段后，就启动一个定时器，用来等待目的端确认收到这个报文段；若没能及时收到这个确认，TCP发送端将重新发送这个报文段（超时重传）；<br>（3）TCP收到一个发自TCP连接的另一端的数据后就将发送一个确认，不过这个确认不是立即就发送，而是要推迟几分之一秒后才发送；<br>（4）TCP将保持它的首部和数据的检验和；（这是一个端到端的检验和，为了检验数据在传输过程中发生的错误；若检测到段的检验和有差错，TCP将丢弃和不确认收到此报文段并希望发端可以进行超时重传）<br>（5）由于TCP报文段是作为IP数据报来传输的，又因为IP数据报的到达可能会失序，所以TCP报文段的到达也可能会失序；因此，有必要的话TCP会对收到的数据进行重新排序后交给应用层；<br>（6）因为TCP报文段是作为IP数据报来传输的，并且IP数据报可能会发生重复，所以TCP的接收端必须丢弃掉重复的数据；<br>（7）TCP提供流量控制；（因为TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这一限制可以防止较快主机致使较慢主机的缓冲区溢出）</li>
+</ol>
+<h1 id="四-tcpip-穿透"><a href="#四-tcpip-穿透" class="headerlink" title="四. tcpip 穿透"></a>四. tcpip 穿透</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>  我们假设在两个不同的局域网后面分别有2台客户机A和 B，AB所在的局域网都分别通过一个路由器接入互联网。互联网上有一台服务器S。<br>    现在AB是无法直接和对方发送信息的，AB都不知道对方在互联网上真正的IP和端口， AB所在的局域网的路由器只允许内部向外主动发送的信息通过。对于B直接发送给A的路由器的消息，路由会认为其“不被信任”而直接丢弃。<br>    要实现 AB直接的通讯，就必须进行以下3步：A首先连接互联网上的服务器S并发送一条消息（对于UDP这种无连接的协议其实直接初始会话发送消息即可），这样S就获取了A在互联网上的实际终端（发送消息的IP和端口号）。接着 B也进行同样的步骤，S就知道了AB在互联网上的终端（这就是“打洞”）。接着S分别告诉A和B对方客户端在互联网上的实际终端，也即S告诉A客户B的会话终端，S告诉B客户A的会话终端。这样，在AB都知道了对方的实际终端之后，就可以直接通过实际终端发送消息了（因为先前双方都向外发送过消息，路由上已经有允许数据进出的消息通道）。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>启动服务器，监听端口8877</li>
+<li>第一次启动客户端（称为client1），连上服务器，服务器将返回字符串first，标识这个是client1，同时，服务器将记录下这个客户端的（经过转换之后的）IP和端口。</li>
+<li>第二次启动客户端（称为client2），连上服务器，服务器将向其返回自身的发送端口（称为port2)，以及client1的（经过转换之后的）IP和端口。</li>
+<li>然后服务器再发client1返回client2（经过转换之后的）IP和端口，然后断开与这两个客户端的连接（此时，服务器的工作已经全部完成了）</li>
+<li>client2尝试连接client1，这次肯定会失败，但它会在路由器上留下记录，以帮忙client1成功穿透，连接上自己，然后设置port2端口为可重用端口，并监听端口port2。</li>
+<li>client1尝试去连接client2，前几次可能会失败，因为穿透还没成功，如果连接10次都失败，就证明穿透失败了（可能是硬件不支持）,如果成功，则每秒向client2发送一次hello, world</li>
+<li>如果client1不断出现send message: Hello, world，client2不断出现recv message: Hello, world，则证明实验成功了，否则就是失败了。<br><a href="https://blog.csdn.net/small_qch/article/details/8815028" target="_blank" rel="noopener">原文链接</a></li>
+</ol>
+<h1 id="五-tcpip-三次握手"><a href="#五-tcpip-三次握手" class="headerlink" title="五.tcpip 三次握手"></a>五.tcpip 三次握手</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p> 按层次分，TCP 位于传输层，提供可靠的字节流服务。<br>所谓的字节流服务（Byte Stream Service）是指，为了方便传输，将大块数据分割成以报文段（segment）<br>为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。一言以蔽之，TCP 协<br>议为了更容易传送大数据才把数据分割，而且 TCP 协议能够确认数据最终是否送达到对方。</p>
+<p>为了准确无误地将数据送达目标处，TCP 协议采用了三次握手（three-way handshaking）策略。用 TCP 协<br>议把数据包送出去后，TCP 不会对传送后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中<br>使用了 TCP 的标志（flag） —— SYN（synchronize） 和 ACK（acknowledgement）。<br>发送端首先发送一个带 SYN 标志的数据包给对方。接收端收到后，回传一个带有 SYN/ACK 标志的数据包以<br>示传达确认信息。最后，发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。<br>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</p>
+<h2 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h2><p>建立起一个TCP连接需要经过“三次握手”：<br>第一次握手：客户端发送syn包(syn=1)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（syn=x），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=x+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。<br>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主 动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”<br> <img src="/linuxNotes/Linux/三次握手.png" alt="logo"><br> 通俗的说就是客户端给服务端发送了一个syn的数据包，服务端收到后响应说我收到你发的数据包了，并发送标记有syn/ack的数据包，<br> 客户端收到后响应明白，发送给服务端标有ack的数据包代表握手结束。</p>
+<h1 id="六-ARP-原理"><a href="#六-ARP-原理" class="headerlink" title="六.ARP 原理"></a>六.ARP 原理</h1><h2 id="协议概述"><a href="#协议概述" class="headerlink" title="协议概述"></a>协议概述</h2><p> 一台主机和另一台主机通信，要知道目标的IP地址，但是在局域网中传输数据的网卡却不能直接识别IP地址，所以用ARP解析协议将IP地解<br> 析成MAC地址。ARP协议的基本功能就是通过目标设备的IP地址，来查询目标设备的mac地址。<br> 在局域网的任意一台主机中，都有一个ARP缓存表，里面保存本机已知的此局域网中各主机和路由器的IP地址和MAC地址的对照关系。ARP缓存<br>主机A想和主机B通信<br>主机A会先查询自己的ARP缓存表里有没有B的联系方式，有的话，就将mac-b地址封装到数据包外面，发送出去。没有的话，A会向全网络发送一个<br>ARP广播包，大声询问：我的IP地址是192.168.0.2，硬件地址是mac-a，我想知道IP地址是192.168.0.3的硬件地址是多少？   此时，局域网内所有<br>主机都收到了，B收到后会单独私密回应：我是192.168.0.3，我的硬件地址是mac-b，其他主机不会理A的<br>此时A知道了B的信息，同时也会动态的更新自身的缓存表</p>
+<h2 id="ARP攻击原理"><a href="#ARP攻击原理" class="headerlink" title="ARP攻击原理"></a>ARP攻击原理</h2><p>ARP欺骗攻击建立在局域网主机间相互信任的基础上的<br>当A发广播询问：我想知道IP是192.168.0.3的硬件地址是多少？<br>此时B当然会回话：我是IP192.168.0.3我的硬件地址是mac-b，<br>可是此时IP地址是192.168.0.4的C也非法回了：我是IP192.168.0.3,我的硬件地址是mac-c。而且是大量的。<br>所以A就会误信192.168.0.3的硬件地址是mac-c，而且动态更新缓存表<br>这样主机C就劫持了主机A发送给主机B的数据，这就是ARP欺骗的过程。<br>假如C直接冒充网关，此时主机C会不停的发送ARP欺骗广播，大声说：我的ip是192.168.0.1，我的硬件地址是mac-c，<br>此时局域网内所有主机都被欺骗，更改自己的缓存表，此时Ｃ将会监听到整个局域网发送给互联网的数据报。</p>
+<h1 id="七-基于linux的网络配置"><a href="#七-基于linux的网络配置" class="headerlink" title="七. 基于linux的网络配置"></a>七. 基于linux的网络配置</h1>
                           
 
                             
@@ -468,7 +498,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-OSI-7层模型以及各层作用"><span class="toc-number">1.</span> <span class="toc-text">一. OSI 7层模型以及各层作用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下面这幅图介绍了7层协议以及每一层的作用"><span class="toc-number">1.1.</span> <span class="toc-text">下面这幅图介绍了7层协议以及每一层的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp-ip-分层模型与通信实例"><span class="toc-number">1.3.</span> <span class="toc-text">tcp/ip 分层模型与通信实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-IP地址"><span class="toc-number">2.</span> <span class="toc-text">二. IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（1）IP详细介绍"><span class="toc-number">2.1.</span> <span class="toc-text">（1）IP详细介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）IP网段"><span class="toc-number">2.2.</span> <span class="toc-text">（2）IP网段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）2个主机分配同一个ip地址"><span class="toc-number">2.3.</span> <span class="toc-text">（2）2个主机分配同一个ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（4）那么我们怎么判断2个网络是不是同一个网段呢？"><span class="toc-number">2.4.</span> <span class="toc-text">（4）那么我们怎么判断2个网络是不是同一个网段呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（5）怎么划分网络"><span class="toc-number">2.5.</span> <span class="toc-text">（5）怎么划分网络</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-TCP-IP-怎么保证可靠传输"><span class="toc-number">3.</span> <span class="toc-text">三. TCP/IP 怎么保证可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-tcpip-穿透"><span class="toc-number">4.</span> <span class="toc-text">四. tcpip 穿透</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-tcpip-三次握手"><span class="toc-number">5.</span> <span class="toc-text">五.tcpip 三次握手</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-ARP-原理"><span class="toc-number">6.</span> <span class="toc-text">六.ARP 原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-基于linux的网络配置"><span class="toc-number">7.</span> <span class="toc-text">七. 基于linux的网络配置</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-OSI-7层模型以及各层作用"><span class="toc-number">1.</span> <span class="toc-text">一. OSI 7层模型以及各层作用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下面这幅图介绍了7层协议以及每一层的作用"><span class="toc-number">1.1.</span> <span class="toc-text">下面这幅图介绍了7层协议以及每一层的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp-ip-分层模型与通信实例"><span class="toc-number">1.3.</span> <span class="toc-text">tcp/ip 分层模型与通信实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-IP地址"><span class="toc-number">2.</span> <span class="toc-text">二. IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（1）IP详细介绍"><span class="toc-number">2.1.</span> <span class="toc-text">（1）IP详细介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）IP网段"><span class="toc-number">2.2.</span> <span class="toc-text">（2）IP网段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）2个主机分配同一个ip地址"><span class="toc-number">2.3.</span> <span class="toc-text">（2）2个主机分配同一个ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（4）那么我们怎么判断2个网络是不是同一个网段呢？"><span class="toc-number">2.4.</span> <span class="toc-text">（4）那么我们怎么判断2个网络是不是同一个网段呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（5）怎么划分网络"><span class="toc-number">2.5.</span> <span class="toc-text">（5）怎么划分网络</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-TCP-IP-怎么保证可靠传输"><span class="toc-number">3.</span> <span class="toc-text">三. TCP/IP 怎么保证可靠传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-tcpip-穿透"><span class="toc-number">4.</span> <span class="toc-text">四. tcpip 穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-number">4.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">4.2.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-tcpip-三次握手"><span class="toc-number">5.</span> <span class="toc-text">五.tcpip 三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">5.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本步骤"><span class="toc-number">5.2.</span> <span class="toc-text">基本步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-ARP-原理"><span class="toc-number">6.</span> <span class="toc-text">六.ARP 原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#协议概述"><span class="toc-number">6.1.</span> <span class="toc-text">协议概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP攻击原理"><span class="toc-number">6.2.</span> <span class="toc-text">ARP攻击原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-基于linux的网络配置"><span class="toc-number">7.</span> <span class="toc-text">七. 基于linux的网络配置</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -642,14 +672,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
@@ -658,7 +680,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -666,15 +692,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,11 +712,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,15 +724,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
