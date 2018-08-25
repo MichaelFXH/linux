@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
   
-    <link rel="icon" href="/linuxNotes/assets/favicon.png">
+    <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -177,7 +177,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                <blockquote><p><div align="center"><img src="/linuxNotes/Linux/internet.jpg" alt="logo"></div><br>本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。</p>
+                <blockquote><p><div align="center"><img src="/Linux/internet.jpg" alt="logo"></div><br>本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。</p>
 </blockquote>
                   
                       
@@ -284,7 +284,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                <blockquote><p> <div align="center"><img src="/linuxNotes/Linux/raid.jpg" alt="logo"></div><br>在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。<br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
+                <blockquote><p> <div align="center"><img src="/Linux/raid.jpg" alt="logo"></div><br>在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。<br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
 </blockquote>
                   
                       
@@ -858,7 +858,7 @@
               
                 <blockquote><p>由于在特殊场景下一般权限难以控制，所以引入了特殊权限。</p>
 </blockquote>
-<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br>
+<p>用户管理：<a href="https://michaelfxh.github.io/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br>
                   
                       
 
@@ -1273,14 +1273,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -1289,15 +1281,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1309,11 +1309,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1325,11 +1325,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1337,11 +1337,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1350,10 +1354,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">

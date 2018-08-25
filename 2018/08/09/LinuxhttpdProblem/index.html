@@ -16,17 +16,17 @@
 <meta property="og:site_name">
 <meta property="og:description" content="httpd 安装问题">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/httpd服务.png">
-<meta property="og:updated_time" content="2018-08-09T14:37:02.084Z">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/httpd服务.png">
+<meta property="og:updated_time" content="2018-08-25T03:48:44.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="httpd 安装问题">
 <meta name="twitter:description" content="httpd 安装问题">
-<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/httpd服务.png">
+<meta name="twitter:image" content="https://michaelfxh.github.io/Linux/httpd服务.png">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
   
-    <link rel="icon" href="/linuxNotes/assets/favicon.png">
+    <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -186,7 +186,7 @@
 </blockquote>
 <a id="more"></a>
 <p>service httpd start<br>报错<br>Could not reliably determine the server’s fully qualified domain name, using 127.0.0.1 for ServerName<br>解决办法：<br>find / -name “httpd.conf”<br>编辑  /etc/httpd/conf/httpd.conf<br>添加ServerName localhost:80<br>重启服务 apachectl restart </p>
-<p>发现只能在虚拟机里访问，外边主机无法访问，应该是iptables中限制远程访问80端口<br>开放端口<br>iptables -I INPUT -p tcp –dport 80 -j ACCEPT<br>保存配置<br>service iptables save<br>重启防火墙<br>service iptables restart<br>查看配置<br>iptables status<br>然后在输入ip 地址可以正常访问了<br><img src="/linuxNotes/Linux/httpd服务.png" alt="logo"></p>
+<p>发现只能在虚拟机里访问，外边主机无法访问，应该是iptables中限制远程访问80端口<br>开放端口<br>iptables -I INPUT -p tcp –dport 80 -j ACCEPT<br>保存配置<br>service iptables save<br>重启防火墙<br>service iptables restart<br>查看配置<br>iptables status<br>然后在输入ip 地址可以正常访问了<br><img src="/Linux/httpd服务.png" alt="logo"></p>
 
                           
 
@@ -208,13 +208,13 @@
                                           <div class="reward-box">
                                             
                                               <div class="reward-box-item">
-                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <img class="reward-img" src="/assets/img/alipay.jpg">
                                                 <span class="reward-type">支付宝</span>
                                               </div>
                                               
                                                 
                                                   <div class="reward-box-item">
-                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <img class="reward-img" src="/assets/img/webchatpay.jpg">
                                                     <span class="reward-type">微信</span>
                                                   </div>
                                                   
@@ -515,14 +515,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -531,15 +523,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +551,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +567,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,11 +579,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,10 +596,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -16,17 +16,17 @@
 <meta property="og:site_name">
 <meta property="og:description" content="大多数linux操作系统提供了一个集中的软件包管理机制，以帮助用户搜索，安装，管理软件。而软件通常以包的形成存储在仓库中，对软件包的使用和管理成为包管理。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/yum本地仓库.png">
-<meta property="og:updated_time" content="2018-08-21T05:59:46.477Z">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/yum本地仓库.png">
+<meta property="og:updated_time" content="2018-08-25T03:48:47.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件包管理">
 <meta name="twitter:description" content="大多数linux操作系统提供了一个集中的软件包管理机制，以帮助用户搜索，安装，管理软件。而软件通常以包的形成存储在仓库中，对软件包的使用和管理成为包管理。">
-<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/yum本地仓库.png">
+<meta name="twitter:image" content="https://michaelfxh.github.io/Linux/yum本地仓库.png">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
   
-    <link rel="icon" href="/linuxNotes/assets/favicon.png">
+    <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -262,7 +262,7 @@
 <h2 id="查看可以安装的包组件名"><a href="#查看可以安装的包组件名" class="headerlink" title="查看可以安装的包组件名"></a>查看可以安装的包组件名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum grouplist </span><br><span class="line">yum groupinfo <span class="string">"Development Tools"</span> 安装开发工具</span><br></pre></td></tr></table></figure>
 <h2 id="查看依赖包"><a href="#查看依赖包" class="headerlink" title="查看依赖包"></a>查看依赖包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">yum deplist package(tree)</span><br><span class="line"><span class="comment">## 查看历史</span></span><br><span class="line">``` bash</span><br><span class="line">yum <span class="built_in">history</span></span><br></pre></td></tr></table></figure>
 <h2 id="下面适合卸载程序使用"><a href="#下面适合卸载程序使用" class="headerlink" title="下面适合卸载程序使用"></a>下面适合卸载程序使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> info 6</span><br><span class="line">yum <span class="built_in">history</span> undo 6 </span><br><span class="line">yum <span class="built_in">history</span> redo 6</span><br></pre></td></tr></table></figure>
-<h1 id="实例定制yum仓库"><a href="#实例定制yum仓库" class="headerlink" title="实例定制yum仓库"></a>实例定制yum仓库</h1><h2 id="（1）服务的首先要安装httpd"><a href="#（1）服务的首先要安装httpd" class="headerlink" title="（1）服务的首先要安装httpd"></a>（1）服务的首先要安装httpd</h2><p>   （2）service httpd status（查看httpd状态）<br>   （3）service httpd start （启动服务）<br>   （4）cd var/www/html<br>   （5）mkdir centos/7/os/x86_64/ -pv<br>   （6）mount -o remount,rw /dev/sr0 /var/www/html/centos/7/os/x86_64/ 挂载光盘到港创建的目录<br>   （7）输入 <a href="http://192.168.110.130/centos/7/os/x86_64/就可以访问了" target="_blank" rel="noopener">http://192.168.110.130/centos/7/os/x86_64/就可以访问了</a><br> 上边我们的仓库源就已经创建好了<br> <img src="/linuxNotes/Linux/yum本地仓库.png" alt="logo"></p>
+<h1 id="实例定制yum仓库"><a href="#实例定制yum仓库" class="headerlink" title="实例定制yum仓库"></a>实例定制yum仓库</h1><h2 id="（1）服务的首先要安装httpd"><a href="#（1）服务的首先要安装httpd" class="headerlink" title="（1）服务的首先要安装httpd"></a>（1）服务的首先要安装httpd</h2><p>   （2）service httpd status（查看httpd状态）<br>   （3）service httpd start （启动服务）<br>   （4）cd var/www/html<br>   （5）mkdir centos/7/os/x86_64/ -pv<br>   （6）mount -o remount,rw /dev/sr0 /var/www/html/centos/7/os/x86_64/ 挂载光盘到港创建的目录<br>   （7）输入 <a href="http://192.168.110.130/centos/7/os/x86_64/就可以访问了" target="_blank" rel="noopener">http://192.168.110.130/centos/7/os/x86_64/就可以访问了</a><br> 上边我们的仓库源就已经创建好了<br> <img src="/Linux/yum本地仓库.png" alt="logo"></p>
 <p><strong>下面开始客户端的配置</strong><br>前面说过了<br>/etc/yum.conf：为所有仓库提供公共配置<br>/etc/yum.repos.d/*.repo：为仓库的指向提供配置<br>我们在/etc/yum.repos.d/ 目录下新建以repo结尾的文件<br>[centos]<br>name=httpserver<br>baseurl=<a href="http://192.168.110.130/centos/7/os/x86_64/" target="_blank" rel="noopener">http://192.168.110.130/centos/7/os/x86_64/</a><br>gpgkey=<a href="http://192.168.110.130/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-6" target="_blank" rel="noopener">http://192.168.110.130/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-6</a><br>gpgcheck=1</p>
 <p><strong>我们可以配置多个源  比如添加来自光盘</strong><br>编辑文件 本地<br>base.repo<br>[cdrom]<br>name=cdrom_repodb<br>baseurl=file:///misc/cd<br>gpgcheck=0</p>
 <p><strong>还可以增加一个epel 源</strong><br>[epel]<br>name=epel<br>baseurl=<a href="http://mirrors.aliyun.com/repo/epel-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/epel-7.repo</a><br>gpgcheck=0</p>
@@ -289,13 +289,13 @@
                                           <div class="reward-box">
                                             
                                               <div class="reward-box-item">
-                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <img class="reward-img" src="/assets/img/alipay.jpg">
                                                 <span class="reward-type">支付宝</span>
                                               </div>
                                               
                                                 
                                                   <div class="reward-box-item">
-                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <img class="reward-img" src="/assets/img/webchatpay.jpg">
                                                     <span class="reward-type">微信</span>
                                                   </div>
                                                   
@@ -609,14 +609,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -625,15 +617,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +645,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +661,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,11 +673,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,10 +690,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">

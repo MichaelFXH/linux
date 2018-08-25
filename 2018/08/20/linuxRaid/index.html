@@ -16,24 +16,24 @@
 <meta property="og:site_name">
 <meta property="og:description" content="在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。RAID：（Redundant A">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid.jpg">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid0.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid1.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid5.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid6.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid10.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid01.png">
-<meta property="og:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid50.png">
-<meta property="og:updated_time" content="2018-08-21T14:52:30.176Z">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid.jpg">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid0.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid1.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid5.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid6.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid10.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid01.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/raid50.png">
+<meta property="og:updated_time" content="2018-08-25T03:48:46.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raid详解">
 <meta name="twitter:description" content="在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。RAID：（Redundant A">
-<meta name="twitter:image" content="https://michaelfxh.github.io/linuxNotes/Linux/raid.jpg">
+<meta name="twitter:image" content="https://michaelfxh.github.io/Linux/raid.jpg">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
   
-    <link rel="icon" href="/linuxNotes/assets/favicon.png">
+    <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -213,7 +213,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p> <div align="center"><img src="/linuxNotes/Linux/raid.jpg" alt="logo"></div><br>在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。<br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
+                        <blockquote><p> <div align="center"><img src="/Linux/raid.jpg" alt="logo"></div><br>在Linux系统中目前以MD (Multiple Devices)虚拟块设备的方式实现软件RAID，利用多个底层的块设备虚拟出一个新的虚拟块设备，并且利用条带化(stripping)技术将数据块均匀分布到多个磁盘上来提高虚拟设备的读写性能，利用不同的数据冗余算法来保护用户数据不会因为某个块设备的故障而完全丢失，而且还能在设备被替换后将丢失的数据恢复到新的设备上。<br>RAID：（Redundant Array of indenpensive Disk） 廉价磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="raid分类"><a href="#raid分类" class="headerlink" title="raid分类"></a><font color="#339966">raid分类</font></h1><p>  一般高性能的磁盘阵列都是以硬件的形式来达成,进一步的把磁盘存取控制及磁盘阵列结合在一个控制器(RAID controler)或控制卡上,针对不同的用户解决人们对磁盘输输入输出系统的四大要求:<br>  (1)增加存取速度,<br>  (2)容错(fault tolerance),即安全性<br>  (3)有效的利用磁盘利用率;<br>  (4)尽量的平衡CPU,内存及磁盘的性能差异,提高主机的整体工作性能。</p>
@@ -223,7 +223,7 @@
 <li>软件RAID：用内核中的MD(multiple devices)模块实现，该类设备在/etc/下表示为：md*；</li>
 </ol>
 <p><strong>几种常见的RAID类型</strong></p>
-<p> <table margintop="0px"><tr><td> <img src="/linuxNotes/Linux/raid0.png" alt="logo"></td><td> <img src="/linuxNotes/Linux/raid1.png" alt="logo"><br> </td></tr><tr><td> <img src="/linuxNotes/Linux/raid5.png" alt="logo"></td><td> <img src="/linuxNotes/Linux/raid6.png" alt="logo"></td></tr><br> <tr><td><img src="/linuxNotes/Linux/raid10.png" alt="logo"> </td><td><img src="/linuxNotes/Linux/raid01.png" alt="logo"> </td></tr><tr><td><img src="/linuxNotes/Linux/raid50.png" alt="logo"> </td></tr><br> </table></p>
+<p> <table margintop="0px"><tr><td> <img src="/Linux/raid0.png" alt="logo"></td><td> <img src="/Linux/raid1.png" alt="logo"><br> </td></tr><tr><td> <img src="/Linux/raid5.png" alt="logo"></td><td> <img src="/Linux/raid6.png" alt="logo"></td></tr><br> <tr><td><img src="/Linux/raid10.png" alt="logo"> </td><td><img src="/Linux/raid01.png" alt="logo"> </td></tr><tr><td><img src="/Linux/raid50.png" alt="logo"> </td></tr><br> </table></p>
 <ol>
 <li>RAID-0striping（条带模式），至少需要两块磁盘，做RAID分区的大小最好是相同的（可以充分发挥并优势）;而数据分散存储于不同的磁盘上，在读写的时候可以实现并发，所以相对其读写性能最好；但是没有容错功能，任何一个磁盘的损坏将损坏全部数据；</li>
 <li>RAID-1mirroring（镜像卷），至少需要两块硬盘，raid大小等于两个raid分区中最小的容量（最好将分区大小分为一样），可增加热备盘提供一定的备份能力；数据有冗余，在存储时同时写入两块硬盘，实现了数据备份；但相对降低了写入性能，但是读取数据时可以并发，几乎类似于raid-0的读取效率；</li>
@@ -292,13 +292,13 @@
                                           <div class="reward-box">
                                             
                                               <div class="reward-box-item">
-                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <img class="reward-img" src="/assets/img/alipay.jpg">
                                                 <span class="reward-type">支付宝</span>
                                               </div>
                                               
                                                 
                                                   <div class="reward-box-item">
-                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <img class="reward-img" src="/assets/img/webchatpay.jpg">
                                                     <span class="reward-type">微信</span>
                                                   </div>
                                                   
@@ -612,14 +612,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -628,15 +620,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,11 +648,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,11 +664,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,11 +676,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,10 +693,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">

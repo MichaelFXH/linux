@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T05:07:41.432Z">
+<meta property="og:updated_time" content="2018-08-25T03:47:06.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一般权限">
 <meta name="twitter:description" content="Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。  用户管理：用户管理一般权限:一般权限ACL访问控制列表:ACL访问控制列表suid,sgid:suid,sgid">
@@ -24,7 +24,7 @@
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
   
-    <link rel="icon" href="/linuxNotes/assets/favicon.png">
+    <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -206,7 +206,7 @@
               
                         <blockquote><p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
 </blockquote>
-<p>用户管理：<a href="https://michaelfxh.github.io/linuxNotes/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/linuxNotes/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
+<p>用户管理：<a href="https://michaelfxh.github.io/2018/08/02/linuxUser/">用户管理</a><br>一般权限:<a href="https://michaelfxh.github.io/2018/08/03/linux一般权限/">一般权限</a><br>ACL访问控制列表:<a href="https://michaelfxh.github.io/2018/08/06/linuxAcl/">ACL访问控制列表</a><br>suid,sgid:<a href="https://michaelfxh.github.io/2018/08/10/linuxSuidSgidSbit/">suid,sgid</a><br><a id="more"></a></p>
 <h1 id="一般属性"><a href="#一般属性" class="headerlink" title="一般属性"></a>一般属性</h1><blockquote><p>[root@centos6 data]# ls -lih<br>total 40K<br>    11 drwx——. 2 root root  16K Jul 18 16:30 lost+found<br>    18 lrwxrwxrwx. 1 root root   11 Aug 14 09:19 pa2 -&gt; /etc/passwd<br>    12 -rw-r–r–. 1 root root 1.7K Aug 14 08:19 passwd<br>    14 -rw-r–r–. 1 root root 1.7K Aug 14 08:29 passwd1<br>    15 -rw-r–r–. 1 root root 1.8K Aug 14 08:31 profile<br>    13 -rw-r–r–. 1 root root 1.7K Aug 14 10:56 pwd<br>523265 drwx——. 2 root root 4.0K Aug 14 11:28 test<br>130817 drwxr-xr-x. 3 root root 4.0K Aug 14 11:23 testdir</p>
 </blockquote>
 <p>以上总共对应了8段字符，每段字符的解释如下：<br>iNode：节点，文件/目录在文件系统中对应的唯一值<br>文件类型：目录、文件还是其它<br>文件权限：不同用户对该文件所具备的权限<br>链接数目：硬链接数目<br>文件所有者：文件的主人<br>文件所属组：文件所属的组<br>文件大小：<br>文件修改时间：文件最后的访问/修改时间<br>文件名：</p>
@@ -250,13 +250,13 @@
                                           <div class="reward-box">
                                             
                                               <div class="reward-box-item">
-                                                <img class="reward-img" src="/linuxNotes/assets/img/alipay.jpg">
+                                                <img class="reward-img" src="/assets/img/alipay.jpg">
                                                 <span class="reward-type">支付宝</span>
                                               </div>
                                               
                                                 
                                                   <div class="reward-box-item">
-                                                    <img class="reward-img" src="/linuxNotes/assets/img/webchatpay.jpg">
+                                                    <img class="reward-img" src="/assets/img/webchatpay.jpg">
                                                     <span class="reward-type">微信</span>
                                                   </div>
                                                   
@@ -570,14 +570,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -586,15 +578,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +606,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +622,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +634,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,10 +651,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
