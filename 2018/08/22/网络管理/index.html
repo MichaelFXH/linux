@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/ip首部.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/三次握手.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/dhcp.jpg">
-<meta property="og:updated_time" content="2018-08-26T01:07:29.564Z">
+<meta property="og:updated_time" content="2018-08-27T00:53:11.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络管理">
 <meta name="twitter:description" content="本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。">
@@ -370,7 +370,10 @@
 <p>如何在重启电脑后仍然可以生效呢<br>我们编辑文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">cd</span> /etc/sysconfig/network-scripts/</span><br><span class="line"> cp  ifcfg-eth0 ifcfg-eth0:1</span><br><span class="line"> vim ifcfg-eth0:1</span><br><span class="line"> [root@centos6 network-scripts]<span class="comment"># vim ifcfg-eth0:1</span></span><br><span class="line">UUID=539cec12d-02c8-44a9-9ca4-453069e071dc</span><br><span class="line">DEVICE=eth0:1  设备名最好跟文件名称一一对应</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">ONBOOT=yes     是否激活</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=none    不要动态获取</span><br><span class="line">HWADDR=00:0C:29:86:58:63  这个网卡地址不要动</span><br><span class="line">IPADDR=172.22.68.210   </span><br><span class="line">NETMASK=255.255.255.0  或者 PREFIX=24(推荐)</span><br></pre></td></tr></table></figure></p>
 <p>然后从其服务<br>service network restart<br>service NetworkManager restart<br>ifconfig -a<br>通过这个命令禁用网卡<br>ifconfig eth0:1 down<br>要想启用执行<br>ifconfig eth0:1 up<br>执行ip a 我们也可以查看网卡信息比ifconfig 更详细，更友好。</p>
 <p>还有可以使用tcpdump -i eth0 -nn icmp 抓取通过eth0网卡的数据包信息。</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p> route -n 可以查看路由，我们在添加ip地址的时候可以配置网关，目的就是配置路由。<br> <code>没有路由就不能跟其他网段的主机通信这一点很关键，即便是本网段也不能通信</code><br> 我们添加一个ip地址，他就会在默认路由表里添加一条路由，以便跟本网段的其他主机通信。<br> 那么如何对路由的增删改呢？<br>route add<br>-net  增加一个网段<br>-host  增加某一台主机<br>我们在一台主机上新增一个ip地址<br>然后再另外一台主机上去ping 这个地址是不行的，虽然连接再同一个交换机上，但是由于没有配置路由，而且网段不同，所以他们之间不能互相通信。<br>新增路由<br>给网卡接口eth0 增加一个路由 目的网段是192.168.0.1 子网掩码 255.255.0.0 网关 172.16.0.1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add  -net  192.168.0.1/16 gw 172.16.0.1 dev eth0</span><br></pre></td></tr></table></figure></p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p> route -n 可以查看路由，我们在添加ip地址的时候可以配置网关，目的就是配置路由。<br> <code>没有路由就不能跟其他网段的主机通信这一点很关键，即便是本网段也不能通信</code><br> 我们添加一个ip地址，他就会在默认路由表里添加一条路由，以便跟本网段的其他主机通信。<br> 那么如何对路由的增删改呢？<br>route add<br>-net  增加一个网段<br>-host  增加某一台主机<br>我们在一台主机上新增一个ip地址<br>然后再另外一台主机上去ping 这个地址是不行的，虽然连接再同一个交换机上，但是由于没有配置路由，而且网段不同，所以他们之间不能互相通信。<br><strong>新增路由</strong><br>给网卡接口eth0 增加一个路由 目的网段是192.168.0.1 子网掩码 255.255.0.0 网关 172.16.0.1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add  -net  192.168.0.1/16 gw 172.16.0.1 dev eth0</span><br></pre></td></tr></table></figure></p>
+<p><strong>添加到主机的路由</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route add –host 192.168.1.11 dev eth0</span><br><span class="line">route add –host 192.168.1.12 gw 192.168.1.1</span><br></pre></td></tr></table></figure></p>
+<p><strong>添加到网络的路由</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route add –net 192.168.1.11 netmask 255.255.255.0 dev eth0</span><br><span class="line">route add –net 192.168.1.11 netmask 255.255.255.0 gw 192.168.1.1</span><br><span class="line">route add –net 192.168.1.0/24 dev eth1</span><br></pre></td></tr></table></figure></p>
+<p><strong>添加默认网关</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 192.168.2.1</span><br></pre></td></tr></table></figure></p>
 <p>强制用某个IP ping<br>ping -I 1.1.1.1 2.2.2.2 强制使用1.1.1.1 去ping 2.2.2.2<br><strong>实验1</strong></p>
 <h2 id="bonding"><a href="#bonding" class="headerlink" title="bonding"></a>bonding</h2><h2 id="nmcli-使用"><a href="#nmcli-使用" class="headerlink" title="nmcli 使用"></a>nmcli 使用</h2>
                           
@@ -720,19 +723,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,7 +735,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,7 +747,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,7 +755,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,7 +771,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,11 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,10 +788,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,6 +804,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">tcp三次握手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
               </li>
              
               <li class="article-tag-list-item">
