@@ -23,7 +23,9 @@
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/ip首部.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/三次握手.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/dhcp.jpg">
-<meta property="og:updated_time" content="2018-08-27T00:53:11.677Z">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/routeTest.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/routeSuccess.png">
+<meta property="og:updated_time" content="2018-08-28T14:13:54.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络管理">
 <meta name="twitter:description" content="本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。">
@@ -368,14 +370,58 @@
 <h2 id="添加一个IP地址ifconfig"><a href="#添加一个IP地址ifconfig" class="headerlink" title="添加一个IP地址ifconfig"></a>添加一个IP地址ifconfig</h2><p> ifconfig -a  查看所有ip信息<br> ifconfig eth0 down /up  停止网卡  启动网卡<br> 那么如何修改网卡的ip地址<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1 172.20.59.205/24</span><br></pre></td></tr></table></figure></p>
 <p> 网卡别名 eth1:1 ip 地址是 172.20.59.205/24<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1:0 172.20.59.205/24</span><br></pre></td></tr></table></figure></p>
 <p>如何在重启电脑后仍然可以生效呢<br>我们编辑文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">cd</span> /etc/sysconfig/network-scripts/</span><br><span class="line"> cp  ifcfg-eth0 ifcfg-eth0:1</span><br><span class="line"> vim ifcfg-eth0:1</span><br><span class="line"> [root@centos6 network-scripts]<span class="comment"># vim ifcfg-eth0:1</span></span><br><span class="line">UUID=539cec12d-02c8-44a9-9ca4-453069e071dc</span><br><span class="line">DEVICE=eth0:1  设备名最好跟文件名称一一对应</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">ONBOOT=yes     是否激活</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=none    不要动态获取</span><br><span class="line">HWADDR=00:0C:29:86:58:63  这个网卡地址不要动</span><br><span class="line">IPADDR=172.22.68.210   </span><br><span class="line">NETMASK=255.255.255.0  或者 PREFIX=24(推荐)</span><br></pre></td></tr></table></figure></p>
+<p>这种添加方式也可以   via 后边的代表网关<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.8/16 via 192.168.32.100</span><br></pre></td></tr></table></figure></p>
 <p>然后从其服务<br>service network restart<br>service NetworkManager restart<br>ifconfig -a<br>通过这个命令禁用网卡<br>ifconfig eth0:1 down<br>要想启用执行<br>ifconfig eth0:1 up<br>执行ip a 我们也可以查看网卡信息比ifconfig 更详细，更友好。</p>
 <p>还有可以使用tcpdump -i eth0 -nn icmp 抓取通过eth0网卡的数据包信息。</p>
 <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p> route -n 可以查看路由，我们在添加ip地址的时候可以配置网关，目的就是配置路由。<br> <code>没有路由就不能跟其他网段的主机通信这一点很关键，即便是本网段也不能通信</code><br> 我们添加一个ip地址，他就会在默认路由表里添加一条路由，以便跟本网段的其他主机通信。<br> 那么如何对路由的增删改呢？<br>route add<br>-net  增加一个网段<br>-host  增加某一台主机<br>我们在一台主机上新增一个ip地址<br>然后再另外一台主机上去ping 这个地址是不行的，虽然连接再同一个交换机上，但是由于没有配置路由，而且网段不同，所以他们之间不能互相通信。<br><strong>新增路由</strong><br>给网卡接口eth0 增加一个路由 目的网段是192.168.0.1 子网掩码 255.255.0.0 网关 172.16.0.1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add  -net  192.168.0.1/16 gw 172.16.0.1 dev eth0</span><br></pre></td></tr></table></figure></p>
 <p><strong>添加到主机的路由</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">route add –host 192.168.1.11 dev eth0</span><br><span class="line">route add –host 192.168.1.12 gw 192.168.1.1</span><br></pre></td></tr></table></figure></p>
 <p><strong>添加到网络的路由</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">route add –net 192.168.1.11 netmask 255.255.255.0 dev eth0</span><br><span class="line">route add –net 192.168.1.11 netmask 255.255.255.0 gw 192.168.1.1</span><br><span class="line">route add –net 192.168.1.0/24 dev eth1</span><br></pre></td></tr></table></figure></p>
 <p><strong>添加默认网关</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 192.168.2.1</span><br></pre></td></tr></table></figure></p>
-<p>强制用某个IP ping<br>ping -I 1.1.1.1 2.2.2.2 强制使用1.1.1.1 去ping 2.2.2.2<br><strong>实验1</strong></p>
-<h2 id="bonding"><a href="#bonding" class="headerlink" title="bonding"></a>bonding</h2><h2 id="nmcli-使用"><a href="#nmcli-使用" class="headerlink" title="nmcli 使用"></a>nmcli 使用</h2>
+<p>强制用某个IP ping<br>ping -I 1.1.1.1 2.2.2.2 强制使用1.1.1.1 去ping 2.2.2.2<br>DNS 配置文件 /etc/resolv.conf<br>在网卡配置文件中加上DOMAIN baidu.com<br>直接ping www 就可以了<br><strong>实验如下图我们要让A，B 2个主机通信</strong><br> <img src="/Linux/routeTest.png" alt="logo"><br> 假设中间有3个路由器，其中2个网段分别是VMNET6,VMNET7.把他们分隔开，表示不同的网段。<br> 要想让2个主机通信，我们先按上图把环境配好。直连的都处于同一个网段，我们在添加ip的时候自动会添加同一个网段的路由，所以他们之间是可以通信的。</p>
+<ol>
+<li>配置每个主机，路由器的IP地址<br><strong>配置主机A：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1 172.20.112.25/16</span><br><span class="line">route add default 172.20.113.26 配置网关 这样就可以跟R1的任何ip通信了。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>配置R1 eth0</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 172.20.113.26/16</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置R1 eth1</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1 10.1.1.10/16</span><br><span class="line">route add default gw 10.1.1.11</span><br></pre></td></tr></table></figure></p>
+<p>同时要把R1的路由功能启用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置R2</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 10.2.2.10/16 --eth0</span><br><span class="line">ifconfig eth1 10.1.1.11/16 --eth1</span><br><span class="line">route add default gw 10.2.2.11</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置R3：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1 10.2.2.11/16 --eth1</span><br><span class="line">ifconfig eth0 192.168.200.131/24 --eth0</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置主机B：</strong></p>
+<ol start="2">
+<li>相邻的测试看看是否可以ping通 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig ens33 192.168.200.132/24</span><br><span class="line"> route add default gw 192.168.200.131 配置网关 这样就可以跟R3的任何ip通信了。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>经过测试相邻路由器跟主机之间是可以通信的</p>
+<p>接下来我们怎么才能让A能到B呢<br>我们从图上可以看出<br>对于R1来说到达任何地址的网关都是10.1.1.11<br>route add default gw 10.1.1.11<br>R2需要配2个<br>route add default gw 10.1.1.10<br>route add default gw 10.2.2.11<br>R3到达任何地址的网关都是10.2.2.10<br>route add default gw 10.2.2.10<br>这样就都关联起来了<br>折腾了半天是因为防火墙问题<br>需要执行iptables -F</p>
+<p>终于成功！<br> <img src="/Linux/routeSuccess.png" alt="logo"><br>以上的所有的ip配置要想生效需要写到配置文件里。/etc/sysconfig/network-Scripts/ifcfg-eth0 或者 eth1中。<br>路由配置文件<br>/etc/sysconfig/network/routes</p>
+<p>补充：<br>模拟给一块网卡配置2个IP，充当路由器，然后让2台不同网段的计算机分别指向对应的网关。这2台计算机也能通信。</p>
+<h2 id="bonding"><a href="#bonding" class="headerlink" title="bonding"></a>bonding</h2><p>bonding(绑定)是一种linux系统下的网卡绑定技术，可以把服务器上n个物理网卡在系统内部抽象(绑定)成一个逻辑上的网卡，能够提升网络吞吐量、实现网络冗余、负载等功能，有很多优势。</p>
+<p>bonding技术是linux系统内核层面实现的，它是一个内核模块(驱动)。使用它需要系统有这个模块, 我们可以modinfo命令查看下这个模块的信息, 一般来说都支持.</p>
+<p>bonding的七种工作模式: </p>
+<p>bonding技术提供了七种工作模式，在使用的时候需要指定一种，每种有各自的优缺点.</p>
+<ol>
+<li>balance-rr (mode=0)       默认, 有高可用 (容错) 和负载均衡的功能,  需要交换机的配置，每块网卡轮询发包 (流量分发比较均衡).</li>
+<li>active-backup (mode=1)  只有高可用 (容错) 功能, 不需要交换机配置, 这种模式只有一块网卡工作, 对外只有一个mac地址。缺点是端口利用率比较低</li>
+<li>balance-xor (mode=2)     不常用</li>
+<li>broadcast (mode=3)        不常用</li>
+<li>802.3ad (mode=4)          IEEE 802.3ad 动态链路聚合，需要交换机配置，没用过</li>
+<li>balance-tlb (mode=5)      不常用</li>
+<li><p>balance-alb (mode=6)     有高可用 ( 容错 )和负载均衡的功能，不需要交换机配置  (流量分发到每个接口不是特别均衡)<br>服务器上两张物理网卡ens33和ens37, 通过绑定成一个逻辑网卡bond0，bonding模式选择mode6<br><strong>实现bonding</strong><br>可以使用lsmod | grep bonding查看模块是否被加载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep bonding</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建基于bond0接口的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-bond0</span><br><span class="line">DEVICE=bond0</span><br><span class="line">TYPE=Bond</span><br><span class="line">IPADDR=172.20.59.100</span><br><span class="line">NETMASK=255.255.0.0</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">USERCTL=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BONDING_MASTER=yes</span><br><span class="line">BONDING_OPTS=<span class="string">"mode=6 miimon=100"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>上面的BONDING_OPTS=”mode=6 miimon=100” 表示这里配置的工作模式是mode6(adaptive load balancing), miimon表示监视网络链接的频度 (毫秒), 我们设置的是100毫秒, 根据你的需求也可以指定mode成其它的负载模式。</p>
+<ol start="2">
+<li>修改ens33<br>DEVICE=ens33<br>USERCTL=no<br>ONBOOT=yes<br>MASTER=bond0<br>SLAVE=yes<br>BOOTPROTO=none</li>
+<li>修改ens37<br>DEVICE=ens37<br>USERCTL=no<br>ONBOOT=yes<br>MASTER=bond0<br>SLAVE=yes<br>BOOTPROTO=none</li>
+<li>我们关掉一个网卡，依然可以ping通<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 172.20.59.100</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="nmcli-使用"><a href="#nmcli-使用" class="headerlink" title="nmcli 使用"></a>nmcli 使用</h2>
                           
 
                             
@@ -719,7 +765,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,7 +773,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,19 +805,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,15 +817,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,6 +838,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">tcp三次握手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
