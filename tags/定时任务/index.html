@@ -6,24 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>磁盘管理 | </title>
+  <title>Tag: 定时任务 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
-<meta name="keywords" content="磁盘管理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="磁盘管理">
-<meta property="og:url" content="https://michaelfxh.github.io/2018/08/16/磁盘管理/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title">
+<meta property="og:url" content="https://michaelfxh.github.io/tags/定时任务/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://michaelfxh.github.io/Linux/固态硬盘.png">
-<meta property="og:image" content="https://michaelfxh.github.io/Linux/机械硬盘.png">
-<meta property="og:image" content="https://michaelfxh.github.io/Linux/添加硬盘.png">
-<meta property="og:updated_time" content="2018-08-25T03:48:47.742Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="磁盘管理">
-<meta name="twitter:description" content="本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。">
-<meta name="twitter:image" content="https://michaelfxh.github.io/Linux/固态硬盘.png">
+<meta name="twitter:title">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -155,270 +146,53 @@
                 <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
               </div>
               <div id="js-content" class="content-ll">
-                <article id="post-磁盘管理" class="article article-type-post "
-  itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+                
   
-    <h1 class="article-title" itemprop="name">
-      磁盘管理
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/08/29/linux定时任务/" class="archive-article-date">
+  	<time datetime="2018-08-29T07:45:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-29</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/08/29/linux定时任务/">linux定时任务</a>
     </h1>
   
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/08/16/磁盘管理/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/08/29/linux定时任务/" class="pageViews">0</span>次
   </a>
 
+        <div class="article-info info-on-right">
           
-            <a href="/2018/08/16/磁盘管理/" class="archive-article-date">
-  	<time datetime="2018-08-16T07:52:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-16</time>
-</a>
-              
-      </header>
-      
-        <!-- 目录内容 -->
-        
-          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-            <span class="btn-bg"></span>
-            <span class="btn-text">文章导航</span>
-          </p>
-          <div id="toc-article" class="toc-article">
-            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-            <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘分类结构"><span class="toc-number">1.</span> <span class="toc-text">磁盘分类结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要给磁盘分区"><span class="toc-number">2.</span> <span class="toc-text">为什么要给磁盘分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#给磁盘分区"><span class="toc-number">3.</span> <span class="toc-text">给磁盘分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建文件系统"><span class="toc-number">4.</span> <span class="toc-text">创建文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#挂载设备"><span class="toc-number">5.</span> <span class="toc-text">挂载设备</span></a></li></ol>
-          </div>
-          <script type="text/javascript">
-            function showToc() {
-              var toc_article = document.getElementById("toc-article");
-              var show_toc_btn = document.getElementById("show-toc-btn");
-              toc_article.setAttribute("style", "display:block");
-              show_toc_btn.setAttribute("style", "display:none");
-            };
-            function showBtn() {
-              var toc_article = document.getElementById("toc-article");
-              var show_toc_btn = document.getElementById("show-toc-btn");
-              toc_article.setAttribute("style", "display:none");
-              show_toc_btn.setAttribute("style", "display:block");
-            };
-          </script>
-          
-            <!-- 目录内容结束 -->
-            <div class="article-entry" itemprop="articleBody">
-              
-                        <blockquote><p>本文主要介绍下磁盘结构以及对磁盘的管理，包括磁盘的分区，创建文件系统（不创建文件系统我们的磁盘是无法使用的），以及挂载。</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="磁盘分类结构"><a href="#磁盘分类结构" class="headerlink" title="磁盘分类结构"></a>磁盘分类结构</h1><ol>
-<li>固态硬盘（Solid state drive）<br>用固态电子存储芯片阵列而制成的硬盘，由控制单元和存储单元（FLASH芯片、DRAM芯片）组成。固态硬盘在接口的规范和定义、功能及使用方法上与普通硬盘的完全相同，在产品外形和尺寸上也与普通硬盘一致.相对于HDD，SSD防震抗摔，传输速度上明显有优势.但是费用昂贵。</li>
-<li><p>机械硬盘（hard disk drive）<br>即是传统普通硬盘，主要由：盘片，磁头，盘片转轴及控制电机，磁头控制器，数据转换器，接口，缓存等几个部分组成。机械硬盘中所有的盘片都装在一个旋转轴上，每张盘片之间是平行的，在每个盘片的存储面上有一个磁头，磁头与盘片之间的距离比头发丝的直径还小，所有的磁头联在一个磁头控制器上，由磁头控制器负责各个磁头的运动。磁头可沿盘片的半径方向运动，加上盘片每分钟几千转的高速旋转，磁头就可以定位在盘片的指定位置上进行数据的读写操作。数据通过磁头由电磁流来改变极性方式被电磁流写到磁盘上，也可以通过相反方式读取。硬盘为精密设备，进入硬盘的空气必须过滤.<br>虽然ssd在很多方面有优势，但是致命的是寿命不长，硬盘有价，数据无价,目前SSD还不能完全取代HDD.<br>2种磁盘的结构是不一样的，工作原理当然也是不一样的，我觉得对磁盘结构以及工作原理的理解有助于我们后边的开发。可以提高磁盘的存取速度。</p>
-<blockquote>
-<p> 1.固态硬盘<br> <img src="/Linux/固态硬盘.png" alt="logo"><br>   固态硬盘是用固态电子存储芯片阵列而制成的硬盘，整个固态硬盘结构无机械装置，全部是由电子芯片及电路板组成。<br>   其实就是由三大块主控芯片、闪存颗粒、缓存单元构成。</p>
-</blockquote>
-<blockquote>
-<p> 2.机械硬盘<br><img src="/Linux/机械硬盘.png" alt="logo"><br>由上图可以看到将盘片分成了磁道（Track），扇区（Sector）和柱面（Cylinder）</p>
-</blockquote>
-<ul>
-<li><p>盘片</p>
-<p>硬盘的存储介质，所有的信息都存储在这里，盘片分为单面盘片和双面盘片，单面盘片只能在一面进行存储，双面盘片能在两面进行存储。硬盘的盘片一般采用合金材料，多数为铝合金(IBM曾经开发过玻璃材质的盘片，好像现在有些厂家也生产玻璃材质的盘片，但不多见)，盘面上涂着磁性材料，厚度一般在0.5mm左右。有些硬盘只装一张盘片，有些则有多张。硬盘盘片安装在主轴电机的转轴上，在主轴电机的带动下作高速旋转。每张盘片的容量称为单碟容量，而一块硬盘的总容量就是所有盘片容量的总和。早期硬盘由于单碟容量低，所以盘片较多。现代的硬盘盘片一般只有少数几片。 盘片上的记录密度很大，而且盘片工作时会高速旋转，为保证其工作的稳定，数据保存的长久，所以硬片都是密封在硬盘内部。不可自行拆卸硬盘，在普通环境下空气中的灰尘、指纹、头发丝等细小杂质都会对硬盘造成永久损害。 硬盘一般会有一个或多个盘片，每个盘片可以有两个面(Side)，即第1个盘片的正面称为0面，反面称为1面；第2个盘片的正面称为2面，反面称为3面…依次类推。每个盘面对应一个磁头(head)用于读写数据。第一个盘面的正面的磁头称为0磁头，背面称为1磁头；第二个盘片正面的磁头称为2磁头，背面称为3磁头，以此类推。盘面数和磁头数是相等的。</p>
-</li>
-<li><p>磁道</p>
-<p>每个盘片的每个盘面被划分成多个狭窄的同心圆环，数据就是存储在这样的同心圆环上，我们将这样的圆环称为磁道(Track)，每个盘面可以划分多个磁道。在每个盘面的最外圈，离盘心最远的地方是“0”磁道，向盘心方向依次增长为1磁道，2磁道，等等。硬盘数据的存放就是从最外圈开始。</p>
-</li>
-<li><p>扇区  </p>
-</li>
-</ul>
-<p>根据硬盘规格的不同，磁道数可以从几百到成千上万不等。每个磁道上可以存储数KB的数据，但计算机并不需要一次读写这么多数据。在这一这基础上，又把每个磁道划分成若干弧段，每段称为一个扇区(Sector)。扇区是硬盘上存储的物理单位，每个扇区可存储128×2N次方（N＝0,1,2,3）字节的数据。从DOS时代起，每扇区是128×22＝512字节，现在已经成了业界不成文的规定，也没有哪个硬盘厂商试图去改变这种约定。也就是说即使计算机只需要硬盘上存储的某个字节，也须一次把这个字节所在的扇区中的全部512字节读入内存，再选择所需的那个字节。扇区的编号是从1开始，而不是0，这一点需要注意。另外，硬盘在划分扇区时，和软盘是有一定区别的。软盘的一个磁道中，扇区号一般依次编排，如1号，2号，3号…以此类推。但在硬盘磁道中，扇区号是按照某个间隔跳跃着编排。比如，2号扇区并不是1号扇区后的按顺序的第一个而是第八个，3号扇区又是2号扇区后的按顺序的第八个，依此类推，这个“八”称为交叉因子。</p>
-<p>这个交叉因子的来历有必要详述一下，我们知道，数据读取经常需要按顺序读取一系列相邻的扇区(逻辑数据相邻)。如对磁道扇区按物理顺序进行编号，很有可能出现当磁头读取完第一个扇区后，由于盘片转速过快来不及读取下一个扇区，(要知道物理相邻扇区位置距离是极小的)，必须等待转完一圈，这极大浪费了时间。所以就用交叉来解决这个问题。</p>
-<ul>
-<li>柱面</li>
-</ul>
-<p>根据硬盘规格的不同，磁道数可以从几百到成千上万不等。每个磁道上可以存储数KB的数据，但计算机并不需要一次读写这么多数据。在这一这基础上，又把每个磁道划分成若干弧段，每段称为一个扇区(Sector)。扇区是硬盘上存储的物理单位，每个扇区可存储128×2N次方（N＝0,1,2,3）字节的数据。从DOS时代起，每扇区是128×22＝512字节，现在已经成了业界不成文的规定，也没有哪个硬盘厂商试图去改变这种约定。也就是说即使计算机只需要硬盘上存储的某个字节，也须一次把这个字节所在的扇区中的全部512字节读入内存，再选择所需的那个字节。扇区的编号是从1开始，而不是0，这一点需要注意。另外，硬盘在划分扇区时，和软盘是有一定区别的。软盘的一个磁道中，扇区号一般依次编排，如1号，2号，3号…以此类推。但在硬盘磁道中，扇区号是按照某个间隔跳跃着编排。比如，2号扇区并不是1号扇区后的按顺序的第一个而是第八个，3号扇区又是2号扇区后的按顺序的第八个，依此类推，这个“八”称为交叉因子。</p>
-<p>这个交叉因子的来历有必要详述一下，我们知道，数据读取经常需要按顺序读取一系列相邻的扇区(逻辑数据相邻)。如对磁道扇区按物理顺序进行编号，很有可能出现当磁头读取完第一个扇区后，由于盘片转速过快来不及读取下一个扇区，(要知道物理相邻扇区位置距离是极小的)，必须等待转完一圈，这极大浪费了时间。所以就用交叉来解决这个问题。</p>
-<ul>
-<li>磁盘工作原理</li>
-</ul>
-<p>现代硬盘寻道都是采用CHS(Cylinder Head Sector)的方式，硬盘读取数据时，读写磁头沿径向移动，移到要读取的扇区所在磁道的上方，这段时间称为寻道时间(seek time)。因读写磁头的起始位置与目标位置之间的距离不同，寻道时间也不同。目前硬盘一般为2到30毫秒，平均约为9毫秒。磁头到达指定磁道后，然后通过盘片的旋转，使得要读取的扇区转到读写磁头的下方，这段时间称为旋转延迟时间(rotational latencytime)。</p>
-<blockquote>
-<p>另外硬盘接口类型有串行跟并行：</p>
-<ul>
-<li>并行：IDE(133MB/S) SCSI (640M/S)</li>
-<li>串行：SATA:6Gbps SAS:6Gbps USB：480MB/s</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>磁盘设备的文件名/dev/DEV_FILE</p>
-<ul>
-<li>虚拟磁盘：/dev/vd</li>
-<li>不同磁盘标识：a-z,aa,ab… /dev/sda, /dev/sdb, …</li>
-<li>同一设备上的不同分区：1,2, …/dev/sda1, /dev/sda5</li>
-<li>硬盘术语 head：磁头，head：磁头，cylinder: 柱面，sector: 扇区，512bytes</li>
-</ul>
-</blockquote>
-<h1 id="为什么要给磁盘分区"><a href="#为什么要给磁盘分区" class="headerlink" title="为什么要给磁盘分区"></a>为什么要给磁盘分区</h1><p>分区是将一个硬盘驱动器分成若干个逻辑驱动器，分区是把硬盘连续的区块当做一个独立的磁硬使用。分区表是一个硬盘分区的索引,分区的信息都会写进分区表。</p>
-<blockquote>
-<p>为什么要给磁盘分区</p>
-</blockquote>
-<ul>
-<li>优化I/O性能</li>
-<li>实现磁盘空间配额限制,易于管理</li>
-<li>提高修复速度</li>
-<li>隔离系统和程序</li>
-<li>安装多个OS</li>
-<li>采用不同文件系统</li>
-<li>有利于数据安全<br>两种分区方式：MBR，GPT</li>
-</ul>
-<blockquote>
-<p>MBR</p>
-</blockquote>
-<p>主引导记录（Master Boot Record ， MBR）是指一个存储设备的开头 512 字节。它包含操作系统的引导器和存储设备的分区表。<br>　全局唯一标识分区表（GUID Partition Table，缩写：GPT）是一个实体硬盘的分区表的结构布局的标准。它是统一可扩展固件接口标准的一部分，它使用全局唯一标识来标识设备。它是新一代分区表格式，用以替代 MBR 分区表。它用来解决 MBR 分区表的缺点，同时带来了一些优点。<br>　MBR 导致的问题<br>　只能有四个主分区或者三个主分区加一个扩展分区 (以及在扩展分区中的任意数量的逻辑分区). 如果你有三个主分区加一个扩展分区以及除此之外的空闲空间，在空闲空间之上你无法创立分区。<br>　　在扩展分区里，逻辑分区的元数据被存储在一个链表结构中。如果一个环节丢失，该元数据之后的逻辑分区全部丢失。<br>　　MBR 只支持1个字节的分区类型编码，导致许多冲突。<br>　　MBR 使用32位的 LBA 值来存储分区扇区信息。LBA 的大小以及512B的扇区大小共同限制了硬盘可寻址大小最大为2TB. 如果使用 MBR, 2TB以外的空间无法使用。 </p>
-<blockquote>
-<p>GPT</p>
-</blockquote>
-<p>使用 GUID (UUID) 来表明分区类型 - 无冲突。<br>　　为每个分区提供了一个唯一硬盘 GUID 和一个唯一分区 GUID - 一个好的不依赖文件系统的引用分区和硬盘的方式。<br>　　任意分区数 - 取决于给分区表分配的空间 - 不需要扩展和逻辑分区。GPT ，默认包含了定义128个分区的空间。当用户想要更多分区 时，他可以给分区表分配更多空间 (目前只有 gdisk 支持这一特性)。<br>　　使用64位 LBA 存储扇区数 - 最大硬盘可寻址大小为 2 ZB.<br>　　 存储了备份头和分区表可于主要部分损坏时进行急救。<br>　　CRC32 校验值用于检测头和分区表的错误与损坏。<br>　　GUID Partition Table （GPT）是一种更灵活的分区方式。它正在逐步取代Master Boot Record （MBR）系统。GPT相对于诞生于 MS-DOS时代的MBR而言，有许多优点。新版的fdisk（MBR）和gdisk（GPT）使得使用GPT或者MBR在可靠性和性能最大化上都非常容易。<br>　　在做出选择前，需要考虑如下内容：<br>　　 如果使用GRUB legacy作为bootloader，必须使用MBR。<br>　　如果使用传统的BIOS，并且双启动中包含 Windows （无论是32位版还是64位版），必须使用MBR。<br>　　如果使用 UEFI 而不是BIOS，并且双启动中包含 Windows 64位版，必须使用GPT。<br>　　非常老的机器需要使用 MBR，因为 BIOS 可能不支持 GPT.<br>　　 如果不属于上述任何一种情况，可以随意选择使用 GPT 还是 MBR。由于 GPT 更先进，建议选择 GPT。<br>　　建议在使用 UEFI 的情况下选择 GPT，因为有些 UEFI firmware 不支持从 MBR 启动</p>
-<h1 id="给磁盘分区"><a href="#给磁盘分区" class="headerlink" title="给磁盘分区"></a>给磁盘分区</h1><p>•fdisk 创建MBR分区<br>•gdisk 创建GPT分区</p>
-<p>fdisk命令参数介绍<br>p、打印分区表。<br>n、新建一个新分区。<br>d、删除一个分区。<br>q、退出不保存。<br>w、把分区写进分区表，保存并退出。<br>为了实验我们新添加一块硬盘：<br><img src="/Linux/添加硬盘.png" alt="logo"><br>发现没有我们增加的硬盘，怎么办呢</p>
-<blockquote>
-<p>运行下面命令查看主机总线号</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ls /sys/class/scsi_host/</span><br><span class="line">total 0</span><br><span class="line">lrwxrwxrwx 1 root root 0 Aug 19  2018 host0 -&gt; ../../devices/pci0000:00/0000:00:07.1/host0/scsi_host/host0</span><br><span class="line">lrwxrwxrwx 1 root root 0 Aug 19  2018 host1 -&gt; ../../devices/pci0000:00/0000:00:07.1/host1/scsi_host/host1</span><br><span class="line">lrwxrwxrwx 1 root root 0 Aug 19  2018 host2 -&gt; ../../devices/pci0000:00/0000:00:10.0/host2/scsi_host/host2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>再次运行lsblk 发现sdb 出来了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># lsblk</span></span><br><span class="line">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sr0     11:0    1  3.7G  0 rom  /media/CentOS_6.10_Final</span><br><span class="line">sda      8:0    0  200G  0 disk </span><br><span class="line">├─sda1   8:1    0    1G  0 part /boot</span><br><span class="line">├─sda2   8:2    0 48.8G  0 part /</span><br><span class="line">├─sda3   8:3    0 29.3G  0 part /data</span><br><span class="line">├─sda4   8:4    0    1K  0 part </span><br><span class="line">└─sda5   8:5    0    2G  0 part [SWAP]</span><br><span class="line">sdb      8:16   0   20G  0 disk</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ol>
-<p>接下来我们就可以在这块硬盘上创建分区了<br>运行命令 fdsik /dev/sdb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line">Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel</span><br><span class="line">Building a new DOS disklabel with disk identifier 0xd973c790.</span><br><span class="line">Changes will remain <span class="keyword">in</span> memory only, until you decide to write them.</span><br><span class="line">After that, of course, the previous content won<span class="string">'t be recoverable.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING: DOS-compatible mode is deprecated. It'</span>s strongly recommended to</span><br><span class="line">        switch off the mode (<span class="built_in">command</span> <span class="string">'c'</span>) and change display units to</span><br><span class="line">        sectors (<span class="built_in">command</span> <span class="string">'u'</span>).</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): m</span><br><span class="line">Command action</span><br><span class="line">  a   toggle a bootable flag  设定硬盘启动区</span><br><span class="line">  b   edit bsd disklabel    </span><br><span class="line">  c   toggle the dos compatibility flag</span><br><span class="line">  d   delete a partition   删除硬盘分区</span><br><span class="line">  l   list known partition types</span><br><span class="line">  m   <span class="built_in">print</span> this menu    显示所有命令列示</span><br><span class="line">  n   add a new partition  创建新的硬盘分区</span><br><span class="line">  o   create a new empty DOS partition table</span><br><span class="line">  p   <span class="built_in">print</span> the partition table  显示硬盘分区情况</span><br><span class="line">  q   quit without saving changes</span><br><span class="line">  s   create a new empty Sun disklabel</span><br><span class="line">  t   change a partition<span class="string">'s system id  改变硬盘分割区属性</span></span><br><span class="line"><span class="string">  u   change display/entry units</span></span><br><span class="line"><span class="string">  v   verify the partition table</span></span><br><span class="line"><span class="string">  w   write table to disk and exit</span></span><br><span class="line"><span class="string">  x   extra functionality (experts only)</span></span><br></pre></td></tr></table></figure></p>
-<p>根据提示我们输入n 是创建新分区<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Command action</span><br><span class="line">   e   extended   扩展分区 只能有一个</span><br><span class="line">   p   primary partition (1-4)  主分区最多4个 因为我们建的是GPT类型的</span><br><span class="line">``` </span><br><span class="line">我们选p </span><br><span class="line">``` bash</span><br><span class="line"> Command (m <span class="keyword">for</span> <span class="built_in">help</span>): p</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 21.5 GB, 21474836480 bytes</span><br><span class="line">255 heads, 63 sectors/track, 2610 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x7d9e381f</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb2             263        2610    18860310   83  Linux</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Command action</span><br><span class="line">   e   extended   扩展分区</span><br><span class="line">   p   primary partition (1-4) 主分区</span><br><span class="line">e</span><br><span class="line">Partition number (1-4): 1</span><br><span class="line">First cylinder (1-2610, default 1): </span><br><span class="line">Using default value 1</span><br><span class="line">Last cylinder, +cylinders or +size&#123;K,M,G&#125; (1-262, default 262): +500M  选择大小</span><br></pre></td></tr></table></figure></p>
-<p>输入w 存盘退出，退出后我们可以通过以下的命令来查看分区信息</p>
-<ul>
-<li>查看内存的分区信息<br>cat /proc/partitions<br>lsblk<br>ls /dev/sdb*</li>
-<li>查看实际的硬盘分区信息<br>fdisk -l /dev/sdb </li>
-</ul>
-<p>另外还有uuidgen 生成随机数。<br>到此给硬盘的分区就创建完了。<br>还有一个问题就是新增完分区会有警告不能识别，我们通过执行下面命令来同步</p>
-<blockquote>
-<p>centos6 增加分区的时候同步分区表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partx -a /dev/sdb</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>删除分区表的时候同步分区表  num 代表第几块分区表</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partx -d -nr num /dev/sdb</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>cetnos7 比较简单一条命令搞定<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partprobe</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>如何给磁盘贴标签<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb </span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): t</span><br><span class="line">Partition number (1-5): 1</span><br><span class="line">Hex code (<span class="built_in">type</span> L to list codes): L</span><br><span class="line"></span><br><span class="line"> 0  Empty           24  NEC DOS         81  Minix / old Lin bf  Solaris        </span><br><span class="line"> 1  FAT12           39  Plan 9          82  Linux swap / So c1  DRDOS/sec (FAT-</span><br><span class="line"> 2  XENIX root      3c  PartitionMagic  83  Linux           c4  DRDOS/sec (FAT-</span><br><span class="line"> 3  XENIX usr       40  Venix 80286     84  OS/2 hidden C:  c6  DRDOS/sec (FAT-</span><br><span class="line"> 4  FAT16 &lt;32M      41  PPC PReP Boot   85  Linux extended  c7  Syrinx         </span><br><span class="line"> 5  Extended        42  SFS             86  NTFS volume <span class="built_in">set</span> da  Non-FS data    </span><br><span class="line"> 6  FAT16           4d  QNX4.x          87  NTFS volume <span class="built_in">set</span> db  CP/M / CTOS / .</span><br><span class="line"> 7  HPFS/NTFS       4e  QNX4.x 2nd part 88  Linux plaintext de  Dell Utility   </span><br><span class="line"> 8  AIX             4f  QNX4.x 3rd part 8e  Linux LVM       df  BootIt         </span><br><span class="line"> 9  AIX bootable    50  OnTrack DM      93  Amoeba          e1  DOS access     </span><br><span class="line"> a  OS/2 Boot Manag 51  OnTrack DM6 Aux 94  Amoeba BBT      e3  DOS R/O        </span><br><span class="line"> b  W95 FAT32       52  CP/M            9f  BSD/OS          e4  SpeedStor      </span><br><span class="line"> c  W95 FAT32 (LBA) 53  OnTrack DM6 Aux a0  IBM Thinkpad hi eb  BeOS fs        </span><br><span class="line"> e  W95 FAT16 (LBA) 54  OnTrackDM6      a5  FreeBSD         ee  GPT            </span><br><span class="line"> f  W95 Ext<span class="string">'d (LBA) 55  EZ-Drive        a6  OpenBSD         ef  EFI (FAT-12/16/</span></span><br><span class="line"><span class="string">10  OPUS            56  Golden Bow      a7  NeXTSTEP        f0  Linux/PA-RISC b</span></span><br><span class="line"><span class="string">11  Hidden FAT12    5c  Priam Edisk     a8  Darwin UFS      f1  SpeedStor      </span></span><br><span class="line"><span class="string">12  Compaq diagnost 61  SpeedStor       a9  NetBSD          f4  SpeedStor      </span></span><br><span class="line"><span class="string">14  Hidden FAT16 &lt;3 63  GNU HURD or Sys ab  Darwin boot     f2  DOS secondary  </span></span><br><span class="line"><span class="string">16  Hidden FAT16    64  Novell Netware  af  HFS / HFS+      fb  VMware VMFS    </span></span><br><span class="line"><span class="string">17  Hidden HPFS/NTF 65  Novell Netware  b7  BSDI fs         fc  VMware VMKCORE </span></span><br><span class="line"><span class="string">18  AST SmartSleep  70  DiskSecure Mult b8  BSDI swap       fd  Linux raid auto</span></span><br><span class="line"><span class="string">1b  Hidden W95 FAT3 75  PC/IX           bb  Boot Wizard hid fe  LANstep        </span></span><br><span class="line"><span class="string">1c  Hidden W95 FAT3 80  Old Minix       be  Solaris boot    ff  BBT            </span></span><br><span class="line"><span class="string">1e  Hidden W95 FAT1</span></span><br><span class="line"><span class="string">Hex code (type L to list codes): 8e</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>这会给你分区贴了标签代表这块分区类型，常见的有8e 逻辑卷，fd raid，83 Linux，82 交换分区。</p>
-<h1 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h1><p>  “文件系统”的主语是“文件”，那么文件系统的意思就是“用于管理文件的(管理)系统”，而这套管理系统所管理的对象当然就是文件了。在大多数操作系统里，“文件是数据的集合”这个基本点是一致的，而这些数据最终都是存储在存储介质里，如硬盘、光盘、U盘等。<br>  另一方面，用户在管理数据时也是文件为基本单位，他们所关心的问题是：</p>
-<p>  1、我的文件在什么地方放着？<br>  2、我如何将数据存入某个文件？<br>  3、如何从文件里将数据读出来？<br>  4、不再需要的文件怎么将其删除？</p>
-<p>  简而言之，文件系统就是一套用于定义文件的命名和组织数据的规范，其根本目的是便对文件进行查询和存取。</p>
-<p>  Unix/Linux系统中的文件系统有个很重要的特性就挂载，即文件系统在使用前必须被挂载在一个实际的目录下才能使用，这是因为类Unix系统中的文件系统都遵循了FHS(Filesystem Hierarchy Standard)。在FHS中详细定义了类Unix操作系统中各种应用软件、管理工具、开发工具、脚本和帮助文件所处的位置。这样，通过该标准，软件发布商和用户在不同的发行版的linux系统里都能预测软件安装后，文件和目录所处的位置。</p>
-<p> 文件系统为了实现对文件更好的管理、组织方式，引入了目录的概念。目录里不但可以保存文件还可以保存目录，以目录为依托，最终会形成一个目录树的结构.<br>如果我们将一块硬盘格式化成ext3或ext4格式后，通过mount命令将其挂载到根目录下，就形成了我们通常所说的“根文件系统”。根文件系统不是一个新实体，而是指挂载在根目录下的存储设备(或某个分区)实际所使用的文件系统类型。当“根文件系统”被挂载后，内存中就有了如上所示的目录结构树。这里提醒一点，千万不要以为你在命令行输入“cd /usr/src/”等命令时是在“操作”硬盘，其实你是在内存的VFS的目录树里。这里就不展开了，后面剖析VFS时再详细介绍。作为用户在使用文件系统时，对于某个具体的存储设备，例如U盘或硬盘，无非是首先执行诸如mk2fs或mkfs.xxx这样的命令对存储设备进行格式化，将其格式化成某种类型的文件系统，然后用mount命令将该存设备挂载到某个具体的目录下，然后对该目录下的文件进行“增、删、改、查”就可以实现对该存储设备上数据的操作。</p>
-<p>所谓文件系统就是操作系统用来明确磁盘或分区上的文件以及数据结构的一种方法，也就是磁盘上文件的组织方法。普通用户所看到的文件系统，是以目录结构而存在的一个多级分层的树状结构，但作为开发人员我们得知道其实每个目录下都可以挂载不同类型的文件系统。最后一点是，每个文件系统可以占用磁盘的一个分区，而不是整个硬盘，这一点请注意。VFS并不是一个实际的文件系统，它是类Unix操作系统给我们提供的一种用于统一管理具体文件系统的机制。当我们要开发一种新的文件系统时，需要遵照VFS的规范，才能享受VFS带来的好处。</p>
-<blockquote>
-<p>Linux文件系统分类：</p>
-</blockquote>
-<ol>
-<li>ext2(Extended file system) :适用于那些分区容量不是太大，更新也不频繁的情况，<br>例如 /boot 分区。</li>
-<li>ext3:是 ext2 的改进版本，其支持日志功能，能够帮助系统从非正常关机导致的异常中<br>恢复。它通常被用作通用的文件系统</li>
-<li>ext4:是 ext 文件系统的最新版。提供了很多新的特性，包括纳秒级时间戳、创建和使<br>用巨型文件(16TB)、最大1EB的文件系统，以及速度的提升</li>
-<li>xfs：SGI，支持最大8EB的文件系统</li>
-<li>btrfs（Oracle）, reiserfs, jfs（AIX）, swap</li>
-<li>光盘：iso9660</li>
-<li>Windows：FAT32, exFAT,NTFS</li>
-<li>Unix: FFS（fast）, UFS（unix）, JFS2</li>
-<li>网络文件系统：NFS, CIFS</li>
-<li>集群文件系统：GFS2, OCFS2（oracle）</li>
-<li>分布式文件系统： fastdfs,ceph, moosefs, mogilefs, glusterfs, Lustre</li>
-<li><p>RAW：未经处理或者未经格式化产生的文件系统</p>
-<blockquote>
-<p>创建文件系统</p>
-</blockquote>
-<p>　格式化与挂载: (挂载目录可以自行创建也可指定存在的空目录)<br>　　mksf.ext3 /dev/sdb1 把第二块硬盘的第一个主分区格式化为ext3<br>或者<br>mkfs -t ext3 /dev/sdb1<br>-L ‘LABEL’: 设定卷标</p>
-<ul>
-<li>mke2fs<br>mke2fs：ext系列文件系统专用管理工具<br>-t {ext2|ext3|ext4}<br>-b {1024|2048|4096}<br>-L ‘LABEL’<br>-j: 相当于 -t ext3<br>mkfs.ext3 = mkfs -t ext3 = mke2fs -j = mke2fs -t ext3<br>-i #: 为数据空间中每多少个字节创建一个inode；此大小不应该小于<br>block的大小<br>-N #：指定分区中创建多少个inode<br>-I 一个inode记录占用的磁盘空间大小，128—4096<br>-m #: 默认5%,为管理人员预留空间占总空间的百分比<br>-O FEATURE[,…]：启用指定特性<br>-O ^FEATURE：关闭指定特性<br>　　mkswap /dev/sdb2 初始化swap区，此区不可格式化。<blockquote>
-<p>文件系统标签</p>
-</blockquote>
-</li>
-</ul>
-<p>指向设备的另一种方法</p>
-</li>
-</ol>
-<ul>
-<li>与设备无关</li>
-<li>blkid：块设备属性信息查看<br>blkid [OPTION]… [DEVICE]<br>-U UUID: 根据指定的UUID来查找对应的设备<br>-L LABEL：根据指定的LABEL来查找对应的设备</li>
-<li>e2label：管理ext系列文件系统的LABEL<br>e2label DEVICE [LABEL]</li>
-<li>findfs ：查找分区<br>findfs [options] LABEL=<label><br>findfs [options] UUID=<uuid><br>tune2fs</uuid></label></li>
-<li>tune2fs：重新设定ext系列文件系统可调整参数的值<br>-l：查看指定文件系统超级块信息；super block<br>-L ‘LABEL’：修改卷标<br>-m #：修预留给管理员的空间百分比<br>-j: 将ext2升级为ext3<br>-O: 文件系统属性启用或禁用, –O ^has_journal<br>-o: 调整文件系统的默认挂载选项，–o ^acl<br>-U UUID: 修改UUID号</li>
-<li><p>dumpe2fs：<br>块分组管理，32768块<br>-h：查看超级块信息，不显示分组信息</p>
-<blockquote>
-<p>文件系统检测和修复</p>
-</blockquote>
-<p>常发生于死机或者非正常关机之后</p>
-</li>
-<li>挂载为文件系统标记为“no clean”</li>
-<li>注意：一定不要在挂载状态下修复</li>
-<li>fsck: File System Check<br>fsck.FS_TYPE<br>fsck -t FS_TYPE<br>-p: 自动修复错误<br>-r: 交互式修复错误<br>FS_TYPE一定要与分区上已经文件类型相同</li>
-<li>e2fsck：ext系列文件专用的检测修复工具<br>-y：自动回答为yes<br>-f：强制修复<h1 id="挂载设备"><a href="#挂载设备" class="headerlink" title="挂载设备"></a>挂载设备</h1>　　mount /dev/sdb1 /mnt/d #将第一个分区挂载到d这个目录<br>　　重启后自动挂载：vi /etc/fstab<br>　　添加：/dev/sdb1（这里最好写设备的UUID） /mnt/d ext3 default 0 0</li>
-</ul>
-
-                          
-
-                            
-                              <div class="page-reward">
-                                <a href="javascript:;" class="page-reward-btn tooltip-top">
-                                  <div class="tooltip tooltip-east">
-                                    <span class="tooltip-item">
-                                      赏
-                                    </span>
-                                    <span class="tooltip-content">
-                                      <span class="tooltip-text">
-                                        <span class="tooltip-inner">
-                                          <p class="reward-p">
-                                            <i class="icon icon-quo-left"></i>
-                                            您的支持是我最大的努力
-                                              <i class="icon icon-quo-right"></i>
-                                          </p>
-                                          <div class="reward-box">
-                                            
-                                              <div class="reward-box-item">
-                                                <img class="reward-img" src="/assets/img/alipay.jpg">
-                                                <span class="reward-type">支付宝</span>
-                                              </div>
-                                              
-                                                
-                                                  <div class="reward-box-item">
-                                                    <img class="reward-img" src="/assets/img/webchatpay.jpg">
-                                                    <span class="reward-type">微信</span>
-                                                  </div>
-                                                  
-                                          </div>
-                                        </span>
-                                      </span>
-                                    </span>
-                                  </div>
-                                </a>
-                              </div>
-                              
-            </div>
-            <div class="article-info article-info-index">
-              
-                  
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">磁盘管理</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">定时任务</a>
         		</li>
       		
 		</ul>
 	</div>
 
-                    
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -431,127 +205,19 @@
 	</div>
 
 
-                      
-
-                          
-                            
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://michaelfxh.github.io/2018/08/16/磁盘管理/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-                              
-                                <div class="clearfix"></div>
-            </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/08/19/linuxswap分区/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Swap分区
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/08/14/linuxvim/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vim 命令</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
     
-      <aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘分类结构"><span class="toc-number">1.</span> <span class="toc-text">磁盘分类结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要给磁盘分区"><span class="toc-number">2.</span> <span class="toc-text">为什么要给磁盘分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#给磁盘分区"><span class="toc-number">3.</span> <span class="toc-text">给磁盘分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建文件系统"><span class="toc-number">4.</span> <span class="toc-text">创建文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#挂载设备"><span class="toc-number">5.</span> <span class="toc-text">挂载设备</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
 
 
-        
-          
-
-                
-
-                      
-
-                            
-
-                                
-                                      
               </div>
             </div>
           </div>
@@ -575,9 +241,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
