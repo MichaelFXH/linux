@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行，下面主要介绍shell 判断，循环，数组以及函数的使用。初级shell:初级shell">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-04T08:23:17.685Z">
+<meta property="og:updated_time" content="2018-09-04T16:54:44.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell进阶">
 <meta name="twitter:description" content="shell是操作系统提供给我们的一种语言，用来将用户的命令输送到内核中执行，下面主要介绍shell 判断，循环，数组以及函数的使用。初级shell:初级shell">
@@ -279,11 +279,11 @@
 <li><p>编写服务脚本/root/bin/testsrv.sh，完成如下要求<br>(1) 脚本可接受参数：start, stop, restart, status<br>(2) 如果参数非此四者之一，提示使用格式后报错退出<br>(3) 如是start:则创建/var/lock/subsys/SCRIPT_NAME, 并显示“启动成功”<br>考虑：如果事先已经启动过一次，该如何处理？<br>(4) 如是stop:则删除/var/lock/subsys/SCRIPT_NAME, 并显示“停止完成”<br>考虑：如果事先已然停止过了，该如何处理？<br>(5) 如是restart，则先stop, 再start<br>考虑：如果本来没有start，如何处理？<br>(6) 如是status, 则如果/var/lock/subsys/SCRIPT_NAME文件存在，则显示“SCRIPT_NAME is<br>running…”<br>如果/var/lock/subsys/SCRIPT_NAME文件不存在，则显示“SCRIPT_NAME is stopped…”<br>其中：SCRIPT_NAME为当前脚本名<br>(7)在所有模式下禁止启动该服务，可用chkconfig 和 service命令管理</p>
 </li>
 <li><p>编写脚本/root/bin/copycmd.sh<br>(1) 提示用户输入一个可执行命令名称<br>(2) 获取此命令所依赖到的所有库文件列表<br>(3) 复制命令至某目标目录(例如/mnt/sysroot)下的对应路径下<br>如：/bin/bash ==&gt; /mnt/sysroot/bin/bash<br>/usr/bin/passwd ==&gt; /mnt/sysroot/usr/bin/passwd<br>(4) 复制此命令依赖到的所有库文件至目标目录下的对应路径下： 如：/lib64/ldlinux-x86-64.so.2<br>==&gt; /mnt/sysroot/lib64/ld-linux-x86-64.so.2<br>(5)每次复制完成一个命令后，不要退出，而是提示用户键入新的要复制的命令，<br>并重复完成上述功能；直到用户输入quit退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">copyCmd</span></span>()&#123;</span><br><span class="line">  cpCmd=`<span class="built_in">which</span> <span class="variable">$cmd</span>`</span><br><span class="line">  cp <span class="variable">$cpCmd</span> /mnt/sysroot</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">copyResult</span></span>()&#123;</span><br><span class="line"> <span class="built_in">echo</span> <span class="variable">$cmd</span></span><br><span class="line">  <span class="keyword">for</span> libfile <span class="keyword">in</span> $( ldd $(<span class="built_in">which</span> <span class="string">"<span class="variable">$cmd</span>"</span> | grep -v <span class="string">"alias"</span> ) | grep -o <span class="string">"/lib[^[:space:]]*"</span>);</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">      cp <span class="variable">$libfile</span> /mnt/sysroot/</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span> <span class="built_in">read</span> -p <span class="string">"请输入一个可执行的命令："</span> cmd;<span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">"<span class="variable">$cmd</span>"</span> = <span class="string">"quit"</span> ];<span class="keyword">then</span></span><br><span class="line">   <span class="built_in">break</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="built_in">which</span> <span class="variable">$cmd</span> &amp;&gt; /dev/null</span><br><span class="line">  <span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">   <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ ! -d <span class="string">"/mnt/sysroot/"</span> ];<span class="keyword">then</span></span><br><span class="line">    mkdir -p /mnt/sysroot/</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">   copyCmd --复制命令</span><br><span class="line">   copyResult --复制依赖库文件</span><br><span class="line"> <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编写函数实现两个数字做为参数，返回最大值</p>
 </li>
-<li><p>斐波那契数列又称黄金分割数列，因数学家列昂纳多·斐波那契以兔子繁殖为例<br>子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、<br>8、13、21、34、……，斐波纳契数列以如下被以递归的方法定义：F（0）=0，<br>F（1）=1，F（n）=F(n-1)+F(n-2)（n≥2）利用函数，求n阶斐波那契数列</p>
-</li>
+<li>斐波那契数列又称黄金分割数列，因数学家列昂纳多·斐波那契以兔子繁殖为例<br>子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、<br>8、13、21、34、……，斐波纳契数列以如下被以递归的方法定义：F（0）=0，<br>F（1）=1，F（n）=F(n-1)+F(n-2)（n≥2）利用函数，求n阶斐波那契数列</li>
 </ol>
 
                           
@@ -685,11 +685,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,6 +698,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,10 +722,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">tcp三次握手</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
               <li class="article-tag-list-item">
