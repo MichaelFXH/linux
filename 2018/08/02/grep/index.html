@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>grep使用 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
 <meta name="keywords" content="grep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grep使用">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/08/02/grep/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T03:35:51.229Z">
+<meta property="og:updated_time" content="2018-09-11T08:08:32.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grep使用">
-<meta name="twitter:description" content="Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;Linux  文本处理三剑客之一，Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则模式：由正则表达式字符及文本字符所编写的过滤条件.">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -204,7 +204,7 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p>Linux  文本处理三剑客之一，<br>Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。<br>REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则<br>模式：由正则表达式字符及文本字符所编写的过滤条件.</p>
+                        <blockquote><p>&nbsp;&nbsp;&nbsp;Linux  文本处理三剑客之一，<br>Grep 是文本过滤工具,根据用户指定的模式对目标文本逐行进行匹配检查；最后打印匹配到的行。<br>REGEXP是由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符字面意义，而表示控制或通配的功能，分为BRE基本正则 跟 ERE扩展正则<br>模式：由正则表达式字符及文本字符所编写的过滤条件.</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="一、grep-基本用法"><a href="#一、grep-基本用法" class="headerlink" title="一、grep 基本用法"></a>一、grep 基本用法</h1> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   grep [options]  pattern  [file...]</span><br><span class="line">例子：grep root /etc/passwd </span><br><span class="line">在passwd文件中搜索当前用户也可以写成下面格式</span><br><span class="line">grep <span class="string">"<span class="variable">$USER</span>"</span> /etc/passwd 搜索结果 root:x:0:0:root:/root:/bin/bash</span><br><span class="line">grep ‘<span class="variable">$USER</span>’ /etc/passwd 如果写成单引号模式他将把<span class="variable">$USER</span>当做字符串而不是变量来搜索，所以结果为空</span><br><span class="line">pattern 除了可以用变量也可以用命令比如：</span><br><span class="line">grep `whoami` /etc/passwd</span><br></pre></td></tr></table></figure>
@@ -554,11 +554,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">awk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,7 +578,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,22 +590,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
@@ -602,15 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,7 +606,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +614,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,23 +630,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,6 +667,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">tcp三次握手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
