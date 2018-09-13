@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-11T09:35:26.887Z">
+<meta property="og:updated_time" content="2018-09-11T09:44:11.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awk">
 <meta name="twitter:description" content="awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。">
@@ -282,7 +282,7 @@
 <p>substr<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;info="this is a test2010test!";print substr(info,4,10);&#125;'</span></span><br><span class="line">s is a tes</span><br></pre></td></tr></table></figure></p>
 <h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><ol>
 <li><p>cat /etc/fstab 统计下文件系统的数量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/^UUID/&#123;print $3&#125;'</span> /etc/fstab |sort|uniq -c</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/^UUID/&#123;print $3&#125;'</span> /etc/fstab |sort|uniq -c</span><br><span class="line">awk <span class="string">'&#123;for(i=1;i&lt;=NF;i++)word[$i]++&#125;END&#123;for (i in word)&#123;print i,word[i]&#125;&#125;'</span> /etc/fstab</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>netstat -nt 每个ip连接次数统计  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nt|awk -F<span class="string">" +|:"</span> <span class="string">'/^tcp/&#123;print $6&#125;'</span>|sort|uniq -c</span><br></pre></td></tr></table></figure>
@@ -291,7 +291,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df |awk -F<span class="string">" +|%"</span> <span class="string">'/^\/dev/sd/&#123;if($5&gt;5)&#123;print $5;print full&#125;'</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>日志文件access_log访问ip次数大于1000的 加到防火墙里。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;print $1&#125;'</span> /var/<span class="built_in">log</span>/httpd/access_log |sort |uniq -c |sort -nr</span><br><span class="line">|awk &#123;<span class="keyword">if</span>(<span class="variable">$1</span>)&gt;1000 <span class="built_in">print</span> <span class="variable">$2</span>&#125;|<span class="keyword">while</span> <span class="built_in">read</span> ip;iptables -I INPUT -s <span class="variable">$ip</span> -j DROP;  <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;ip[$1]++&#125;END&#123;for( i in ip)&#123;if(ip[i]&gt;=1000)system("iptables -A INPUT -s "i" -j REJECT")&#125;&#125;'</span> /var/<span class="built_in">log</span>/httpd/access_log</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>计算1到100的和</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;sum=0;for(i=1;i&lt;=100;i++)&#123;sum+=i&#125;print sum&#125;'</span></span><br></pre></td></tr></table></figure>
@@ -299,7 +299,14 @@
 <li><p>打印奇数<br>seq 10 |awk ‘i=!i’</p>
 </li>
 <li>打印偶数<br>seq 10 |awk -v i=1 ‘i=!i’</li>
-<li>取出磁盘利用率的3种方式<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk <span class="string">'&#123;print $1,$5&#125;'</span> |awk  -F% <span class="string">'&#123;print $1&#125;'</span></span><br><span class="line"></span><br><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk -F<span class="string">'[ %]+'</span> <span class="string">'&#123;print $1,$5&#125;'</span>  </span><br><span class="line"></span><br><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk -F<span class="string">' +|%'</span> <span class="string">'&#123;print $1,$5&#125;'</span></span><br></pre></td></tr></table></figure></li>
+<li><p>取出磁盘利用率的3种方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk <span class="string">'&#123;print $1,$5&#125;'</span> |awk  -F% <span class="string">'&#123;print $1&#125;'</span></span><br><span class="line"></span><br><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk -F<span class="string">'[ %]+'</span> <span class="string">'&#123;print $1,$5&#125;'</span>  </span><br><span class="line"></span><br><span class="line">df |grep <span class="string">"^/dev/sd"</span>|awk -F<span class="string">' +|%'</span> <span class="string">'&#123;print $1,$5&#125;'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>算出每个性别的平均成绩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'!/^name/&#123;if($3=="m")&#123;score_m+=$2;number_m++&#125;else&#123;score_f+=$2;number_f++&#125;&#125;END&#123;print "avg_m="score_m/number_m,"avg_f="score_f/number_f&#125;'</span> score.txt</span><br><span class="line">avg_m=96.3333 avg_f=98.5</span><br><span class="line">awk <span class="string">'NR!=1&#123;score[$3]+=$2;num[$3]++&#125;END&#123;for(sex in num)&#123;print sex":avg="score[sex]/num[sex]&#125;&#125;'</span> score.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>算出最大值最小值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F<span class="string">","</span> <span class="string">'&#123;max=$1;min=$1;i=2;while(i&lt;=NF)&#123;if($i&gt;max)&#123;max=$i&#125;;if($i&lt;min)&#123;min=$i&#125;;i++;&#125;&#125;END&#123;print "max="max,"min="min&#125;'</span> f1.txt</span><br></pre></td></tr></table></figure></li>
 </ol>
 
                           
@@ -434,7 +441,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          selinux
+          SELinux
         
       </div>
     </a>
@@ -650,11 +657,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,19 +669,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +681,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,11 +689,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,11 +705,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,7 +717,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,7 +725,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,7 +737,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -743,10 +766,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,11 +785,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
             
             <div class="clearfix"></div>

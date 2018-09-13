@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
-  <title>selinux | </title>
+  <title>SELinux | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="selinux">
+  <meta name="description" content="用户权限管理中，分为root账户跟普通账户，这2中身份能否有访问资源的权限，取决于rwx的配置，不过要注意各种配置对root是无效的，当某个程序要对文件进行存取时，系统就会根据该程序的所属者，所属主判断文件的权限，如果权限通过就可以存取该文件了。这种存取文件系统的方式称为 DAC：Discretionary Access Control自由访问控制，基本上就是依据程序的拥有者与文件资源的rwx权限">
+<meta name="keywords" content="SELinux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SELinux">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/09/11/selinux/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="用户权限管理中，分为root账户跟普通账户，这2中身份能否有访问资源的权限，取决于rwx的配置，不过要注意各种配置对root是无效的，当某个程序要对文件进行存取时，系统就会根据该程序的所属者，所属主判断文件的权限，如果权限通过就可以存取该文件了。这种存取文件系统的方式称为 DAC：Discretionary Access Control自由访问控制，基本上就是依据程序的拥有者与文件资源的rwx权限">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-11T08:08:08.476Z">
+<meta property="og:updated_time" content="2018-09-13T14:17:55.462Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="selinux">
+<meta name="twitter:title" content="SELinux">
+<meta name="twitter:description" content="用户权限管理中，分为root账户跟普通账户，这2中身份能否有访问资源的权限，取决于rwx的配置，不过要注意各种配置对root是无效的，当某个程序要对文件进行存取时，系统就会根据该程序的所属者，所属主判断文件的权限，如果权限通过就可以存取该文件了。这种存取文件系统的方式称为 DAC：Discretionary Access Control自由访问控制，基本上就是依据程序的拥有者与文件资源的rwx权限">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -155,7 +159,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      selinux
+      SELinux
     </h1>
   
 
@@ -173,10 +177,127 @@
       
         <!-- 目录内容 -->
         
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+          </p>
+          <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是SELinux"><span class="toc-number">1.</span> <span class="toc-text">什么是SELinux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux工作类型"><span class="toc-number">2.</span> <span class="toc-text">SELinux工作类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安全上下文"><span class="toc-number">3.</span> <span class="toc-text">安全上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关命令"><span class="toc-number">4.</span> <span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux文件安全标签"><span class="toc-number">5.</span> <span class="toc-text">SELinux文件安全标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例：httpd-默认的目录是-var-www-html-如果我想改成-data-目录"><span class="toc-number">5.1.</span> <span class="toc-text">实例：httpd 默认的目录是/var/www/html 如果我想改成/data/ 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux端口标签"><span class="toc-number">6.</span> <span class="toc-text">SELinux端口标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例修改httpd-默认的端口"><span class="toc-number">6.1.</span> <span class="toc-text">实例修改httpd 默认的端口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理SELinux布尔值开关"><span class="toc-number">7.</span> <span class="toc-text">管理SELinux布尔值开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理日志"><span class="toc-number">8.</span> <span class="toc-text">管理日志</span></a></li></ol>
+          </div>
+          <script type="text/javascript">
+            function showToc() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:block");
+              show_toc_btn.setAttribute("style", "display:none");
+            };
+            function showBtn() {
+              var toc_article = document.getElementById("toc-article");
+              var show_toc_btn = document.getElementById("show-toc-btn");
+              toc_article.setAttribute("style", "display:none");
+              show_toc_btn.setAttribute("style", "display:block");
+            };
+          </script>
+          
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        
+                        <blockquote><p>用户权限管理中，分为root账户跟普通账户，这2中身份能否有访问资源的权限，取决于rwx的配置，不过要注意各种配置对root是无效的，当某个程序要对文件进行存取时，系统就会根据该程序的所属者，所属主判断文件的权限，如果权限通过就可以存取该文件了。<br>这种存取文件系统的方式称为 DAC：Discretionary Access Control自由访问控制，基本上就是依据程序的拥有者与文件资源的rwx权限来决定有无存取权限。不过DAC有些弊端，大概有2种情况：</p>
+<ol>
+<li>root 具有最高权限，如果root 账号被盗，那么后果很糟糕</li>
+<li>如果不小心把某一文件权限设置成777，那么该目录任何人都可以任意存取。<br>这些问题非常严重， 因此我们使用 MAC：Mandatory Access Control 强制访问控制 来解决这些问题。</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是SELinux"><a href="#什么是SELinux" class="headerlink" title="什么是SELinux"></a>什么是SELinux</h1><p>SELinux是美国国家安全局(NSA=The NationalSecurity Agency)和SCC(Secure Computing Corporation)开发的 Linux的一<br>个强制访问控制的安全模块。2000年以GNU GPL发布，Linux内核2.6版本后集成在内核中</p>
+<p>举例来默认情况下，httpd仅能在 /var/www/ 这个目录底下存取文件，如果 httpd 这个程序想要到其他目录去存取数据时， 除了配置要开放外，目标目录也得要配置成 httpd 可读取的模式 (type) 才行！限制非常多！ 所以，即使不小心 httpd 被 cracker 取得了控制权，他也无权浏览 /etc/shadow 等重要的配置！</p>
+<h1 id="SELinux工作类型"><a href="#SELinux工作类型" class="headerlink" title="SELinux工作类型"></a>SELinux工作类型</h1><p>SELinux有四种工作类型：</p>
+<ol>
+<li>strict: centos5,每个进程都受到selinux的控制</li>
+<li>targeted: 用来保护常见的网络服务,仅有限进程受到selinux控制，只监控容<br>易被入侵的进程，centos4只保护13个服务，centos5保护88个服务</li>
+<li>minimum：centos7,修改的targeted，只对选择的网络服务</li>
+<li>mls:提供MLS（多级安全）机制的安全性<br>targeted为默认类型，minimum和mls稳定性不足，未加以应用，strict已不再<br>使用<h1 id="安全上下文"><a href="#安全上下文" class="headerlink" title="安全上下文"></a>安全上下文</h1>传统Linux，一切皆文件，由用户，组，权限控制访问</li>
+<li>在SELinux中，一切皆对象（object），由存放在inode的扩展属性域的安全元<br>素所控制其访问</li>
+<li>所有文件和端口资源和进程都具备安全标签：安全上下文（security context）<br>安全上下文有五个元素组成：</li>
+<li>user:role:type:sensitivity:category</li>
+<li>user_u:object_r:tmp_t:s0:c0</li>
+<li>实际上下文：存放在文件系统中，ls –Z;ps –Z</li>
+<li>期望(默认)上下文：存放在二进制的SELinux策略库（映射目录和期望安全上下<br>文）中。</li>
+</ol>
+<p>说明五个安全元素</p>
+<ol>
+<li>User：指示登录系统的用户类型,进程：如system_u为系统服务进程，是受到管<br>制的，unconfined_u为不管制的进程，用户自己开启的，如 bash，文件：<br>system_u系统进程创建的文件， unconfined_u为用户自已创建的文件</li>
+<li>Role：定义文件，进程和用户的用途：进程：system_r为系统服务进程，受到<br>管制。unconfined_r 为不管制进程，通常都是用户自己开启的，如 bash，文<br>件:object_r</li>
+<li>Type：指定数据类型，规则中定义何种进程类型访问何种文件Target策略基于<br>type实现,多服务共用：public_content_t</li>
+<li>Sensitivity：限制访问的需要，由组织定义的分层安全级别，如<br>unclassified,secret,top,secret, 一个对象有且只有一个sensitivity,分0-15级，<br>s0最低,Target策略默认使用s0</li>
+<li>Category：对于特定组织划分不分层的分类，如FBI Secret，NSA secret, 一个<br>对象可以有多个categroy， c0-c1023共1024个分类， Target 策略不使用<br>category<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1></li>
+<li>获取selinux当前状态<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getenforce</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>查看selinux状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sestatus</span><br></pre></td></tr></table></figure></p>
+<p>设置selinux模式<br>setenforce 0|1<br>0: 设置为permissive<br>1: 设置为enforcing</p>
+<p>配置文件<br>/boot/grub/grub.conf<br>在kernel行使用selinux=0禁用SELinux<br>/etc/sysconfig/selinux<br>SELINUX={disabled|enforcing|permissive}</p>
+<p>centos6 安装semanage<br>yum provides /usr/sbin/semanage<br>yum install policycoreutils-python-2.0.83-30.1.el6_8.x86_64</p>
+<h1 id="SELinux文件安全标签"><a href="#SELinux文件安全标签" class="headerlink" title="SELinux文件安全标签"></a>SELinux文件安全标签</h1><p> chcon [OPTION]… [-u USER] [-r ROLE] [-t TYPE] FILE…<br> 修改文件标签<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -t var_log_t /var/<span class="built_in">log</span>/messages</span><br></pre></td></tr></table></figure></p>
+<p> 重新启动使用这个文件的服务<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart rsyslog</span><br></pre></td></tr></table></figure></p>
+<p> 也可以参考一个文件改另外一个文件<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon --reference /var/<span class="built_in">log</span>/messages /data/f1.txt</span><br></pre></td></tr></table></figure></p>
+<h2 id="实例：httpd-默认的目录是-var-www-html-如果我想改成-data-目录"><a href="#实例：httpd-默认的目录是-var-www-html-如果我想改成-data-目录" class="headerlink" title="实例：httpd 默认的目录是/var/www/html 如果我想改成/data/ 目录"></a>实例：httpd 默认的目录是/var/www/html 如果我想改成/data/ 目录</h2><ol>
+<li>向策略中新增一条规则<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -a -t  httpd_sys_content_t <span class="string">'/data(/.*)?'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>查看data 目录的策略</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext –l|grep <span class="string">"/data"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由于策略里数据库里已经有了data目录了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restorecon –Rv /data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看是否生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll -Z /data -d</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果要删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -d –t httpd_sys_content_t <span class="string">'/data(/.*)?'</span></span><br></pre></td></tr></table></figure></p>
+<p>selinux 的配置文件在 /etc/selinux 中。</p>
+<h1 id="SELinux端口标签"><a href="#SELinux端口标签" class="headerlink" title="SELinux端口标签"></a>SELinux端口标签</h1><ol>
+<li><p>查看端口标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port –l</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">semanage port -a -t port_label -p tcp|udp PORT</span><br><span class="line">semanage port -a -t http_port_t -p tcp 9527</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">semanage port -d -t port_label -p tcp|udp PORT</span><br><span class="line">semanage port -d -t http_port_t -p tcp 9527</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改现有端口为新标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">semanage port -m -t port_label -p tcp|udp PORT</span><br><span class="line">semanage port -m -t http_port_t -p tcp 9527</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="实例修改httpd-默认的端口"><a href="#实例修改httpd-默认的端口" class="headerlink" title="实例修改httpd 默认的端口"></a>实例修改httpd 默认的端口</h2><ol>
+<li><p>查看http端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port -l|grep http</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改http默认端口为9527</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增9527端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port -a -t http_port_t -p tcp 9527</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启http服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="管理SELinux布尔值开关"><a href="#管理SELinux布尔值开关" class="headerlink" title="管理SELinux布尔值开关"></a>管理SELinux布尔值开关</h1><p>查看bool命令：<br>getsebool [-a] [boolean]<br>semanage boolean –l<br>semanage boolean -l –C 查看修改过的布尔值<br>设置bool值命令：<br>setsebool [-P] boolean value（on,off）<br>setsebool [-P] Boolean=value（0，1）<br>-P 表示又改当前状态，也改数据库<br>比如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setsebool -P samba_enable_home_dirs on</span><br></pre></td></tr></table></figure></p>
+<h1 id="管理日志"><a href="#管理日志" class="headerlink" title="管理日志"></a>管理日志</h1><p>yum install setroubleshoot（重启生效）</p>
+<ol>
+<li>将错误的信息写入/var/log/message<br>grep setroubleshoot /var/log/messages</li>
+<li>查看安全事件日志说明<br>sealert -l UUID</li>
+<li>扫描并分析日志<br>sealert -a /var/log/audit/audit.log</li>
+</ol>
+<p>写入日志<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger <span class="string">"messages"</span></span><br></pre></td></tr></table></figure></p>
+<p>监控日志<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/<span class="built_in">log</span>/messages</span><br></pre></td></tr></table></figure></p>
+
                           
 
                             
@@ -219,7 +340,29 @@
             <div class="article-info article-info-index">
               
                   
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
                     
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
                       
 
@@ -283,6 +426,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/09/12/加密安全/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          加密安全
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/09/11/awk/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">awk</div>
@@ -304,6 +456,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是SELinux"><span class="toc-number">1.</span> <span class="toc-text">什么是SELinux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux工作类型"><span class="toc-number">2.</span> <span class="toc-text">SELinux工作类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安全上下文"><span class="toc-number">3.</span> <span class="toc-text">安全上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关命令"><span class="toc-number">4.</span> <span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux文件安全标签"><span class="toc-number">5.</span> <span class="toc-text">SELinux文件安全标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例：httpd-默认的目录是-var-www-html-如果我想改成-data-目录"><span class="toc-number">5.1.</span> <span class="toc-text">实例：httpd 默认的目录是/var/www/html 如果我想改成/data/ 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux端口标签"><span class="toc-number">6.</span> <span class="toc-text">SELinux端口标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例修改httpd-默认的端口"><span class="toc-number">6.1.</span> <span class="toc-text">实例修改httpd 默认的端口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理SELinux布尔值开关"><span class="toc-number">7.</span> <span class="toc-text">管理SELinux布尔值开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理日志"><span class="toc-number">8.</span> <span class="toc-text">管理日志</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -481,11 +646,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,19 +658,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +670,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,11 +678,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,11 +694,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,7 +706,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +714,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,7 +726,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,10 +755,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,11 +774,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
             
             <div class="clearfix"></div>
