@@ -8,15 +8,18 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>sudo | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="sudo">
+  <meta name="description" content="sudo命令用来以其他身份来执行命令，预设的身份为root。在/etc/sudoers中设置了可执行sudo指令的用户。若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。">
+<meta name="keywords" content="sudo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sudo">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/09/17/sudo/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="sudo命令用来以其他身份来执行命令，预设的身份为root。在/etc/sudoers中设置了可执行sudo指令的用户。若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-17T09:27:26.234Z">
+<meta property="og:updated_time" content="2018-09-17T15:20:30.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sudo">
+<meta name="twitter:description" content="sudo命令用来以其他身份来执行命令，预设的身份为root。在/etc/sudoers中设置了可执行sudo指令的用户。若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -181,7 +184,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sudo使用"><span class="toc-number">1.</span> <span class="toc-text">sudo使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo别名"><span class="toc-number">1.1.</span> <span class="toc-text">sudo别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选项"><span class="toc-number">1.2.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#日志与安全"><span class="toc-number">2.</span> <span class="toc-text">日志与安全</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -201,7 +204,32 @@
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        
+                        <blockquote><p>sudo命令用来以其他身份来执行命令，预设的身份为root。在/etc/sudoers中设置了可执行sudo指令的用户。若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="sudo使用"><a href="#sudo使用" class="headerlink" title="sudo使用"></a>sudo使用</h1><p>配置文件：/etc/sudoers, /etc/sudoers.d/<br>用户 登入主机=(代表用户) 命令<br>root ALL=(ALL) ALL<br>格式说明：<br>user: 运行命令者的身份<br>host: 通过哪些主机<br>(runas)：以哪个用户的身份<br>command: 运行哪些命令</p>
+<h2 id="sudo别名"><a href="#sudo别名" class="headerlink" title="sudo别名"></a>sudo别名</h2><p>格式说明：<br>user: 运行命令者的身份<br>host: 通过哪些主机<br>(runas)：以哪个用户的身份<br>command: 运行哪些命令<br>别名有四种类型：User_Alias, Runas_Alias, Host_Alias ，Cmnd_Alias<br>别名格式：<a href="[A-Z][0-9]_">A-Z</a><em><br>别名定义：<br>Alias_Type NAME1 = item1, item2, item3 : NAME2 = item4, item5<br>别名定义：<br>Alias_Type NAME1 = item1, item2, item3 : NAME2 = item4, item5<br>示例2：<br>student ALL=(root) /sbin/pidof,/sbin/ifconfig<br>%wheel ALL=(ALL) NOPASSWD: ALL<br>示例3<br>User_Alias NETADMIN= netuser1,netuser2<br>Cmnd_Alias NETCMD = /usr/sbin/ip<br>NETADMIN ALL=（root） NETCMD<br>示例4<br>User_Alias SYSADER=wang,mage,%admins<br>User_Alias DISKADER=tom<br>Host_Alias SERS=<a href="http://www.magedu.com,172.16.0.0/24" target="_blank" rel="noopener">www.magedu.com,172.16.0.0/24</a><br>Runas_Alias OP=root<br>Cmnd_Alias SYDCMD=/bin/chown,/bin/chmod<br>Cmnd_Alias DSKCMD=/sbin/parted,/sbin/fdisk<br>SYSADER SERS= SYDCMD,DSKCMD<br>DISKADER ALL=(OP) DSKCMD<br>示例5<br>User_Alias ADMINUSER = adminuser1,adminuser2<br>Cmnd_Alias ADMINCMD = /usr/sbin/useradd，/usr/sbin/usermod,<br>/usr/bin/passwd [a-zA-Z]</em>, !/usr/bin/passwd root<br>ADMINUSER ALL=(root) NOPASSWD:ADMINCMD，<br>PASSWD:/usr/sbin/userdel<br>示例6<br>Defaults:wang runas_default=tom<br>wang ALL=(tom,jerry) ALL<br>示例7<br>wang 192.168.1.6,192.168.1.8=(root) /usr/sbin/,!/usr/sbin/useradd<br>示例8<br>wang ALL=(ALL) /bin/cat /var/log/messages*</p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>-b：在后台执行指令；<br>-h：显示帮助；<br>-H：将HOME环境变量设为新身份的HOME环境变量；<br>-k：结束密码的有效期限，也就是下次再执行sudo时便需要输入密码；。<br>-l：列出目前用户可执行与无法执行的指令；<br>-p：改变询问密码的提示符号；<br>-s<shell>：执行指定的shell；<br>-u&lt;用户&gt;：以指定的用户作为新的身份。若不加上此参数，则预设以root作为新的身份；<br>-v：延长密码有效期限5分钟；<br>-V ：显示版本信息。</shell></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>配置sudo必须通过编辑/etc/sudoers文件，而且只有超级用户才可以修改它，还必须使用visudo编辑。之所以使用visudo有两个原因，一是它能够防止两个用户同时修改它；二是它也能进行有限的语法检查。所以，即使只有你一个超级用户，你也最好用visudo来检查一下语法。</p>
+<p>visudo默认的是在vi里打开配置文件，用vi来修改文件。我们可以在编译时修改这个默认项。visudo不会擅自保存带有语法错误的配置文件，它会提示你出现的问题，并询问该如何处理，就像：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudoers file: syntax error, line 22 &lt;&lt;</span><br></pre></td></tr></table></figure></p>
+<p>此时我们有三种选择：键入“e”是重新编辑，键入“x”是不保存退出，键入“Q”是退出并保存。如果真选择Q，那么sudo将不会再运行，直到错误被纠正。</p>
+<p>现在，我们一起来看一下神秘的配置文件，学一下如何编写它。让我们从一个简单的例子开始：让用户Foobar可以通过sudo执行所有root可执行的命令。以root身份用visudo打开配置文件，可以看到类似下面几行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Runas alias specification</span><br><span class="line"># User privilege specificationroot    ALL=(ALL)ALL</span><br></pre></td></tr></table></figure></p>
+<p>我们一看就明白个差不多了，root有所有权限，只要仿照现有root的例子就行，我们在下面加一行（最好用tab作为空白）<br>foobar ALL=(ALL)    ALL</p>
+<p>保存退出后，切换到foobar用户，我们用它的身份执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[foobar@localhost ~]$ ls /root</span><br><span class="line">ls: /root: 权限不够</span><br><span class="line"></span><br><span class="line">[foobar@localhost ~]$ sudo ls /root</span><br><span class="line">PassWord:</span><br><span class="line">anaconda-ks.cfg Desktop install.log install.log.syslog</span><br></pre></td></tr></table></figure></p>
+<p>好了，我们限制一下foobar的权利，不让他为所欲为。比如我们只想让他像root那样使用ls和ifconfig，把那一行改为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foobar localhost=    /sbin/ifconfig,   /bin/ls</span><br></pre></td></tr></table></figure></p>
+<p>再来执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[foobar@localhost ~]$ sudo head -5 /etc/shadow</span><br><span class="line">Password:</span><br><span class="line">Sorry, user foobar is not allowed to execute <span class="string">'/usr/bin/head -5 /etc/shadow'</span> as root on localhost.localdomain.</span><br><span class="line"></span><br><span class="line">[foobar@localhost ~]$ sudo /sbin/ifconfigeth0      Linkencap:Ethernet HWaddr 00:14:85:EC:E9:9B...</span><br></pre></td></tr></table></figure></p>
+<p>现在让我们来看一下那三个ALL到底是什么意思。第一个ALL是指网络中的主机，我们后面把它改成了主机名，它指明foobar可以在此主机上执行后面的命令。第二个括号里的ALL是指目标用户，也就是以谁的身份去执行命令。最后一个ALL当然就是指命令名了。例如，我们想让foobar用户在linux主机上以jimmy或rene的身份执行kill命令，这样编写配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foobar    linux=(jimmy,rene)    /bin/<span class="built_in">kill</span></span><br></pre></td></tr></table></figure></p>
+<p>但这还有个问题，foobar到底以jimmy还是rene的身份执行？这时我们应该想到了sudo -u了，它正是用在这种时候。 foobar可以使用sudo -u jimmy kill PID或者sudo -u rene kill PID，但这样挺麻烦，其实我们可以不必每次加-u，把rene或jimmy设为默认的目标用户即可。再在上面加一行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults:foobar    runas_default=rene</span><br></pre></td></tr></table></figure></p>
+<p>Defaults后面如果有冒号，是对后面用户的默认，如果没有，则是对所有用户的默认。就像配置文件中自带的一行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults    env_reset</span><br></pre></td></tr></table></figure></p>
+<p>另一个问题是，很多时候，我们本来就登录了，每次使用sudo还要输入密码就显得烦琐了。我们可不可以不再输入密码呢？当然可以，我们这样修改配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foobar localhost=NOPASSWD:     /bin/cat, /bin/ls</span><br></pre></td></tr></table></figure></p>
+<h1 id="日志与安全"><a href="#日志与安全" class="headerlink" title="日志与安全"></a>日志与安全</h1><p>sudo为安全考虑得很周到，不仅可以记录日志，还能在有必要时向系统管理员报告。但是，sudo的日志功能不是自动的，必须由管理员开启。这样来做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch /var/<span class="built_in">log</span>/sudo</span><br><span class="line">vi /etc/syslog.conf</span><br></pre></td></tr></table></figure></p>
+<p>在syslog.conf最后面加一行（必须用tab分割开）并保存：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local2.debug    /var/<span class="built_in">log</span>/sudo</span><br></pre></td></tr></table></figure></p>
+<p>重启日志守候进程，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux grep syslogd</span><br></pre></td></tr></table></figure></p>
+<p>把得到的syslogd进程的PID（输出的第二列是PID）填入下面：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> –HUP PID</span><br></pre></td></tr></table></figure></p>
+<p>这样，sudo就可以写日志了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[foobar@localhost ~]$ sudo ls /rootanaconda-ks.cfg</span><br><span class="line">Desktop install.log</span><br><span class="line">install.log.syslog</span><br><span class="line"><span class="variable">$cat</span> /var/<span class="built_in">log</span>/sudoJul 28 22:52:54 localhost sudo:   foobar :</span><br><span class="line">TTY=pts/1 ; <span class="built_in">pwd</span>=/home/foobar ; USER=root ; <span class="built_in">command</span>=/bin/ls /root</span><br></pre></td></tr></table></figure></p>
+<p>不过，有一个小小的“缺陷”，sudo记录日志并不是很忠实：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[foobar@localhost ~]$ sudo cat /etc/shadow &gt; /dev/null</span><br><span class="line">cat /var/<span class="built_in">log</span>/sudo...Jul 28 23:10:24 localhost sudo:   foobar : TTY=pts/1 ;</span><br><span class="line">PWD=/home/foobar ; USER=root ; COMMAND=/bin/cat /etc/shadow</span><br></pre></td></tr></table></figure></p>
+<p>重定向没有被记录在案！为什么？因为在命令运行之前，shell把重定向的工作做完了，sudo根本就没看到重定向。这也有个好处，下面的手段不会得逞：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[foobar@localhost ~]$ sudo ls /root &gt; /etc/shadowbash: /etc/shadow: 权限不够</span><br></pre></td></tr></table></figure></p>
+
                           
 
                             
@@ -359,7 +387,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sudo使用"><span class="toc-number">1.</span> <span class="toc-text">sudo使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo别名"><span class="toc-number">1.1.</span> <span class="toc-text">sudo别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选项"><span class="toc-number">1.2.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#日志与安全"><span class="toc-number">2.</span> <span class="toc-text">日志与安全</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -537,11 +565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,10 +581,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
@@ -565,15 +589,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ACL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,7 +601,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,11 +613,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,7 +629,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,11 +641,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,7 +661,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,15 +673,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell script</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,11 +681,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,11 +701,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
             
             <div class="clearfix"></div>
