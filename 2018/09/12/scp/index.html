@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>自动化运维工具 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自动化运维工具 scp,rsync,sftp">
-<meta name="keywords" content="scp,rsync,sftp">
+  <meta name="description" content="自动化运维工具 scp,rsync,sftp  scpscp命令用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 r">
+<meta name="keywords" content="scp,rsync,sftp,pssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动化运维工具">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/09/12/scp/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="自动化运维工具 scp,rsync,sftp">
+<meta property="og:description" content="自动化运维工具 scp,rsync,sftp  scpscp命令用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 r">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-13T16:20:38.820Z">
+<meta property="og:updated_time" content="2018-09-17T09:35:10.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动化运维工具">
-<meta name="twitter:description" content="自动化运维工具 scp,rsync,sftp">
+<meta name="twitter:description" content="自动化运维工具 scp,rsync,sftp  scpscp命令用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 r">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -184,7 +184,7 @@
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scp"><span class="toc-number">1.</span> <span class="toc-text">scp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用法"><span class="toc-number">1.1.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rsync"><span class="toc-number">2.</span> <span class="toc-text">rsync</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">2.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选项"><span class="toc-number">2.2.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">2.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sftp"><span class="toc-number">3.</span> <span class="toc-text">sftp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pssh"><span class="toc-number">4.</span> <span class="toc-text">pssh</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选项-1"><span class="toc-number">4.1.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-2"><span class="toc-number">4.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PSCP-PSSH"><span class="toc-number">5.</span> <span class="toc-text">PSCP.PSSH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PSLURP"><span class="toc-number">6.</span> <span class="toc-text">PSLURP</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -206,6 +206,54 @@
               
                         <blockquote><p>自动化运维工具 scp,rsync,sftp</p>
 </blockquote>
+<h1 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h1><p>scp命令用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 rsync比scp会快一点，但当小文件众多的情况下，rsync会导致硬盘I/O非常高，而scp基本不影响系统正常使用。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>scp命令：<br>scp [options] SRC… DEST/<br>两种方式：<br>从远程主机拷贝文件<br>scp [options] [user@]host:/sourcefile /destpath<br>把文件拷贝到远程主机<br>scp [options] /sourcefile [user@]host:/destpath<br>常用选项：<br>-C 压缩数据流<br>-r 递归复制<br>-p 保持原文件的属性信息<br>-q 静默模式<br>-P PORT 指明remote host的监听的端口</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ol>
+<li>从远程复制文件到本地<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp root@10.10.10.10:/opt/soft/nginx-0.5.38.tar.gz /opt/soft/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果复制目录的时候要加-r</p>
+<ol start="2">
+<li>从本地上传文件到远程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  /opt/soft/nginx-0.5.38.tar.gz root@10.10.10.10:/opt/soft/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>同样如果复制目录的时候要加-r</p>
+<h1 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h1><p>rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项，我们下面就对它的选项一一进行分析说明。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>rsync [OPTION]… SRC DEST<br>rsync [OPTION]… SRC [USER@]host:DEST<br>rsync [OPTION]… [USER@]HOST:SRC DEST<br>rsync [OPTION]… [USER@]HOST::SRC DEST<br>rsync [OPTION]… SRC [USER@]HOST::DEST<br>rsync [OPTION]… rsync://[USER@]HOST[:PORT]/SRC [DEST]</p>
+<ol>
+<li>拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号”:”分隔符时就启动这种工作模式。如：rsync -a /data /backup</li>
+<li>使用一个远程shell程序(如rsh、ssh)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号”:”分隔符时启动该模式。如：rsync -avz *.c foo:src</li>
+<li>使用一个远程shell程序(如rsh、ssh)来实现将远程机器的内容拷贝到本地机器。当SRC地址路径包含单个冒号”:”分隔符时启动该模式。如：rsync -avz foo:src/bar /data</li>
+<li>从远程rsync服务器中拷贝文件到本地机。当SRC路径信息包含”::”分隔符时启动该模式。如：rsync -av <a href="mailto:root@192.168.78.192" target="_blank" rel="noopener">root@192.168.78.192</a>::www /databack</li>
+<li>从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含”::”分隔符时启动该模式。如：rsync -av /databack <a href="mailto:root@192.168.78.192" target="_blank" rel="noopener">root@192.168.78.192</a>::www</li>
+<li>列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：rsync -v rsync://192.168.78.192/www</li>
+</ol>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>-n 模拟复制过程<br>-v 显示详细过程<br>-r 递归复制目录树<br>-p 保留权限<br>-t 保留时间戳<br>-g 保留组信息<br>-o 保留所有者信息<br>-l 将软链接文件本身进行复制（默认）<br>-L 将软链接文件指向的文件复制<br>-a 存档，相当于–rlptgoD，但不保留ACL（-A）和SELinux属性（-X）<br>–delete 删除那些DST中SRC没有的文件。<br>–progress 在传输时现实传输过程。<br>-z, –compress 对备份的文件在传输时进行压缩处理。</p>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><p><strong>SSH方式</strong></p>
+<p>首先在服务端启动ssh服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd start</span><br></pre></td></tr></table></figure></p>
+<p>使用rsync进行同步<br>接下来就可以在客户端使用rsync命令来备份服务端上的数据了，SSH方式是通过系统用户来进行备份的，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -vzrtopg --progress -e ssh --delete root@172.20.58.21:/www/* /databack/experiment/rsync</span><br></pre></td></tr></table></figure></p>
+<p>上面的信息描述了整个的备份过程，以及总共备份数据的大小。</p>
+<p><strong>后台服务方式</strong><br>启动rsync服务，编辑/etc/xinetd.d/rsync文件，将其中的disable=yes改为disable=no，并重启xinetd服务，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># cat /etc/xinetd.d/rsync</span></span><br><span class="line"><span class="comment"># default: off</span></span><br><span class="line"><span class="comment"># description: The rsync server is a good addition to an ftp server, as it \</span></span><br><span class="line"><span class="comment">#       allows crc checksumming etc.</span></span><br><span class="line">service rsync</span><br><span class="line">&#123;</span><br><span class="line">        <span class="built_in">disable</span> = yes</span><br><span class="line">        flags           = IPv6</span><br><span class="line">        socket_type     = stream</span><br><span class="line">        <span class="built_in">wait</span>            = no</span><br><span class="line">        user            = root</span><br><span class="line">        server          = /usr/bin/rsync</span><br><span class="line">        server_args     = --daemon</span><br><span class="line">        log_on_failure  += USERID</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建配置文件，默认安装好rsync程序后，并不会自动创建rsync的主配置文件，需要手工来创建，其主配置文件为“/etc/rsyncd.conf”，创建该文件并插入如下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rsyncd.conf</span><br><span class="line"></span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">max connections=4</span><br><span class="line"><span class="built_in">log</span> file=/var/<span class="built_in">log</span>/rsyncd.log</span><br><span class="line">pid file=/var/run/rsyncd.pid</span><br><span class="line">lock file=/var/run/rsyncd.lock</span><br><span class="line">secrets file=/etc/rsyncd.passwd</span><br><span class="line">hosts deny=172.20.58.0/16</span><br><span class="line"></span><br><span class="line">[www]</span><br><span class="line">comment= backup web</span><br><span class="line">path=/www</span><br><span class="line"><span class="built_in">read</span> only = no</span><br><span class="line">exclude=<span class="built_in">test</span></span><br><span class="line">auth users=work</span><br></pre></td></tr></table></figure></p>
+<p>创建密码文件，采用这种方式不能使用系统用户对客户端进行认证，所以需要创建一个密码文件，其格式为“username:password”，用户名可以和密码可以随便定义，最好不要和系统帐户一致，同时要把创建的密码文件权限设置为600，这在前面的模块参数做了详细介绍。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"work:abc123"</span> &gt; /etc/rsyncd.passwd</span><br><span class="line">chmod 600 /etc/rsyncd.passwd</span><br></pre></td></tr></table></figure></p>
+<p>备份，完成以上工作，现在就可以对数据进行备份了，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --progress --delete work@172.16.78.192::www /databack/experiment/rsync</span><br></pre></td></tr></table></figure></p>
+<p>恢复，当服务器的数据出现问题时，那么这时就需要通过客户端的数据对服务端进行恢复，但前提是服务端允许客户端有写入权限，否则也不能在客户端直接对服务端进行恢复，使用rsync对数据进行恢复的方法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --progress /databack/experiment/rsync/ work@172.16.78.192::www</span><br></pre></td></tr></table></figure></p>
+<h1 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h1><p>sftp命令是一款交互式的文件传输程序，命令的运行和使用方式与ftp命令相似，但是，sftp命令对传输的所有信息使用ssh加密，它还支持公钥认证和压缩等功能。</p>
+<p>交互式文件传输工具<br>用法和传统的ftp工具相似<br>利用ssh服务实现安全的文件上传和下载<br>使用ls cd mkdir rmdir pwd get put等指令，可用？或help获取帮助信息<br>sftp [user@]host<br>sftp&gt; help</p>
+<h1 id="pssh"><a href="#pssh" class="headerlink" title="pssh"></a>pssh</h1><p>pssh命令是一个python编写可以在多台服务器上执行命令的工具，同时支持拷贝文件，是同类工具中很出色的，类似pdsh，个人认为相对pdsh更为简便，使用必须在各个服务器上配置好密钥认证访问。</p>
+<p><strong>yum方法</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install pssh</span><br></pre></td></tr></table></figure></p>
+<p><strong>编译安装</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://parallel-ssh.googlecode.com/files/pssh-2.3.1.tar.gz</span><br><span class="line">tar xf pssh-2.3.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> pssh-2.3.1/</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p>
+<h2 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h2><p>–version：查看版本<br>–help：查看帮助，即此信息<br>-h：主机文件列表，内容格式”[user@]host[:port]”<br>-H：主机字符串，内容格式”[user@]host[:port]”<br>-：登录使用的用户名<br>-p：并发的线程数【可选】<br>-o：输出的文件目录【可选】<br>-e：错误输入文件【可选】<br>-t：TIMEOUT 超时时间设置，0无限制【可选】<br>-O：SSH的选项<br>-v：详细模式<br>-A：手动输入密码模式<br>-x：额外的命令行参数使用空白符号，引号，反斜线处理<br>-X：额外的命令行参数，单个参数模式，同-x<br>-i：每个服务器内部处理信息输出<br>-P：打印出服务器返回信息</p>
+<h2 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h2><p>获取每台服务器的uptime：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -h ip.txt -i uptime</span><br></pre></td></tr></table></figure></p>
+<p>查看每台服务器上mysql复制IO/SQL线程运行状态信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -h IP.txt -i <span class="string">"/usr/local/mysql/bin/mysql -e 'show slave status \G'"</span>|grep Running:</span><br></pre></td></tr></table></figure></p>
+<p>保存每台服务器运行的结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -h IP.txt -i -o /tmp/pssh/ uptime</span><br></pre></td></tr></table></figure></p>
+<p>通过pssh批量关闭seLinux<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -H root@192.168.1.10 -i <span class="string">"sed -i "</span>s/SELINUX=enforcing/SELINUX=disabled/<span class="string">" /etc/selinux/config"</span></span><br></pre></td></tr></table></figure></p>
+<p>批量发送指令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pssh -H root@192.168.1.10 -i setenforce 0</span><br><span class="line">pssh -H xuewb@192.168.1.10 -i hostname</span><br></pre></td></tr></table></figure></p>
+<p>当不支持ssh的key认证时，通过 -A选项，使用密码认证批量执行指令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -H xuewb@192.168.1.10 -A -i hostname</span><br></pre></td></tr></table></figure></p>
+<p>将标准错误和标准正确重定向都保存至/app目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -H 192.168.1.10 -o /app -e /app -i <span class="string">"hostname"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="PSCP-PSSH"><a href="#PSCP-PSSH" class="headerlink" title="PSCP.PSSH"></a>PSCP.PSSH</h1><p>pscp.pssh功能是将本地文件批量复制到远程主机<br>pscp [-vAr] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par] [-o<br>outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] local remote<br>Pscp-pssh选项<br>-v 显示复制过程<br>-r 递归复制目录<br>将本地curl.sh 复制到/app/目录<br>pscp.pssh -H 192.168.1.10 /root/test/curl.sh /app/<br>pscp.pssh -h host.txt /root/test/curl.sh /app/<br>将本地多个文件批量复制到/app/目录<br>pscp.pssh -H 192.168.1.10 /root/f1.sh /root/f2.sh /app/<br>将本地目录批量复制到/app/目录<br>pscp.pssh -H 192.168.1.10 -r /root/test/ /app/</p>
+<h1 id="PSLURP"><a href="#PSLURP" class="headerlink" title="PSLURP"></a>PSLURP</h1><p>pslurp功能是将远程主机的文件批量复制到本地<br>pslurp [-vAr] [-h hosts_file] [-H [user@]host[:port]] [-l user] [-p par][-o<br>outdir] [-e errdir] [-t timeout] [-O options] [-x args] [-X arg] [-L localdir]<br>remote local（本地名）<br>Pslurp选项<br>-L 指定从远程主机下载到本机的存储的目录，local是下载到本地后的名称<br>-r 递归复制目录<br>批量下载目标服务器的passwd文件至/app下，并更名为user<br>pslurp -H 192.168.1.10 -L /app/ /etc/passwd user</p>
+
                           
 
                             
@@ -253,7 +301,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">scp,rsync,sftp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">scp,rsync,sftp,pssh</a>
         		</li>
       		
 		</ul>
@@ -334,9 +382,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/09/17/sudo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          sudo
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/09/12/ssh/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ssh</div>
+      <div class="article-nav-title">SSH</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -363,7 +420,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scp"><span class="toc-number">1.</span> <span class="toc-text">scp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用法"><span class="toc-number">1.1.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rsync"><span class="toc-number">2.</span> <span class="toc-text">rsync</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">2.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选项"><span class="toc-number">2.2.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">2.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sftp"><span class="toc-number">3.</span> <span class="toc-text">sftp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pssh"><span class="toc-number">4.</span> <span class="toc-text">pssh</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选项-1"><span class="toc-number">4.1.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-2"><span class="toc-number">4.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PSCP-PSSH"><span class="toc-number">5.</span> <span class="toc-text">PSCP.PSSH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PSLURP"><span class="toc-number">6.</span> <span class="toc-text">PSLURP</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -545,11 +602,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,15 +614,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,11 +622,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,7 +630,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,11 +662,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,23 +670,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,15 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
+                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,7 +710,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,19 +742,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
             
             <div class="clearfix"></div>
