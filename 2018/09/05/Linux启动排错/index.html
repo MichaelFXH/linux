@@ -49,20 +49,122 @@
     <div id="container" q-class="show:isCtnShow">
       <canvas id="anm-canvas" class="anm-canvas"></canvas>
       <div class="left-col" q-class="show:isShow">
-        
+        <style>
+/*搜索框*/
+.search {
+  width: 68%;
+  height: 18px;
+  margin-top: 1px;
+  padding: 0;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #d3d3d3;
+  border-radius: 2px;
+  opacity: 0.65;
+  background: none;
+}
+.search:hover {
+  border: 2px solid #d3d3d3;
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/*搜索重置按钮*/
+#search-form .fa-times {
+  display: none;
+  padding: 1px 0.7em;
+  box-shadow: 0 0 3px rgba(0,0,0,0.15);
+  cursor: pointer;
+  color: #808080;
+}
+#search-form .fa-times:active {
+  background: #d3d3d3;
+}
+#search-form .fa-times:hover {
+  zoom: 1.1;
+  padding: 1px 0.6em;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+}
+
+/*搜索结果区*/
+#local-search-result {
+  margin: auto -12% auto -6%;
+  font-size: 0.9em;
+  text-align: left;
+  word-break: break-all;
+}
+
+#local-search-result ul.search-result-list li:hover {
+  font-weight: normal;
+}
+
+/*单条搜索结果*/
+#local-search-result li {
+  margin: 0.5em auto;
+  border-bottom: 2px solid #d3d3d3;
+}
+#local-search-result .search-result-list li:hover {
+  background: rgba(158,188,226,0.21);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/*匹配的标题*/
+#local-search-result a.search-result-title {
+  line-height: 1.2;
+  font-weight: bold;
+  color: #708090;
+}
+
+/*搜索预览段落*/
+#local-search-result p.search-result {
+  margin: 0.4em auto;
+  line-height: 1.2em;
+  max-height: 3.6em;
+  overflow: hidden;
+  font-size: 0.8em;
+  text-align: justify;
+  color: #808080;
+}
+
+/*匹配的关键词*/
+#local-search-result em.search-keyword {
+  color: #f58e90;
+  border-bottom: 1px dashed #f58e90;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+/*无匹配搜索结果时显示*/
+p.no-result {
+  display: none;
+  margin: 2em 0 2em 6%;
+  padding-bottom: 0.5em;
+  text-align: left;
+  color: #808080;
+  font-family: font-serif serif;
+  border-bottom: 2px solid #d3d3d3;
+}
+</style>
+
 <div class="overlay" style="background: #A4D3EE"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			<img src="http://ww2.sinaimg.cn/large/7f318987jw1f72m7gv450j205k05kmx1.jpg" class="js-avatar">
-		</a>
+        </a>
+        
+		<div id="site_search">
+		<input type="text" class="search" id="local-search-input" onclick="testSearch()" name="q" results="0" placeholder="search my blog..." class="form-control"/>
+		<div id="local-search-result"></div>
+        </div>
+        <p class='no-result'>No results found </p>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Michael</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">学而不思则罔，思而不学则殆！</p>
 		
-
 		<nav class="header-menu">
 			<ul>
 			
@@ -74,7 +176,7 @@
 	        
 			</ul>
 		</nav>
-		<nav class="header-smart-menu">
+		<!-- <nav class="header-smart-menu">
     		
     			
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
@@ -88,16 +190,114 @@
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
-		</nav>
+		</nav> -->
 		<nav class="header-nav">
-			<div class="social">
-				
-				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
+			<div class="social" >
+				<!--  -->
+				<iframe frameborder="no" border="0" margintop="-10" marginwidth="0" marginheight="0" width=330 height=80 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
 			</div>
 		</nav>
 	</header>	
 </div>
-
+<script type="text/javascript">    
+var testSearch=function()
+{
+    var search_path = "search.xml";
+	if (search_path.length == 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, 'local-search-input', 'local-search-result');
+}  
+	
+</script>
+	<script type="text/javascript">      
+var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 100;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                });
+                str += "</ul>";
+                $resultContent.innerHTML = str;
+            });
+        }
+    });
+}
+</script>
       </div>
       <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
         
@@ -733,11 +933,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,7 +949,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,11 +965,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,7 +977,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,19 +985,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -801,7 +993,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,15 +1013,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,11 +1025,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,11 +1037,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">加密安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -878,10 +1082,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
             
             <div class="clearfix"></div>
