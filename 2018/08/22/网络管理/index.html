@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/dhcp.jpg">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/routeTest.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/routeSuccess.png">
-<meta property="og:updated_time" content="2018-09-01T11:16:24.901Z">
+<meta property="og:updated_time" content="2018-09-19T12:29:09.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络管理">
 <meta name="twitter:description" content="本章主要介绍OSI7层模型，IP地址的分类，以及路由的配置等。">
@@ -199,7 +199,7 @@ p.no-result {
 		<nav class="header-nav">
 			<div class="social" >
 				<!--  -->
-				<iframe frameborder="no" border="0" margintop="-10" marginwidth="0" marginheight="0" width=330 height=80 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
+				<iframe frameborder="no" border="0" margintop="10" marginwidth="0" marginheight="0" width=330 height=80 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
 			</div>
 		</nav>
 	</header>	
@@ -601,8 +601,16 @@ var searchFunc = function(path, search_id, content_id) {
 </ol>
 <p>经过测试相邻路由器跟主机之间是可以通信的</p>
 <p>接下来我们怎么才能让A能到B呢<br>我们从图上可以看出<br>对于R1来说到达任何地址的网关都是10.1.1.11<br>route add default gw 10.1.1.11<br>R2需要配2个<br>route add default gw 10.1.1.10<br>route add default gw 10.2.2.11<br>R3到达任何地址的网关都是10.2.2.10<br>route add default gw 10.2.2.10<br>这样就都关联起来了<br>折腾了半天是因为防火墙问题<br>需要执行iptables -F</p>
-<p>终于成功！<br> <img src="/Linux/routeSuccess.png" alt="logo"><br>以上的所有的ip配置要想生效需要写到配置文件里。/etc/sysconfig/network-Scripts/ifcfg-eth0 或者 eth1中。<br>路由配置文件<br>/etc/sysconfig/network/routes</p>
-<p>补充：<br>模拟给一块网卡配置2个IP，充当路由器，然后让2台不同网段的计算机分别指向对应的网关。这2台计算机也能通信。</p>
+<p>终于成功！<br> <img src="/Linux/routeSuccess.png" alt="logo"><br>以上的所有的ip配置要想生效需要写到配置文件里。/etc/sysconfig/network-Scripts/ifcfg-eth0 或者 eth1中。<br><strong>路由配置文件</strong></p>
+<ol>
+<li><p>写到/etc/rc.local 文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 10.2.2.10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/etc/sysconfig/static-routes配置(推荐)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim  /etc/sysconfig/static-routes</span><br><span class="line">any net  192.168.15.0/24   gw 192.168.14.254</span><br><span class="line">any host 123.57.223.144    gw 192.168.14.254</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意：static-routes默认不存在<br>补充：<br>模拟给一块网卡配置2个IP，充当路由器，然后让2台不同网段的计算机分别指向对应的网关。这2台计算机也能通信。</p>
 <h2 id="bonding"><a href="#bonding" class="headerlink" title="bonding"></a>bonding</h2><p>bonding(绑定)是一种linux系统下的网卡绑定技术，可以把服务器上n个物理网卡在系统内部抽象(绑定)成一个逻辑上的网卡，能够提升网络吞吐量、实现网络冗余、负载等功能，有很多优势。</p>
 <p>bonding技术是linux系统内核层面实现的，它是一个内核模块(驱动)。使用它需要系统有这个模块, 我们可以modinfo命令查看下这个模块的信息, 一般来说都支持.</p>
 <p>bonding的七种工作模式: </p>
@@ -983,15 +991,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1003,10 +1007,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
@@ -1015,15 +1015,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1035,11 +1039,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,7 +1059,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,18 +1071,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
@@ -1079,15 +1079,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1095,11 +1091,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1127,7 +1127,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1135,7 +1143,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
               </li>
             
             <div class="clearfix"></div>

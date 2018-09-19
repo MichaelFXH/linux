@@ -16,10 +16,13 @@
 <meta property="og:site_name">
 <meta property="og:description" content="SSH 基于密码跟基于Key的验证">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-17T15:19:48.966Z">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
+<meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
+<meta property="og:updated_time" content="2018-09-19T15:24:10.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH">
 <meta name="twitter:description" content="SSH 基于密码跟基于Key的验证">
+<meta name="twitter:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
   
@@ -189,7 +192,7 @@ p.no-result {
 		<nav class="header-nav">
 			<div class="social" >
 				<!--  -->
-				<iframe frameborder="no" border="0" margintop="-10" marginwidth="0" marginheight="0" width=330 height=80 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
+				<iframe frameborder="no" border="0" margintop="10" marginwidth="0" marginheight="0" width=330 height=80 src="//music.163.com/outchain/player?type=2&id=21041381&auto=1&height=66"></iframe>
 			</div>
 		</nav>
 	</header>	
@@ -384,7 +387,7 @@ var searchFunc = function(path, search_id, content_id) {
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.4.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -457,7 +460,44 @@ var searchFunc = function(path, search_id, content_id) {
 </ol>
 <h2 id="批量把本机的公钥拷贝到其他服务器-待完善"><a href="#批量把本机的公钥拷贝到其他服务器-待完善" class="headerlink" title="批量把本机的公钥拷贝到其他服务器 待完善"></a>批量把本机的公钥拷贝到其他服务器 待完善</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">rpm -q expect &amp;&gt; /dev/null || yum install expect -y</span><br><span class="line">ssh-keygen  -P <span class="string">""</span> -f <span class="string">"/root/.ssh/id_rsa"</span></span><br><span class="line">password=centos</span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> ipaddr;<span class="keyword">do</span></span><br><span class="line">expect &lt;&lt;EOF</span><br><span class="line"><span class="built_in">set</span> timeout 10</span><br><span class="line">spawn ssh-copy-id <span class="variable">$ipaddr</span></span><br><span class="line">expect &#123;</span><br><span class="line"><span class="string">"yes/no"</span> &#123; send <span class="string">"yes\n"</span>;exp_continue &#125;</span><br><span class="line"><span class="string">"password"</span> &#123; send <span class="string">"<span class="variable">$password</span>\n"</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line">expect eof</span><br><span class="line">EOF</span><br><span class="line"><span class="keyword">done</span> &lt; ip.txt</span><br></pre></td></tr></table></figure>
 <h2 id="重新生成-etc-ssh-目录"><a href="#重新生成-etc-ssh-目录" class="headerlink" title="重新生成/etc/ssh 目录"></a>重新生成/etc/ssh 目录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install openssh-server</span><br></pre></td></tr></table></figure>
-<h1 id="SSH端口转发"><a href="#SSH端口转发" class="headerlink" title="SSH端口转发"></a>SSH端口转发</h1><h1 id="ssh服务的最佳实践"><a href="#ssh服务的最佳实践" class="headerlink" title="ssh服务的最佳实践"></a>ssh服务的最佳实践</h1>
+<h1 id="SSH端口转发"><a href="#SSH端口转发" class="headerlink" title="SSH端口转发"></a>SSH端口转发</h1><p>SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH还能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。这一过程也被叫做“隧道”（tunneling），这是因为 SSH 为<br>其他 TCP 链接提供了一个安全的通道来进行传输而得名。例如，Telnet，SMTP，LDAP 这些 TCP 应用均能够从中得益，避免了用户名，密码以及隐私信息的明文传输。而与此同时，如果工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，也能够通过将 TCP 端口转发来使用 SSH 进行通讯<br>SSH 端口转发能够提供两大功能：</p>
+<ol>
+<li>加密 SSH Client 端至 SSH Server 端之间的通讯数据</li>
+<li>突破防火墙的限制完成一些之前无法建立的 TCP 连接</li>
+</ol>
+<p>使用了端口转发之后，TCP 端口 A 与 B 之间现在并不直接通讯，而是转发到了 SSH 客户端及服务端来通讯，从而自动实现了数据加密并同时绕过了防火墙的限制</p>
+<h2 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h2><p>语法：<br>ssh -L <local port="">:<remote host="">:<remote port=""> <ssh hostname=""><br>选项：<br>-f 后台启用<br>-N 不打开远程shell，处于等待状态<br>-g 启用网关功能</ssh></remote></remote></local></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="/Linux/端口转发.png" alt="logo"><br>如上图A(是telnet客户端),ip:172.20.59.25，B(是SSH客户端,服务端,ip:172.20.59.26)  C(telnet服务端，ip:172.20.59.27)，<br>现在A要通过SSH 安全协议SSH访问C。假设防火墙可以让A 访问到B的内网。</p>
+<ol>
+<li>首先要在A机器安装telnet客户端，C机器安装telnet服务端（yum install telnet-server -y）</li>
+<li><p>在客户端A机器上执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh –L 9527:172.20.59.27:23 -Nf 172.20.59.26</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行ss -ntl </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]<span class="comment"># ss -ntl</span></span><br><span class="line">State      Recv-Q Send-Q                                          Local Address:Port                                            Peer Address:Port                                                       *:*     </span><br><span class="line">LISTEN     0      128                                                 127.0.0.1:9527</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>发现A客户机已经打开了9527端口</p>
+<ol start="4">
+<li>执行命令 telnet 127.0.0.1 9527 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">telnet 127.0.0.1 9527</span><br><span class="line">``` </span><br><span class="line">5. 登陆进去 输入ip a 发现已经连接到了C机器</span><br><span class="line">```bash</span><br><span class="line">ip a</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>数据先传递到本机的9527端口，然后在本机上开一个随机端口，通过SSH协议把数据报文发送到SSH服务器的22端口，最后在由ssh服务器发送到telnet 服务端。服务端按同样的流程发给客户端。<br>注意：在C机器上启动telnet-server, 并且不能以root身份连接telnet<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chkconfig telnet on       </span><br><span class="line">chkconfig xinetd on    </span><br><span class="line">service xinetd start</span><br><span class="line">chkconfig --list</span><br></pre></td></tr></table></figure></p>
+<p>如果跟A 在同一个内网有一台机器D要通过B连接C。 那么需要在B机器上执行命令,此时B机器相当于跳板机<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh –L 9527:172.20.59.27:23 -Nf 172.20.59.26</span><br></pre></td></tr></table></figure></p>
+<p>在D机器上执行命令进行连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet 172.20.59.25 9527</span><br></pre></td></tr></table></figure></p>
+<h2 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h2><p>语法：<br>ssh -R <local port="">:<remote host="">:<remote port=""> <ssh hostname=""><br>示例：<br>ssh –R 9527:telnetsrv:23 –N sshsrv<br><img src="/Linux/端口转发.png" alt="logo"><br>如上图A是telnet客户端，B(是SSH客户端,服务端)  C(telnet服务端)，<br>现在A要通过SSH 安全协议SSH访问C。防火墙让A 访问不到B的内网。所以我们要在B 机器上做一个端口转发。</ssh></remote></remote></local></p>
+<ol>
+<li><p>在B机器上执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh –R 9527:172.20.59.27:23 -Nfg 172.20.59.26</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在A机器上不需要做任何配置就可以连接到C</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet 127.0.0.1 9527</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="动态端口转发"><a href="#动态端口转发" class="headerlink" title="动态端口转发"></a>动态端口转发</h2><p>当用firefox访问internet时，本机的1080端口做为代理服务器，firefox的访问<br>请求被转发到sshserver上，由sshserver替之访问internet<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 1080 root@sshserver</span><br></pre></td></tr></table></figure></p>
+<p>假如有3台电脑A内外， 外网（B，C ），A 访问不了C，A能访问B，B能访问C。<br>那么我们在中间的代理服务器上执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 9527 C的ip</span><br></pre></td></tr></table></figure></p>
+<p>然后我们在A机器上配置代理设置B的ip 跟端口，比如我们可以在浏览器里设置代理。这样A就借助于代理B可以访问C了。</p>
+<h1 id="ssh服务的最佳实践"><a href="#ssh服务的最佳实践" class="headerlink" title="ssh服务的最佳实践"></a>ssh服务的最佳实践</h1>
                           
 
                             
@@ -624,7 +664,7 @@ var searchFunc = function(path, search_id, content_id) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.4.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -798,15 +838,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -818,10 +854,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
@@ -830,15 +862,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux 安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -850,11 +886,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">Raid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort,uniq,cut,wc,tr</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,7 +906,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -874,18 +918,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
               </li>
              
@@ -894,15 +926,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -910,11 +938,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sudo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -942,7 +974,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -950,7 +990,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color5">内核编译</a>
               </li>
             
             <div class="clearfix"></div>
