@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="https://michaelfxh.github.io">
   <title>SSH | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SSH 基于密码跟基于Key的验证">
+  <meta name="description" content="SSH 基于密码跟基于Key的验证，SSH端口转发,SSH最佳实践">
 <meta name="keywords" content="ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH">
 <meta property="og:url" content="https://michaelfxh.github.io/2018/09/12/ssh/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="SSH 基于密码跟基于Key的验证">
+<meta property="og:description" content="SSH 基于密码跟基于Key的验证，SSH端口转发,SSH最佳实践">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
-<meta property="og:updated_time" content="2018-09-20T08:34:29.654Z">
+<meta property="og:updated_time" content="2018-09-20T09:43:09.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH">
-<meta name="twitter:description" content="SSH 基于密码跟基于Key的验证">
+<meta name="twitter:description" content="SSH 基于密码跟基于Key的验证，SSH端口转发,SSH最佳实践">
 <meta name="twitter:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
   
     <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
@@ -387,7 +387,7 @@ var searchFunc = function(path, search_id, content_id) {
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么实现2个网络之间的连接"><span class="toc-number">3.4.</span> <span class="toc-text">怎么实现2个网络之间的连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.5.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么实现2个网络之间的连接"><span class="toc-number">3.4.</span> <span class="toc-text">怎么实现2个网络之间的连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.5.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#etc-ssh-sshd-config文件说明"><span class="toc-number">4.1.</span> <span class="toc-text">/etc/ssh/sshd_config文件说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践说明"><span class="toc-number">4.2.</span> <span class="toc-text">最佳实践说明</span></a></li></ol></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -407,7 +407,7 @@ var searchFunc = function(path, search_id, content_id) {
             <!-- 目录内容结束 -->
             <div class="article-entry" itemprop="articleBody">
               
-                        <blockquote><p>SSH 基于密码跟基于Key的验证</p>
+                        <blockquote><p>SSH 基于密码跟基于Key的验证，SSH端口转发,SSH最佳实践</p>
 </blockquote>
 <a id="more"></a>
 <p>当用户远程连接ssh服务器时，会复制ssh服务器/etc/ssh/ssh_host*key.pub<br>（CentOS7默认是ssh_host_ecdsa_key.pub）文件中的公钥到客户机的<br>~./ssh/know_hosts中。下次连接时，会自动匹配相应私钥，不能匹配，将拒绝连接</p>
@@ -431,7 +431,8 @@ var searchFunc = function(path, search_id, content_id) {
 <li>得到服务端发来的消息后，客户端会使用私钥进行解密，然后将解密后的字符串发送给服务端</li>
 <li>服务端接受到客户端发来的字符串后，跟之前的字符串进行对比，如果一致，就允许免密码登录</li>
 </ol>
-<h2 id="ssh-keygen实现"><a href="#ssh-keygen实现" class="headerlink" title="ssh-keygen实现"></a>ssh-keygen实现</h2><ol>
+<h2 id="ssh-keygen实现"><a href="#ssh-keygen实现" class="headerlink" title="ssh-keygen实现"></a>ssh-keygen实现</h2><p>修改/etc/ssh/sshd_config 文件，将RSAAuthentication 和 PubkeyAuthentication 后面的值都改成yes ，保存。</p>
+<ol>
 <li><p>在客户端生成一对公钥私钥</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 </li>
@@ -504,10 +505,25 @@ var searchFunc = function(path, search_id, content_id) {
 </li>
 </ol>
 <p>在A机器上执行命令进行连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet 172.20.59.27 9527</span><br></pre></td></tr></table></figure></p>
-<h2 id="动态端口转发"><a href="#动态端口转发" class="headerlink" title="动态端口转发"></a>动态端口转发</h2><p>当用firefox访问internet时，本机的1080端口做为代理服务器，firefox的访问<br>请求被转发到sshserver上，由sshserver替之访问internet<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 1080 root@sshserver</span><br></pre></td></tr></table></figure></p>
-<p>假如有3台电脑A内外， 外网（B，C ），A 访问不了C，A能访问B，B能访问C。<br>那么我们在中间的代理服务器B上执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 9527 C的ip</span><br></pre></td></tr></table></figure></p>
-<p>然后我们在A机器上配置代理设置B的ip 跟端口，比如我们可以在浏览器里设置代理。这样A就借助于代理B可以访问C了。</p>
-<h1 id="ssh服务的最佳实践"><a href="#ssh服务的最佳实践" class="headerlink" title="ssh服务的最佳实践"></a>ssh服务的最佳实践</h1>
+<h2 id="动态端口转发"><a href="#动态端口转发" class="headerlink" title="动态端口转发"></a>动态端口转发</h2><p>当用firefox访问internet时，本机的1080端口做为代理服务器，firefox的访问<br>请求被转发到sshserver上，由sshserver替之访问internet<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 1080 sshserver</span><br></pre></td></tr></table></figure></p>
+<p>假如有3台电脑A内网， 外网（B，C ），由于防火墙原因 A 访问不了C，A能访问B，B能访问C。<br>那么我们在客户端A上执行命令<br>我们在客户端执行命令，端口自己指定，B服务器充当搬网工<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 9527 sshserver（搬网工服务器ip） -fN</span><br></pre></td></tr></table></figure></p>
+<p>然后在客户端A机器配置代理ip 127.0.0.1 端口9527 ，配置好A就可以利用端口转发顺利访问C了。</p>
+<p>但是如果有一台windows机器想访问google怎么办，windows 上不支持ssh命令的。只要在命令中加个小j就可以了。<br>在A机器执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 9527 sshserver（搬网工服务器ip） -fNg</span><br></pre></td></tr></table></figure></p>
+<p>这样在其他电脑上配置代理ip 跟端口就可以借助这个隧道功能访问到C网站了。<br>比如有个D机器想访问C,通过命令curl 也可以配置代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 A的ip地址:9527 http://C的ip地址</span><br></pre></td></tr></table></figure></p>
+<h1 id="ssh服务的最佳实践"><a href="#ssh服务的最佳实践" class="headerlink" title="ssh服务的最佳实践"></a>ssh服务的最佳实践</h1><p>SSH 服务器端：<br>OpenSSH 软件包包含了以下程序：<br>sshd             – SSH服务端程序<br>sftp-server  – SFTP服务端程序（类似FTP，但提供数据加密的一种协议）<br>scp               – 非交互式sftp-server的客户端，用来向服务器上传/下载文件，安全复制<br>sftp              – 交互式sftp-server客户端，用法和ftp命令一样。<br>slogin          – ssh的别名<br>ssh               – SSH协议的客户端程序，用来登入远程系统或远程执行命令<br>ssh-add       –  SSH代理相关程序，用来向SSH代理添加dsa　key<br>ssh-agent      – ssh代理程序<br>ssh-keygen    – ssh public key 生成器</p>
+<h2 id="etc-ssh-sshd-config文件说明"><a href="#etc-ssh-sshd-config文件说明" class="headerlink" title="/etc/ssh/sshd_config文件说明"></a>/etc/ssh/sshd_config文件说明</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6_1 ~]<span class="comment"># vim /etc/ssh/sshd_config</span></span><br><span class="line"><span class="comment">#       $OpenBSD: sshd_config,v 1.80 2008/07/02 02:24:18 djm Exp $</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the sshd server system-wide configuration file.  See</span></span><br><span class="line"><span class="comment"># sshd_config(5) for more information.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This sshd was compiled with PATH=/usr/local/bin:/bin:/usr/bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The strategy used for options in the default sshd_config shipped with</span></span><br><span class="line"><span class="comment"># OpenSSH is to specify options with their default value where</span></span><br><span class="line"><span class="comment"># possible, but leave them commented.  Uncommented options change a</span></span><br><span class="line"><span class="comment"># default value.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Port 22                  #默认端口是22  生产环境必须修改这个端口</span></span><br><span class="line"><span class="comment">#AddressFamily any</span></span><br><span class="line"><span class="comment">#ListenAddress 0.0.0.0    #监听的地址为所有地址 </span></span><br><span class="line"><span class="comment">#ListenAddress ::</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable legacy (protocol version 1) support in the server for new</span></span><br><span class="line"><span class="comment"># installations. In future the default will change to require explicit</span></span><br><span class="line"><span class="comment"># activation of protocol 1</span></span><br><span class="line">Protocol 2                 <span class="comment">#使用SSH V2协议 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># HostKey for protocol version 1</span></span><br><span class="line"><span class="comment">#HostKey /etc/ssh/ssh_host_key</span></span><br><span class="line"><span class="comment"># HostKeys for protocol version 2</span></span><br><span class="line"><span class="comment">#HostKey /etc/ssh/ssh_host_rsa_key</span></span><br><span class="line"><span class="comment">#HostKey /etc/ssh/ssh_host_dsa_key</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Lifetime and size of ephemeral version 1 server key</span></span><br><span class="line"><span class="comment">#KeyRegenerationInterval 1h</span></span><br><span class="line"><span class="comment">#ServerKeyBits 1024  #密钥长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Logging</span></span><br><span class="line"><span class="comment"># obsoletes QuietMode and FascistLogging</span></span><br><span class="line"><span class="comment">#SyslogFacility AUTH</span></span><br><span class="line">SyslogFacility AUTHPRIV</span><br><span class="line"><span class="comment">#LogLevel INFO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Authentication:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#LoginGraceTime 2m    # 登陆验证时间</span></span><br><span class="line"><span class="comment">#PermitRootLogin yes  #是否允许root用户登陆。</span></span><br><span class="line"><span class="comment">#StrictModes yes</span></span><br><span class="line"><span class="comment">#MaxAuthTries 6</span></span><br><span class="line"><span class="comment">#MaxSessions 10</span></span><br><span class="line"></span><br><span class="line">/X11</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set this to 'yes' to enable PAM authentication, account processing, </span></span><br><span class="line"><span class="comment"># and session processing. If this is enabled, PAM authentication will </span></span><br><span class="line"><span class="comment"># be allowed through the ChallengeResponseAuthentication and</span></span><br><span class="line"><span class="comment"># PasswordAuthentication.  Depending on your PAM configuration,</span></span><br><span class="line"><span class="comment"># PAM authentication via ChallengeResponseAuthentication may bypass</span></span><br><span class="line"><span class="comment"># the setting of "PermitRootLogin without-password".</span></span><br><span class="line"><span class="comment"># If you just want the PAM account and session checks to run without</span></span><br><span class="line"><span class="comment"># PAM authentication, then enable this but set PasswordAuthentication</span></span><br><span class="line"><span class="comment"># and ChallengeResponseAuthentication to 'no'.</span></span><br><span class="line"><span class="comment">#UsePAM no</span></span><br><span class="line">UsePAM yes</span><br><span class="line"></span><br><span class="line"><span class="comment"># Accept locale-related environment variables</span></span><br><span class="line">AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES</span><br><span class="line">AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT</span><br><span class="line">AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE</span><br><span class="line">AcceptEnv XMODIFIERS</span><br><span class="line"></span><br><span class="line"><span class="comment">#AllowAgentForwarding yes</span></span><br><span class="line"><span class="comment">#AllowTcpForwarding yes</span></span><br><span class="line"><span class="comment">#GatewayPorts no</span></span><br><span class="line"><span class="comment">#X11Forwarding no</span></span><br><span class="line">X11Forwarding yes</span><br><span class="line"><span class="comment">#X11DisplayOffset 10</span></span><br><span class="line"><span class="comment">#X11UseLocalhost yes</span></span><br><span class="line"><span class="comment">#PrintMotd yes</span></span><br><span class="line"><span class="comment">#PrintLastLog yes</span></span><br><span class="line"><span class="comment">#TCPKeepAlive yes</span></span><br><span class="line"><span class="comment">#UseLogin no</span></span><br><span class="line"><span class="comment">#UsePrivilegeSeparation yes</span></span><br><span class="line"><span class="comment">#PermitUserEnvironment no</span></span><br><span class="line"><span class="comment">#Compression delayed</span></span><br><span class="line"><span class="comment">#ClientAliveInterval 0</span></span><br><span class="line"><span class="comment">#ClientAliveCountMax 3</span></span><br><span class="line"><span class="comment">#ShowPatchLevel no</span></span><br><span class="line"><span class="comment">#UseDNS yes       #禁止DNS 反向解析</span></span><br><span class="line"><span class="comment">#PidFile /var/run/sshd.pid</span></span><br><span class="line"><span class="comment">#MaxStartups 10:30:100</span></span><br><span class="line"><span class="comment">#PermitTunnel no</span></span><br><span class="line"><span class="comment">#ChrootDirectory none</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># no default banner path</span></span><br><span class="line"><span class="comment">#Banner none</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># override default of no subsystems</span></span><br><span class="line">Subsystem       sftp    /usr/libexec/openssh/sftp-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example of overriding settings on a per-user basis</span></span><br><span class="line"><span class="comment">#Match User anoncvs</span></span><br><span class="line"><span class="comment">#       X11Forwarding no</span></span><br><span class="line"><span class="comment">#       AllowTcpForwarding no</span></span><br><span class="line"><span class="comment">#       ForceCommand cvs server</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#只允许user用户登录，与DenyUsers选项相反  </span></span><br><span class="line">AllowUsers user1 user2  </span><br><span class="line"><span class="comment"># 禁止指定的 用户或组</span></span><br><span class="line">DenyUsers apache</span><br><span class="line"></span><br><span class="line"><span class="comment">##登录验证方式  </span></span><br><span class="line"><span class="comment">#关闭密码验证  </span></span><br><span class="line">PasswordAuthentication no  </span><br><span class="line"> </span><br><span class="line"><span class="comment">#以下三行没什么要改的，把默认的#注释去掉就行了</span></span><br><span class="line">RSAAuthentication yes</span><br><span class="line"><span class="comment">#启用秘钥验证  </span></span><br><span class="line">PubkeyAuthentication yes  </span><br><span class="line"><span class="comment">#指定公钥数据库文件  </span></span><br><span class="line">AuthorsizedKeysFile .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>另外，限制登录设置主要是对hosts.allow与hosts.deny就行改动<br>首先限制所有IP都无法连接，我们顺便将FTP的限制也加入其中。注意要想FTP限制起作用，需要修改配置中的tcp_wrappers=YES。<br>　　vi /etc/hosts.deny<br>　　sshd:ALL<br>　　vsftpd:ALL<br>设定允许指定的IP地址连接：<br>　　vi /etc/hosts.allow # xxx.xxx.xxx.表示网段<br>　　sshd:192.168.1.<br>　　vsftpd:192.168.1.</p>
+<h2 id="最佳实践说明"><a href="#最佳实践说明" class="headerlink" title="最佳实践说明"></a>最佳实践说明</h2><p>服务器安全第一条:启用尽可能少的服务.<br>服务器安全第二条:管好你的ssh.<br>1)禁止root用户远程登录<br> root是linux里的最高统帅了,就它官最大,可以在系统里畅通无阻.也就是因为这个原因,它是我们的重点保护对象.对于管理linux系统,一个最基本的建议就是:平时登陆和工作的时候都使用普通用户进行操作.在需要修改系统设置使用特级权限时,再切换到root用户（su  - root）.这样可以最大限度的避免因为误操作造成对linux系统的破坏.另外因为root用户是每个linux系统里都内置的,恶意的黑客可能会拿它做用户名然后尝试用不同的密码登陆密码哟.所以还是自己新建一个帐号,这样用户名被猜中的机率就很低了,再禁止root用户登陆,想猜密码?先猜用户吧.<br>在sshd_config中修改如下就可以了:<br>      PermitRootLogin  no<br>2)禁止空密码登陆<br>再有就是空密码.一般来说linux系统都会内置很多帐号,而这些用户的密码我们是不知道的.谁知道哪天哪个linux的发行版,对其中的帐号设置空密码或者指定的密码呢?所以还是禁止为妙,省得夜长梦多.<br>在sshd_config这样修改:<br>      PermitEmptyPasswords  no<br>3)使用非默认端口，非22端口<br>  其实吧很多时候你的服务器被盯上,并不是有人特别跟你过不去.人家随机的用软件扫了一个ip段,而你的ip正好在里面.而人家的扫描规则就是:是否开启22端口.这个时候,如果你没有禁止root登陆,root的密码又是简单的123456或者000000,111111这些地球人都知道的密码的话,你的服务器不黑,谁的被黑?所以安全从简单的小事儿做起,你向前移动一小步,你的服务器安全就进步一大步.还等什么?先修改默认端口呗,打开sshd_config文件,修改成:<br>      Port 30003<br>  根据你的心情,port随机的选一个,除了你自己,鬼知道你当时选的哪个端口.再打开/var/log/secure,看下世界是不是一下子清静了?再也没有烦人的用不同的帐号和密码尝试登陆的日志了.这招百试不爽.<br>4)限制ssh监听的ip<br>  在服务器有多个ip的时候.设置ssh服务器只监听在指定的ip,未尝不是一个好办法.例如一组服务器中,肯定会组成内网和外网两个小的局域网.这时候只让不起眼的一两台机器的ssh服务监听到公网ip上.其它的机器ssh只监听内网ip,通过另外的一两台机器登陆进行管理,是不是很安全保守的做法呢?<br>在sshd_config中修改如下:<br>      ListenAddress 192.168.1.5<br>如上的写法,是ssh服务器只监听192.168.1.5这个ip.</p>
+<p>5)使用的协议版本2： ssh v2<br>  ssh协议有两个版本.肯定v2要比v1安全高效的多了.ssh服务器默认会接受两种协议的连接.为了保证服务器的安全,咱们可以定义服务器只使用v2:<br>在sshd_config中修改如下:<br>      Protocol 2<br>6)禁用密码登陆，推荐使用密钥登录，并且私钥使用强密码加密<br>  其实经过前面几步简单的设置,个人认为ssh服务器的安全已经有了一个质的提高.但是在不使用其它复杂的手段的情况下,还有一些加固的小技巧,例如这一条:禁止使用密码登陆.什么?是不是写错了,或者弄迷糊了?ssh服务器竟然要禁止使用密码登陆?那怎么管理服务器呢?当然还是用ssh啦.ssh服务器不单支持密码认证,还支持通过key的认证方式,而且是默认的哟.关于怎样生成key的方法参见:&lt;&lt;使ssh不用输入密码&gt;&gt;</p>
+<p>在sshd_config中修改如下:<br>      PasswordAuthentication no<br>  经过这点小的改动,你的ssh服务绝对又是一个质的提升.能够拿到你的私key,又知道服务器登陆的用户名和端口,这绝对不是一件简单的事儿吧.<br>7)限制连接IP，仅保证有限的机器能够远程访问<br>  现在再拿出最后一招杀手锏:限制ssh服务连接的ip.我们前面提到一组服务器我们只留一两台机器可以远程访问.这样这两台机器的安全又成了重中之重.怎样再保证一下这两台机器的安全呢?我们可以限制连接这两台机器的ip.例如:这两台机器只允许公司的出口ip进行访问.这样就再次提高了服务器的安全系数.想想如果有一个黑客,能够进入你们公司的办公网络,能够拿到你的私key,又能知道只有你才知道的服务器的用户名和登陆的端口,以及登陆的方式,如果有这样的牛X的黑客,还有什么好防的呢?因为防不胜防啊.扯远了,看下限制ip的做法:<br>      在/etc/hosts.allow输入<br>      sshd:192.168.1.5:allow(其中192.168.1.5是你要允许登陆ssh的ip,或者是一个网段192.168.1.0/24)<br>      在/etc/hosts.deny输入<br>      sshd:ALL(表示除了hosts.allow中允许的，其他的ip拒绝登陆ssh)<br>      呵呵,这是传统的做法,因为开了防火墙所以笔者更喜欢直接在防火墙上做设置:)</p>
+<p>使用 iptables 设置 ssh 服务安全访问策略。<br>8) 日志<br>记录好日志，经常做日志分析。<br>用户登录成功日志： /var/log/wtmp  , 使用 # last 命令查看<br>用户登录失败日志： /var/log/btmp , 使用 # lastb 命令查看<br>查看所有用户上次登录情况： 使用  #lastlog [-u User]</p>
+<p>SSH 最佳实践<br><blockquote><p>Port 30003<br>ListenAddress 192.168.1.5<br>Protocol 2</p>
+<p>#白名单<br>AllowUsers user1 user2</p>
+<p>#黑名单<br>denyUser user3 user4<br>PasswordAuthentication no<br>PermitEmptyPasswords no<br>PermitRootLogin  no<br>UseDNS no</p>
+</blockquote></p>
+<p>脚本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 配置sshd的参数</span></span><br><span class="line">/bin/cp  /etc/ssh/sshd_config   /etc/ssh/sshd_config.bak.$(date +<span class="string">"%Y-%m-%d-%H-%m-%S"</span>)</span><br><span class="line">/bin/sed -i <span class="string">'s/#Port 22/Port 30003/g'</span>  /etc/ssh/sshd_config</span><br><span class="line">/bin/sed -i <span class="string">'s/#LogLevel INFO/LogLevel VERBOSE/g'</span>  /etc/ssh/sshd_config</span><br><span class="line">/bin/sed -i <span class="string">"s/PasswordAuthentication yes/PasswordAuthentication no/g"</span>  /etc/ssh/sshd_config</span><br><span class="line">/bin/sed -i <span class="string">"s/#PermitEmptyPasswords no/PermitEmptyPasswords no/g"</span>  /etc/ssh/sshd_config</span><br><span class="line">/bin/sed -i <span class="string">"s/#PermitRootLogin yes/PermitRootLogin no/g"</span>  /etc/ssh/sshd_config</span><br><span class="line">/bin/sed -i <span class="string">"s/#UseDNS yes/UseDNS no/"</span> /etc/ssh/sshd_config</span><br><span class="line"> </span><br><span class="line">/sbin/service sshd reload</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://blog.csdn.net/xiaoluoshan/article/details/78177217?locationNum=8&amp;fps=1" target="_blank" rel="noopener">参考文章</a></p>
+
                           
 
                             
@@ -674,7 +690,7 @@ var searchFunc = function(path, search_id, content_id) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么实现2个网络之间的连接"><span class="toc-number">3.4.</span> <span class="toc-text">怎么实现2个网络之间的连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.5.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于用户名密码的登陆"><span class="toc-number">1.</span> <span class="toc-text">基于用户名密码的登陆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于key密钥的登录方式"><span class="toc-number">2.</span> <span class="toc-text">基于key密钥的登录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-keygen实现"><span class="toc-number">2.1.</span> <span class="toc-text">ssh-keygen实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三台主机实现基于Key验证"><span class="toc-number">2.2.</span> <span class="toc-text">三台主机实现基于Key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secureCRT生成key验证"><span class="toc-number">2.3.</span> <span class="toc-text">secureCRT生成key验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量把本机的公钥拷贝到其他服务器-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">批量把本机的公钥拷贝到其他服务器 待完善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新生成-etc-ssh-目录"><span class="toc-number">2.5.</span> <span class="toc-text">重新生成/etc/ssh 目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地转发"><span class="toc-number">3.1.</span> <span class="toc-text">本地转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.2.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程转发"><span class="toc-number">3.3.</span> <span class="toc-text">远程转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么实现2个网络之间的连接"><span class="toc-number">3.4.</span> <span class="toc-text">怎么实现2个网络之间的连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态端口转发"><span class="toc-number">3.5.</span> <span class="toc-text">动态端口转发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh服务的最佳实践"><span class="toc-number">4.</span> <span class="toc-text">ssh服务的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#etc-ssh-sshd-config文件说明"><span class="toc-number">4.1.</span> <span class="toc-text">/etc/ssh/sshd_config文件说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践说明"><span class="toc-number">4.2.</span> <span class="toc-text">最佳实践说明</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -848,7 +864,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,11 +872,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内核启动grub故障修复</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">grep</a>
+                <a href="javascript:void(0)" class="js-tag color1">httpd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -868,7 +880,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+                <a href="javascript:void(0)" class="js-tag color5">grep</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,15 +892,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Raid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -900,15 +912,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color5">用户管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,19 +936,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,11 +944,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一般权限</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">逻辑卷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -953,10 +969,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -984,6 +996,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">磁盘管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
@@ -996,11 +1012,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
+                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell script</a>
+                <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
               </li>
             
             <div class="clearfix"></div>
