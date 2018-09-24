@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
 <meta property="og:image" content="https://michaelfxh.github.io/Linux/端口转发.png">
-<meta property="og:updated_time" content="2018-09-20T09:43:09.498Z">
+<meta property="og:updated_time" content="2018-09-24T09:02:46.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH">
 <meta name="twitter:description" content="SSH 基于密码跟基于Key的验证，SSH端口转发,SSH最佳实践">
@@ -441,7 +441,7 @@ var searchFunc = function(path, search_id, content_id) {
 </li>
 </ol>
 <p>重新设置口令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -p</span><br></pre></td></tr></table></figure></p>
-<p>但是每次连接对方都要设置口令，很麻烦，这时可以使用代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent bash</span><br><span class="line">ssh-add</span><br></pre></td></tr></table></figure></p>
+<p>但是每次连接对方都要设置口令，很麻烦，这时可以使用代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent bash</span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure></p>
 <p>再次连接对方则不需要输入口令了。</p>
 <p>实现了不需要用户名密码就可以登陆了，我们可以在远程机器上拷贝文件，执行命令<br>拷贝文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> `cat ip.txt`;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  scp f1.sh <span class="variable">$ip</span>:/data/;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
 <p>执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> `cat ip.txt`;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  ssh  <span class="variable">$ip</span>  <span class="string">"/data/f1.sh"</span>;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
@@ -516,8 +516,7 @@ var searchFunc = function(path, search_id, content_id) {
 <h2 id="最佳实践说明"><a href="#最佳实践说明" class="headerlink" title="最佳实践说明"></a>最佳实践说明</h2><p>服务器安全第一条:启用尽可能少的服务.<br>服务器安全第二条:管好你的ssh.<br>1)禁止root用户远程登录<br> root是linux里的最高统帅了,就它官最大,可以在系统里畅通无阻.也就是因为这个原因,它是我们的重点保护对象.对于管理linux系统,一个最基本的建议就是:平时登陆和工作的时候都使用普通用户进行操作.在需要修改系统设置使用特级权限时,再切换到root用户（su  - root）.这样可以最大限度的避免因为误操作造成对linux系统的破坏.另外因为root用户是每个linux系统里都内置的,恶意的黑客可能会拿它做用户名然后尝试用不同的密码登陆密码哟.所以还是自己新建一个帐号,这样用户名被猜中的机率就很低了,再禁止root用户登陆,想猜密码?先猜用户吧.<br>在sshd_config中修改如下就可以了:<br>      PermitRootLogin  no<br>2)禁止空密码登陆<br>再有就是空密码.一般来说linux系统都会内置很多帐号,而这些用户的密码我们是不知道的.谁知道哪天哪个linux的发行版,对其中的帐号设置空密码或者指定的密码呢?所以还是禁止为妙,省得夜长梦多.<br>在sshd_config这样修改:<br>      PermitEmptyPasswords  no<br>3)使用非默认端口，非22端口<br>  其实吧很多时候你的服务器被盯上,并不是有人特别跟你过不去.人家随机的用软件扫了一个ip段,而你的ip正好在里面.而人家的扫描规则就是:是否开启22端口.这个时候,如果你没有禁止root登陆,root的密码又是简单的123456或者000000,111111这些地球人都知道的密码的话,你的服务器不黑,谁的被黑?所以安全从简单的小事儿做起,你向前移动一小步,你的服务器安全就进步一大步.还等什么?先修改默认端口呗,打开sshd_config文件,修改成:<br>      Port 30003<br>  根据你的心情,port随机的选一个,除了你自己,鬼知道你当时选的哪个端口.再打开/var/log/secure,看下世界是不是一下子清静了?再也没有烦人的用不同的帐号和密码尝试登陆的日志了.这招百试不爽.<br>4)限制ssh监听的ip<br>  在服务器有多个ip的时候.设置ssh服务器只监听在指定的ip,未尝不是一个好办法.例如一组服务器中,肯定会组成内网和外网两个小的局域网.这时候只让不起眼的一两台机器的ssh服务监听到公网ip上.其它的机器ssh只监听内网ip,通过另外的一两台机器登陆进行管理,是不是很安全保守的做法呢?<br>在sshd_config中修改如下:<br>      ListenAddress 192.168.1.5<br>如上的写法,是ssh服务器只监听192.168.1.5这个ip.</p>
 <p>5)使用的协议版本2： ssh v2<br>  ssh协议有两个版本.肯定v2要比v1安全高效的多了.ssh服务器默认会接受两种协议的连接.为了保证服务器的安全,咱们可以定义服务器只使用v2:<br>在sshd_config中修改如下:<br>      Protocol 2<br>6)禁用密码登陆，推荐使用密钥登录，并且私钥使用强密码加密<br>  其实经过前面几步简单的设置,个人认为ssh服务器的安全已经有了一个质的提高.但是在不使用其它复杂的手段的情况下,还有一些加固的小技巧,例如这一条:禁止使用密码登陆.什么?是不是写错了,或者弄迷糊了?ssh服务器竟然要禁止使用密码登陆?那怎么管理服务器呢?当然还是用ssh啦.ssh服务器不单支持密码认证,还支持通过key的认证方式,而且是默认的哟.关于怎样生成key的方法参见:&lt;&lt;使ssh不用输入密码&gt;&gt;</p>
 <p>在sshd_config中修改如下:<br>      PasswordAuthentication no<br>  经过这点小的改动,你的ssh服务绝对又是一个质的提升.能够拿到你的私key,又知道服务器登陆的用户名和端口,这绝对不是一件简单的事儿吧.<br>7)限制连接IP，仅保证有限的机器能够远程访问<br>  现在再拿出最后一招杀手锏:限制ssh服务连接的ip.我们前面提到一组服务器我们只留一两台机器可以远程访问.这样这两台机器的安全又成了重中之重.怎样再保证一下这两台机器的安全呢?我们可以限制连接这两台机器的ip.例如:这两台机器只允许公司的出口ip进行访问.这样就再次提高了服务器的安全系数.想想如果有一个黑客,能够进入你们公司的办公网络,能够拿到你的私key,又能知道只有你才知道的服务器的用户名和登陆的端口,以及登陆的方式,如果有这样的牛X的黑客,还有什么好防的呢?因为防不胜防啊.扯远了,看下限制ip的做法:<br>      在/etc/hosts.allow输入<br>      sshd:192.168.1.5:allow(其中192.168.1.5是你要允许登陆ssh的ip,或者是一个网段192.168.1.0/24)<br>      在/etc/hosts.deny输入<br>      sshd:ALL(表示除了hosts.allow中允许的，其他的ip拒绝登陆ssh)<br>      呵呵,这是传统的做法,因为开了防火墙所以笔者更喜欢直接在防火墙上做设置:)</p>
-<p>使用 iptables 设置 ssh 服务安全访问策略。<br>8) 日志<br>记录好日志，经常做日志分析。<br>用户登录成功日志： /var/log/wtmp  , 使用 # last 命令查看<br>用户登录失败日志： /var/log/btmp , 使用 # lastb 命令查看<br>查看所有用户上次登录情况： 使用  #lastlog [-u User]</p>
-<p>SSH 最佳实践<br><blockquote><p>Port 30003<br>ListenAddress 192.168.1.5<br>Protocol 2</p>
+<p>使用 iptables 设置 ssh 服务安全访问策略。<br>8) 日志<br>记录好日志，经常做日志分析。<br>用户登录成功日志： /var/log/wtmp  , 使用 # last 命令查看<br>用户登录失败日志： /var/log/btmp , 使用 # lastb 命令查看<br>查看所有用户上次登录情况： 使用  #lastlog [-u User]<br>9）免输入yes，只需改/etc/ssh/ssh_config配置文件<br>StrictHostKeyChecking no<br>SSH 最佳实践<br><blockquote><p>Port 30003<br>ListenAddress 192.168.1.5<br>Protocol 2</p>
 <p>#白名单<br>AllowUsers user1 user2</p>
 <p>#黑名单<br>denyUser user3 user4<br>PasswordAuthentication no<br>PermitEmptyPasswords no<br>PermitRootLogin  no<br>UseDNS no</p>
 </blockquote></p>
@@ -872,11 +871,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">ansible</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -904,11 +907,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -924,15 +927,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">find</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Swap分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -996,6 +999,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络配置</a>
               </li>
              
@@ -1009,10 +1016,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">tcp三次握手</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
               <li class="article-tag-list-item">
