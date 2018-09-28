@@ -16,7 +16,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。 与传统的磁盘与分区相比，LVM为计算机提供了更高层">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T11:34:38.542Z">
+<meta property="og:updated_time" content="2018-09-28T06:20:17.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux逻辑卷">
 <meta name="twitter:description" content="LVM是 Logical Volume Manager(逻辑卷管理)的简写，它由Heinz Mauelshagen在Linux 2.4内核上实现。LVM将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的分区加入其中，这样可以实现磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性。 与传统的磁盘与分区相比，LVM为计算机提供了更高层">
@@ -384,7 +384,7 @@ var searchFunc = function(path, search_id, content_id) {
           <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缩小LVM分区"><span class="toc-number">4.</span> <span class="toc-text">缩小LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除LVM分区"><span class="toc-number">5.</span> <span class="toc-text">删除LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM-快照恢复"><span class="toc-number">6.</span> <span class="toc-text">LVM 快照恢复</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM-分区"><span class="toc-number">7.</span> <span class="toc-text">LVM 分区</span></a></li></ol>
           </div>
           <script type="text/javascript">
             function showToc() {
@@ -433,6 +433,7 @@ var searchFunc = function(path, search_id, content_id) {
 <li>创建PV，扩容VG，LV</li>
 </ol>
 <p>pvcreate /dev/sde<br>vgdisplay #查看当前已经存在的VG信息，以存在VG：VolGroup00为例<br>vgextend VolGroup00 /dev/sde    #扩展VolGroup00<br>lvdisplay #查看已经存在的LV信息，以存在LV：LogVol01为例<br>lvextend –L 1G /dev/VolGroup00/LogVol01 #扩展LV<br>resize2fs /dev/VolGroup00/LogVol01 #执行该重设大小，对于当前正在使用的LogVol01有效<br>df –h #查看挂载情况，已经扩容</p>
+<h1 id="缩小LVM分区"><a href="#缩小LVM分区" class="headerlink" title="缩小LVM分区"></a>缩小LVM分区</h1><h1 id="删除LVM分区"><a href="#删除LVM分区" class="headerlink" title="删除LVM分区"></a>删除LVM分区</h1><h1 id="LVM-快照恢复"><a href="#LVM-快照恢复" class="headerlink" title="LVM 快照恢复"></a>LVM 快照恢复</h1><h1 id="LVM-分区"><a href="#LVM-分区" class="headerlink" title="LVM 分区"></a>LVM 分区</h1><p><a href="https://www.cnblogs.com/mchina/p/linux-centos-logical-volume-manager-lvm.html" target="_blank" rel="noopener">https://www.cnblogs.com/mchina/p/linux-centos-logical-volume-manager-lvm.html</a></p>
 
                           
 
@@ -600,7 +601,7 @@ var searchFunc = function(path, search_id, content_id) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是逻辑卷"><span class="toc-number">1.</span> <span class="toc-text">什么是逻辑卷</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建跟管理LVM"><span class="toc-number">2.</span> <span class="toc-text">创建跟管理LVM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩容LVM分区"><span class="toc-number">3.</span> <span class="toc-text">扩容LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缩小LVM分区"><span class="toc-number">4.</span> <span class="toc-text">缩小LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除LVM分区"><span class="toc-number">5.</span> <span class="toc-text">删除LVM分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM-快照恢复"><span class="toc-number">6.</span> <span class="toc-text">LVM 快照恢复</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM-分区"><span class="toc-number">7.</span> <span class="toc-text">LVM 分区</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -774,7 +775,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">httpd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,10 +792,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">自制linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">启动排错</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -814,15 +819,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">sed</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Raid</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SUID、SGID、chattr & SBIT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sed</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,6 +839,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">find</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件管理</a>
               </li>
              
@@ -842,15 +851,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">find</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">打包压缩</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -858,11 +859,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,15 +871,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">源码编译安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">rpmyum</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
+                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SELinux</a>
+                <a href="javascript:void(0)" class="js-tag color5">scp,rsync,sftp,pssh</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -910,10 +915,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络配置</a>
               </li>
              
@@ -931,6 +932,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CA证书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SHELL进阶</a>
               </li>
              
               <li class="article-tag-list-item">
